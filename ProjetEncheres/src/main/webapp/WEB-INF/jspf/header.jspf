@@ -4,6 +4,8 @@
 <img src="asset/logo/Logo_eni_encheres_bleuFonce.png">
 
 <nav>
+
+<a href="<%= request.getContextPath()%>/Inscription">Inscription</a>
 </nav>
 
 </header>
