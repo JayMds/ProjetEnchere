@@ -8,7 +8,7 @@ public class Factory {
 	public static class factory{
 		public static ObjetsEnchereDAO<Utilisateur> getUtilisateurDAO() {
 			return new UtilisateurDAOImpl();
-			test
+	
 		}
 
 	}
