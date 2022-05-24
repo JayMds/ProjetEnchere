@@ -12,11 +12,13 @@ import java.util.List;
 import fr.eni.encheres.bo.Utilisateur;
 
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Object> {
-
+	
 	@Override
-	public void insert() {
-
+	public void insert(Object objet) throws DALException {
+		
 	}
+
+
 
 	@Override
 	public Utilisateur selectById(int no_utilisateur) throws DALException {
@@ -98,6 +100,10 @@ public static void close(AutoCloseable resource) {
 		}
 	}
  }
+
+
+
+
 }
 
 
