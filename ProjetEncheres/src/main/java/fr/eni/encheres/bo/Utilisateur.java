@@ -13,6 +13,7 @@ public class Utilisateur {
 	private String ville;
 	private String motDePasse;
 	private String credit;
+	private boolean administrateur;
 	
 	
 	public int getNoUtilisateur() {
@@ -87,5 +88,5 @@ public class Utilisateur {
 	public void setAdministrateur(int administrateur) {
 		this.administrateur = administrateur;
 	}
-	private int administrateur;
+	
 }
