@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,23 @@ import fr.eni.encheres.dal.DALException;
 
 
 public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
-	
+	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
 	private final String selectAllArticles = "select * from Articles; ";
 	private final String selectByIdArticles = "select * from Articles where no_article = ?; ";
+	private final String insertArticle = "insert into articles (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_vendeur, no_categorie, no_acheteur ) values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 	@Override
 	public void insert(Article a) {
-		// TODO Auto-generated method stub
+		
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			//Todo avant insert article: insert Categorie et Utilisateur
+			PreparedStatement pstmt = cnx.prepareStatement(insertArticle);
+			pstmt.setString(1, a.getNomArticle());
+			pstmt.setString(1, insertArticle);
+			pstmt.setInt(1, 0);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
 
@@ -57,8 +68,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
 		
-			try(Connection cnx = ConnectionProvider.getConnection();)
-			{
+			try(Connection cnx = ConnectionProvider.getConnection();){
 				Statement stmt = cnx.createStatement();
 				ResultSet rs = stmt.executeQuery(selectAllArticles);
 				while (rs.next()) {
