@@ -6,6 +6,13 @@ import java.util.List;
 import fr.eni.encheres.bo.Utilisateur;
 
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Object> {
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public void insert() {
@@ -14,7 +21,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Object> {
 
 	@Override
 	public  Utilisateur selectById(int id) {
-		return null;
+		
 	}
 
 	@Override
