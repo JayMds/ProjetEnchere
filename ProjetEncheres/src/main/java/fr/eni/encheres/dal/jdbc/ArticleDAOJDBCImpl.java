@@ -27,7 +27,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			//Todo avant insert article: insert Categorie et Utilisateur
 			PreparedStatement pstmt = cnx.prepareStatement(insertArticle);
-			pstmt.setString(1, insertArticle);
+			pstmt.setString(1, a.getNomArticle());
 			pstmt.setString(1, insertArticle);
 			pstmt.setInt(1, 0);
 		} catch (Exception e) {
