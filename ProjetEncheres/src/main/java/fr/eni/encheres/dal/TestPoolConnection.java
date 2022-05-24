@@ -1,4 +1,4 @@
-package connection;
+package fr.eni.encheres.dal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
