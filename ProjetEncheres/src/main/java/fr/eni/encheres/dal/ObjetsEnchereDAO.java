@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ObjetsEnchereDAO<T> {
 	
-	public void insert();
+	public void insert(T objet);
 	public T selectById(int id);
 	public List<T> selectAll();
 	public void delete(int id);

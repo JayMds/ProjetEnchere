@@ -20,7 +20,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 	private final String selectByIdArticles = "select * from Articles where no_article = ?; ";
 
 	@Override
-	public void insert() {
+	public void insert(Article a) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -38,16 +38,17 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 			if (rs.next()) 
 			{
 				a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
-			}else
-			{
+			}else{
+				
 				throw new DALException("Aucun Article ne correspont à l'id "+ id);
 			}
 			pstmt.close();
 		} catch (Exception e) {
-			e.printStackTrace();		}
+			e.printStackTrace();		
+			}
 		
 
-		return null;
+		return a;
 	}
 
 	@Override
