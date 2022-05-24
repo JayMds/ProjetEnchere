@@ -16,6 +16,8 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Object> {
 	@Override
 	public void insert(Object objet) throws DALException {
 		
+		
+		
 	}
 
 

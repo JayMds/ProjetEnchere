@@ -25,9 +25,11 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 	public void insert(Article a) {
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			
 			//Todo avant insert article: insert Categorie et Utilisateur
-			
+			PreparedStatement pstmt = cnx.prepareStatement(insertArticle);
+			pstmt.setString(1, insertArticle);
+			pstmt.setString(1, insertArticle);
+			pstmt.setInt(1, 0);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -66,8 +68,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
 		
-			try(Connection cnx = ConnectionProvider.getConnection();)
-			{
+			try(Connection cnx = ConnectionProvider.getConnection();){
 				Statement stmt = cnx.createStatement();
 				ResultSet rs = stmt.executeQuery(selectAllArticles);
 				while (rs.next()) {
