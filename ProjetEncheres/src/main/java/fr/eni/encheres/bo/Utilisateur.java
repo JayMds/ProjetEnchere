@@ -82,10 +82,10 @@ public class Utilisateur {
 	public void setCredit(String credit) {
 		this.credit = credit;
 	}
-	public int getAdministrateur() {
+	public boolean getAdministrateur() {
 		return administrateur;
 	}
-	public void setAdministrateur(int administrateur) {
+	public void setAdministrateur(Boolean administrateur) {
 		this.administrateur = administrateur;
 	}
 	
