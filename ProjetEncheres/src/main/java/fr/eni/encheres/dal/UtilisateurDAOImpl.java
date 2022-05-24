@@ -16,7 +16,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String insert = "INSERT INTO Utilisateurs (pseudo,nom, prenom, email,telephone,rue,codePostal,ville motDePasse,administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	@Override
-<<<<<<< HEAD
+	
 	public void insert(Utilisateur utilisateurCourant) throws DALException {
 		int rowsInserted = -1;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -45,13 +45,6 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		if (rowsInserted == -1) {
 			throw new DALException("erreur lors de l'insert");
 		}
-
-=======
-	public void insert(Object objet) throws DALException {
-		
-		
-		
->>>>>>> branch 'main' of https://github.com/JayMds/ProjetEnchere
 	}
 
 	@Override
