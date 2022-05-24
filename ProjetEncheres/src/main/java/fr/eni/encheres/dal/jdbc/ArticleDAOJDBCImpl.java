@@ -26,12 +26,26 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			//Todo avant insert article: insert Categorie et Utilisateur
-			PreparedStatement pstmt = cnx.prepareStatement(insertArticle);
+			PreparedStatement pstmt = cnx.prepareStatement(insertArticle, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, a.getNomArticle());
-			pstmt.setString(1, insertArticle);
-			pstmt.setInt(1, 0);
+			pstmt.setString(2, a.getDescription());
+			pstmt.setDate(3, java.sql.Date.valueOf(a.getDateDebutEnchere()));
+			pstmt.setDate(4, java.sql.Date.valueOf(a.getDateFinEnchere()));
+			pstmt.setInt(5, a.getPrixInitial());
+			pstmt.setInt(6, a.getPrixVente());
+			pstmt.setInt(7, a.getNoVendeur());
+			pstmt.setInt(8, a.getNoCategorie());
+			pstmt.setInt(9, a.getNoAcheteur());
+			
+			int rowsInserted = pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys(); rs.next();
+			if (rowsInserted > 0) {
+				System.out.println(rowsInserted + " Article inséré");
+				a.setNoArticle(rs.getInt(1));
+			}
+			pstmt.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}
