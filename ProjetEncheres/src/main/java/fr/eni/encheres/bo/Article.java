@@ -2,7 +2,7 @@ package fr.eni.encheres.bo;
 
 import java.time.LocalDate;
 
-public class Articles {
+public class Article {
 	
 	private int noArticle;
 	private String nomArticle;
