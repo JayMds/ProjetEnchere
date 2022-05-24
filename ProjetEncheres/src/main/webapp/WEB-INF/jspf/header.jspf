@@ -6,6 +6,7 @@
 <nav>
 
 <a href="<%= request.getContextPath()%>/Inscription">Inscription</a>
+<a href="<%= request.getContextPath()%>/Connexion">Se connecter</a>
 </nav>
 
 </header>

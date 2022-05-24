@@ -26,6 +26,16 @@
 	<servlet-name>Inscription</servlet-name>
 	<url-pattern>/Inscription</url-pattern>
 </servlet-mapping>
+ 
+<servlet>
+	<servlet-name>Connexion</servlet-name>
+	<servlet-class>fr.eni.encheres.RegistrationServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Connexion</servlet-name>
+	<url-pattern>/Connexion</url-pattern>
+</servlet-mapping>
+  
   
   
   
