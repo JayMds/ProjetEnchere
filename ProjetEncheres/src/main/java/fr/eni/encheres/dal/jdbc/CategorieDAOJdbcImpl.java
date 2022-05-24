@@ -15,7 +15,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	@Override
 	public void insert(Categorie c) throws DALException {
 		
-		try (Connection cnx = ConnectionProvider.getConnection();) {
+		/*try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdArticles);
 			pstmt.setInt(1, id);
 			int x = pstmt.executeUpdate();
@@ -29,7 +29,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
+		}*/
 				
 	}
 
