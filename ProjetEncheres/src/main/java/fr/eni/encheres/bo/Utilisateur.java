@@ -85,7 +85,11 @@ public class Utilisateur {
 	public boolean getAdministrateur() {
 		return administrateur;
 	}
+<<<<<<< HEAD
 	public void setAdministrateur(boolean administrateur) {
+=======
+	public void setAdministrateur(Boolean administrateur) {
+>>>>>>> branch 'main' of https://github.com/JayMds/ProjetEnchere.git
 		this.administrateur = administrateur;
 	}
 	
