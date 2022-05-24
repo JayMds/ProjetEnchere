@@ -14,5 +14,10 @@
 <body>
 <%@ include file="header.jspf" %>
 
+<a href="<%=request.getContextPath()%>/WEB-INF/index1.jsp">
+test de ma jsp
+</a>
+
 </body>
+
 </html>
