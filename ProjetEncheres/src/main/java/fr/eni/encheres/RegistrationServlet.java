@@ -24,10 +24,15 @@ public class RegistrationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String uname = request.getParameter("name");
-		String uemail = request.getParameter("email");
-		String upwd = request.getParameter("pass");
-		String umobile = request.getParameter("contact");
+		String pseudo = request.getParameter("pseudo");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String telephone = request.getParameter("telephone");
+		String rue = request.getParameter("rue");
+		String codePostal = request.getParameter("code_postal");
+		String ville = request.getParameter("ville");
+		
 		RequestDispatcher dispatcher = null;
 		Connection cnx = null;
 		
@@ -35,11 +40,15 @@ public class RegistrationServlet extends HttpServlet {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "nanou");
-			PreparedStatement pst = cnx.prepareStatement("insert into users(uname,upwd,uemail,umobile) values(?,?,?,?) ");
-			pst.setString(1, uname);
-			pst.setString(2, upwd);
-			pst.setString(3, uemail);
-			pst.setString(4, umobile);
+			PreparedStatement pst = cnx.prepareStatement("insert into users(pseudo,nom,prenom,email,telephone,rue,code_postal,ville) values(?,?,?,?,?,?,?,?) ");
+			pst.setString(1, pseudo);
+			pst.setString(2, nom);
+			pst.setString(3, prenom);
+			pst.setString(4, email);
+			pst.setString(5, telephone);
+			pst.setString(6, rue);
+			pst.setString(7, codePostal);
+			pst.setString(8, ville);
 			
 			int rowCount = pst.executeUpdate();
 			dispatcher = request.getRequestDispatcher("registration.jsp");
