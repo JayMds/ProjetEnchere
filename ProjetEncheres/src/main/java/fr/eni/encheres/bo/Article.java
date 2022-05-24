@@ -13,7 +13,46 @@ public class Article {
 	private int prixVente;
 	private int noUtilisateur;
 	private int noCategorie;
+	private int noAcheteur;
 	
+	public Article(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere,
+			LocalDate dateFinEnchere, int prixInitial, int prixVente, int noUtilisateur, int noCategorie,
+			int noAcheteur) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
+		this.noAcheteur = noAcheteur;
+	}
+	
+	public Article(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int prixInitial, int prixVente, int noUtilisateur, int noCategorie, int noAcheteur) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
+		this.noAcheteur = noAcheteur;
+	}
+
+	
+
+	public Article(String nomArticle) {
+		super();
+		this.nomArticle = nomArticle;
+	}
+
+
 	
 	public int getNoArticle() {
 		return noArticle;
@@ -68,6 +107,14 @@ public class Article {
 	}
 	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
+	}
+
+	public int getNoAcheteur() {
+		return noAcheteur;
+	}
+
+	public void setNoAcheteur(int noAcheteur) {
+		this.noAcheteur = noAcheteur;
 	}
 	
 	
