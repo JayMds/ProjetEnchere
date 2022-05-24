@@ -30,7 +30,7 @@ public class Login extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 		
 		try {
-			Class.forName("com.mysql.jbdc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "nanou");
 			PreparedStatement pst = cnx.prepareStatement("select * from users where email = ? and motdepasse = ?");
 			pst.setString(1, email);
