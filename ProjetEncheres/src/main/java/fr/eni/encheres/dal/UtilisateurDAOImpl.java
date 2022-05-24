@@ -16,12 +16,14 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String insert = "INSERT INTO Utilisateurs (pseudo,nom, prenom, email,telephone,rue,codePostal,ville motDePasse,administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	@Override
-<<<<<<< HEAD
+	
 	public void insert(Utilisateur utilisateurCourant) throws DALException {
 		int rowsInserted = -1;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
+			
 
-			PreparedStatement pstmt = cnx.prepareStatement(insert);
+			PreparedStatement pstmt = cnx.prepareStatement(insert,PreparedStatement.RETURN_GENERATED_KEYS);
+			ResultSet rs = pstmt.getGeneratedKeys();
 			int index = 0;
 			pstmt.setString(index++, utilisateurCourant.getPseudo());
 			pstmt.setString(index++, utilisateurCourant.getNom());
@@ -32,6 +34,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			pstmt.setString(index++, utilisateurCourant.getCodePostal());
 			pstmt.setString(index++, utilisateurCourant.getVille());
 			pstmt.setString(index++, utilisateurCourant.getMotDePasse());
+			rs = pstmt.getGeneratedKeys();
 
 			rowsInserted = pstmt.executeUpdate();
 			if (rowsInserted > 0) {
@@ -45,13 +48,6 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		if (rowsInserted == -1) {
 			throw new DALException("erreur lors de l'insert");
 		}
-
-=======
-	public void insert(Object objet) throws DALException {
-		
-		
-		
->>>>>>> branch 'main' of https://github.com/JayMds/ProjetEnchere
 	}
 
 	@Override
