@@ -18,7 +18,7 @@ public class UtilisateurManager {
 	
 	
 	
-	a su
+
 	
 	private ObjetsEnchereDAO<Utilisateur> utilisateurDAO;
 
