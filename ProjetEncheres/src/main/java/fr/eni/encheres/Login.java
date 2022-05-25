@@ -17,10 +17,16 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/login")
+
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	
+	@Override
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+		rd.forward(request, response);
+		}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -39,11 +45,12 @@ public class Login extends HttpServlet {
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				session.setAttribute("nom", rs.getString("nom"));
-				dispatcher = request.getRequestDispatcher("index.jsp");
+				dispatcher = request.getRequestDispatcher("/WEB-INF/index.jsp");
 				
 			}else {
 				request.setAttribute("status", "failed");
-				dispatcher = request.getRequestDispatcher("login.jsp");
+				dispatcher = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+				
 			}
 			dispatcher.forward(request, response);
 			

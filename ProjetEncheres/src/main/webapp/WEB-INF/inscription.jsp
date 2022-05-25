@@ -31,7 +31,7 @@
 </div>	
 <div>
 	<label for="idTelephone">Téléphone :</label>
-	<input type ="tel" id="idTelephone" name="telephone" required="required" placeholder="votre téléphone" inputmode="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" >
+	<input type ="tel" id="idTelephone" name="telephone" required="required" placeholder="votre téléphone" inputmode="tel" pattern="^\+?\d{0,13}" >
 </div>	
 <div>
 	<label for="idRue">Rue :</label>

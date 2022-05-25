@@ -17,7 +17,7 @@
 
 
 <nav id="disconnectedNav">   
-        <a class="btn-profil" href="<%= request.getContextPath()%>/Connexion">Se connecter / s'inscrire</a>
+        <a class="btn-profil" href="<%= request.getContextPath()%>/connexion">Se connecter / s'inscrire</a>
     </nav>
 
 

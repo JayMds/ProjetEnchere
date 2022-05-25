@@ -4,6 +4,9 @@
  </head>
 <body>
 
+
+
+
 			<div class="signin-form">
 						<h2 class="form-title">Sign up</h2>
 						<form method="" action="" class="register-form"

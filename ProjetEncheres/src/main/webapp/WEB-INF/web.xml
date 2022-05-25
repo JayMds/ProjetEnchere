@@ -24,16 +24,16 @@
 </servlet>
 <servlet-mapping>
 	<servlet-name>Inscription</servlet-name>
-	<url-pattern>/Inscription</url-pattern>
+	<url-pattern>/inscription</url-pattern>
 </servlet-mapping>
  
 <servlet>
 	<servlet-name>Connexion</servlet-name>
-	<servlet-class>fr.eni.encheres.RegistrationServlet</servlet-class>
+	<servlet-class>fr.eni.encheres.Login</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>Connexion</servlet-name>
-	<url-pattern>/Connexion</url-pattern>
+	<url-pattern>/connexion</url-pattern>
 </servlet-mapping>
   
   
