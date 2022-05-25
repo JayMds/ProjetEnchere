@@ -14,6 +14,8 @@ import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
+
+
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 
 	String selectById = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `no_utilisateur` =?";
@@ -59,7 +61,6 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	@Override
 	public Utilisateur selectById(int no_utilisateur) throws DALException {
 
-		List<Utilisateur> Utilisateurs = new ArrayList<Utilisateur>();
 		Utilisateur UtilisateurCourant = new Utilisateur();
 
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -80,7 +81,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				String ville = rs.getString("ville");
 
 				UtilisateurCourant = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
-				Utilisateurs.add(UtilisateurCourant);
+
 
 				
 			}
