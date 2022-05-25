@@ -223,6 +223,5 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		return null;
 	}
 	
-	tetst
 
 }
