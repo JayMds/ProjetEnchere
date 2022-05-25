@@ -1,14 +1,14 @@
 package fr.eni.encheres.bo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Article {
 	
 	private int noArticle;
 	private String nomArticle;
 	private String description;
-	private LocalDate dateDebutEnchere;
-	private LocalDate dateFinEnchere;
+	private LocalDateTime dateDebutEnchere;
+	private LocalDateTime dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
 	private int noVendeur;
@@ -28,8 +28,8 @@ public class Article {
 				+ ", noAcheteur=" + noAcheteur + nomVendeur + "]";
 	}
 
-	public Article(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere,
-			LocalDate dateFinEnchere, int prixInitial, int prixVente, int noVendeur, int noCategorie,
+	public Article(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, int prixInitial, int prixVente, int noVendeur, int noCategorie,
 			int noAcheteur) {
 		super();
 		this.noArticle = noArticle;
@@ -44,8 +44,8 @@ public class Article {
 		this.noAcheteur = noAcheteur;
 	}
 	
-	public Article(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, int noUtilisateur, int noCategorie, int noAcheteur) {
+	public Article(String nomArticle, String description, LocalDateTime dateDebutEnchere, LocalDateTime dateFinEnchere,
+			int prixInitial, int prixVente, int noUtilisateur, int noCategorie, int noAcheteur, String nomVendeur) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -86,16 +86,16 @@ public class Article {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public LocalDate getDateDebutEnchere() {
+	public LocalDateTime getDateDebutEnchere() {
 		return dateDebutEnchere;
 	}
-	public void setDateDebutEnchere(LocalDate dateDebutEnchere) {
+	public void setDateDebutEnchere(LocalDateTime dateDebutEnchere) {
 		this.dateDebutEnchere = dateDebutEnchere;
 	}
-	public LocalDate getDateFinEnchere() {
+	public LocalDateTime getDateFinEnchere() {
 		return dateFinEnchere;
 	}
-	public void setDateFinEnchere(LocalDate dateFinEnchere) {
+	public void setDateFinEnchere(LocalDateTime dateFinEnchere) {
 		this.dateFinEnchere = dateFinEnchere;
 	}
 	public int getPrixInitial() {

@@ -64,18 +64,11 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdArticles);
 			pstmt.setInt(1, id);
-			pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();
-			
-			 
-		//Si rs.next renvoie un resultat creer un nouvel Article
+			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) 
 			{
 				a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
-				
-				
 			}else{
-				
 				throw new DALException("Aucun Article ne correspont à l'id "+ id);
 			}
 			pstmt.close();
