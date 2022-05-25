@@ -19,6 +19,9 @@ public class CategorieManager {
 	}
 	
 	public void addCategrorie(String nom) throws DALException {
+		if (nom != null) {
+			
+		}
 		Categorie c = new Categorie(nom);
 		categorieDAO.insert(c);
 	}

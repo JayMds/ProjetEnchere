@@ -53,8 +53,6 @@ public class ArticleManager {
 		
 	}
 	
-	
-	
 	public  void deleteArticle(int id) throws DALException {
 		articleDAO.delete(id);
 	}

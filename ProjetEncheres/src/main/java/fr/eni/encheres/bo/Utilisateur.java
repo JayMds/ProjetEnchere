@@ -1,6 +1,5 @@
 package fr.eni.encheres.bo;
 
-import java.util.List;
 
 public class Utilisateur {
 	

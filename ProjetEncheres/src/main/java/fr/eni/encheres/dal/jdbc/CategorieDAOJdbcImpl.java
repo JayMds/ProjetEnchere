@@ -23,7 +23,6 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	public void insert(Categorie c) throws DALException {
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			//Todo avant insert article: insert Categorie et Utilisateur
 			PreparedStatement pstmt = cnx.prepareStatement(insertCategorie, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, c.getLibelle());
 			
@@ -46,8 +45,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdCategorie);
 			pstmt.setInt(1, id);
-			pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();
+			ResultSet rs = pstmt.executeQuery();
 		//Si rs.next renvoie un resultat creer un nouvel Article
 			if (rs.next()) 
 			{
