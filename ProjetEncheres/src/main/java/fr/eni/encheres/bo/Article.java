@@ -15,7 +15,7 @@ public class Article {
 	private int noAcheteur;
 	private String nomVendeur;
 	private Utilisateur Vendeur;
-	private 
+	 
 
 
 
