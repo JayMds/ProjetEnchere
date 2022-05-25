@@ -59,7 +59,6 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	@Override
 	public Utilisateur selectById(int no_utilisateur) throws DALException {
 
-		List<Utilisateur> Utilisateurs = new ArrayList<Utilisateur>();
 		Utilisateur UtilisateurCourant = new Utilisateur();
 
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -80,7 +79,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				String ville = rs.getString("ville");
 
 				UtilisateurCourant = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
-				Utilisateurs.add(UtilisateurCourant);
+
 
 				System.out.println(UtilisateurCourant.toString());
 			}
@@ -150,12 +149,15 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+<<<<<<< Upstream, based on origin/main
 
 	@Override
 	public List<Utilisateur> selectUnsellArticle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+=======
+>>>>>>> ce89590 UtilisateurManager
 		
 
 }
