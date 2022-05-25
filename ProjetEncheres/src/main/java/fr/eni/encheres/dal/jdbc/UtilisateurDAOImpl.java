@@ -15,7 +15,6 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 
-(test)
 
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 
