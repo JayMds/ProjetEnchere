@@ -8,7 +8,17 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
+
+
+
 public class UtilisateurManager {
+	
+	
+	private static int TAILLE_MINI_PSEUDO=3;
+	
+	
+	
+	
 
 	private ObjetsEnchereDAO<Utilisateur> utilisateurDAO;
 
@@ -20,16 +30,15 @@ public class UtilisateurManager {
 			String rue, String codePostal, String ville, String motDePasse) throws BusinessException, DALException {
 
 		BusinessException businessException = new BusinessException();
-		this.validerPseudo(pseudo);
-		;
-		this.validerNom(nom);
-		this.validerPrenom(prenom);
-		this.validerEmail(email);
-		this.validerTelephone(telephone);
-		this.validerRue(rue);
-		this.validercodePostal(codePostal);
-		this.validerVille(ville);
-		this.validermotDePasse(motDePasse);
+		this.validerPseudo(pseudo,businessException);
+		this.validerNom(nom,businessException);
+		this.validerPrenom(prenom,businessException);
+		this.validerEmail(email,businessException);
+		this.validerTelephone(telephone,businessException);
+		this.validerRue(rue,businessException);
+		this.validercodePostal(codePostal,businessException);
+		this.validerVille(ville,businessException);
+		this.validermotDePasse(motDePasse,businessException);
 
 		Utilisateur utilisateur = null;
 
@@ -59,40 +68,92 @@ public class UtilisateurManager {
 		return utilisateur;
 	}
 
-	private void validerPseudo(String pseudo) {
+	private void validerPseudo(String pseudo,BusinessException businessException)  {
+		
+
+				
+				
+				
+				if(pseudo.isBlank()^pseudo.isEmpty() ) {
+					businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+				}
+			
+
+				if(pseudo.length()<TAILLE_MINI_PSEUDO)  {
+				businessException.ajouterErreur(CodesResultatBLL.REGLE_PSEUDO_TAILLE_MINI);
+				}
+		
+				
+				
+		
+				
+				
+				
+				
+				
+
+	}
+		
+		
+	
+	
+
+	private void validerNom(String nom,BusinessException businessException) {
+		
+		if(nom.isBlank()^nom.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+		}
+
 
 	}
 
-	private void validerNom(String nom) {
-
+	private void validerPrenom(String prenom,BusinessException businessException) {
+		
+		if(prenom.isBlank()^prenom.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+		}
 	}
 
-	private void validerPrenom(String prenom) {
+	private void validerEmail(String email,BusinessException businessException) {
 
+		if(email.isBlank()^email.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+		}
 	}
 
-	private void validerEmail(String email) {
+	private void validerTelephone(String telephone,BusinessException businessException) {
 
+		if(telephone.isBlank()^telephone.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+		}
 	}
 
-	private void validerTelephone(String telephone) {
+	private void validerRue(String rue,BusinessException businessException) {
 
+		if(rue.isBlank()^rue.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+		}
 	}
 
-	private void validerRue(String rue) {
+	private void validercodePostal(String codePostal,BusinessException businessException) {
 
+		if(codePostal.isBlank()^codePostal.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+		}
 	}
 
-	private void validercodePostal(String codePostal) {
+	private void validerVille(String ville,BusinessException businessException) {
 
+		if(ville.isBlank()^ville.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+		}
 	}
 
-	private void validerVille(String ville) {
+	private void validermotDePasse(String motdepasse,BusinessException businessException) {
 
-	}
-
-	private void validermotDePasse(String motdepasse) {
-
+		if(motdepasse.isBlank()^motdepasse.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
+		}
 	}
 
 	public List<Utilisateur> selectionnerTousLesUtilisateurs() throws BusinessException, DALException {
