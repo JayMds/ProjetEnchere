@@ -1,12 +1,11 @@
 package fr.eni.encheres.bll;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
-import fr.eni.encheres.dal.Factory;
+import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class UtilisateurManager {
@@ -14,7 +13,7 @@ public class UtilisateurManager {
 	private ObjetsEnchereDAO<Utilisateur> utilisateurDAO;
 
 	public UtilisateurManager() {
-		this.utilisateurDAO = Factory.getUtilisateurDAO();
+		this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
 
 	public Utilisateur ajouterutilisateur(String pseudo, String nom, String prenom, String email, String telephone,
