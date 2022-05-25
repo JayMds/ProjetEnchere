@@ -1,4 +1,5 @@
 
+
 <%@page import="fr.eni.encheres.bo.Categorie"%>
 <%@page import="java.util.List"%>
 <%@include file="/WEB-INF/jspf/head.jspf" %>
@@ -19,8 +20,10 @@
                 <%
                  List<Categorie> listeCategories = (List<Categorie>) request.getAttribute("Categories");
                 for(Categorie categorie : listeCategories){
+                	String str = categorie.getLibelle();
+                	String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
                 %>
-                 <option value="<%= categorie.getNoCategorie() %>"> <%= categorie.getLibelle() %> </option>             
+                 <option value="<%= categorie.getNoCategorie() %>"> <%= cap %> </option>             
                 
                 <%
                 }
