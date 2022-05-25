@@ -12,4 +12,23 @@ import java.util.List;
 			this.listeCodesErreur=new ArrayList<>();
 		}
 	
+
+	public void ajouterErreur(int code)
+	{
+		if(!this.listeCodesErreur.contains(code))
+		{
+			this.listeCodesErreur.add(code);
+		}
+	}
+	
+	public boolean hasErreurs()
+	{
+		return this.listeCodesErreur.size()>0;
+	}
+	
+	public List<Integer> getListeCodesErreur()
+	{
+		return this.listeCodesErreur;
+	}
+
 }
