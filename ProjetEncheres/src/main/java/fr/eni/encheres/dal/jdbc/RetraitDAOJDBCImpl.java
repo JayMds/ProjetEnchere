@@ -38,8 +38,8 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		
 	}
 	@Override
-	public Retrait selectById(int id) throws DALException {
-		Enchere e = null;
+	public Retrait selectByIdFull(int id) throws DALException {
+		Retrait e = null;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdRetrait);
 			pstmt.setInt(1, id);
@@ -59,11 +59,6 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 			}
 		return e;
 	}
-	@Override
-	public List<Retrait> selectAll() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	@Override 
 	public void delete(int id) throws DALException {
 		// TODO Auto-generated method stub
@@ -76,6 +71,21 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	}
 	@Override //DO NOT USE
 	public List<Retrait> selectUnsellArticle() {
+		return null;
+	}
+	@Override
+	public Retrait selectByIdDiscret(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Retrait> selectAllFull() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Retrait> selectAllDiscret() throws DALException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

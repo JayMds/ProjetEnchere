@@ -27,7 +27,7 @@ public class CategorieManager {
 	}
 	
 	public Categorie selectCategrorie(int id) throws DALException {
-		Categorie c = categorieDAO.selectAllById(id);
+		Categorie c = categorieDAO.selectByIdFull(id);
 		return c;
 	}
 	

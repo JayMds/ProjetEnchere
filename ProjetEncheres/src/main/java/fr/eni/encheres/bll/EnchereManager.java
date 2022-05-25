@@ -26,7 +26,7 @@ public class EnchereManager {
 	}
 	
 	public Enchere selectEnchere(int id) throws DALException {
-		Enchere e = enchereDAO.selectAllById(id);
+		Enchere e = enchereDAO.selectByIdFull(id);
 		return e;
 	}
 	
