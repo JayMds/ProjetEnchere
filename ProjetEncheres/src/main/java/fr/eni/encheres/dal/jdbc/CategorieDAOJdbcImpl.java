@@ -40,7 +40,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	}
 
 	@Override
-	public Categorie selectById(int id) throws DALException {
+	public Categorie selectAllById(int id) throws DALException {
 		Categorie c = null;
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -64,7 +64,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 
 	
 	@Override
-	public List<Categorie> selectAll() throws DALException {
+	public List<Categorie> selectAllDiscret() throws DALException {
 		//Création Liste
 		List<Categorie> categories = new ArrayList<>();
 		Categorie c = null;

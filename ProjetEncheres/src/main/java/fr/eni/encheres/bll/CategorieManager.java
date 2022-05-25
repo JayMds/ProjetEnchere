@@ -24,13 +24,13 @@ public class CategorieManager {
 	}
 	
 	public Categorie selectCategrorie(int id) throws DALException {
-		Categorie c = categorieDAO.selectById(id);
+		Categorie c = categorieDAO.selectAllById(id);
 		return c;
 	}
 	
 	public List<Categorie> selectAllCategrorie() throws DALException{
 		List<Categorie> categories = new ArrayList<>();
-		categories = categorieDAO.selectAll();
+		categories = categorieDAO.selectAllDiscret();
 		return categories;
 	}
 	

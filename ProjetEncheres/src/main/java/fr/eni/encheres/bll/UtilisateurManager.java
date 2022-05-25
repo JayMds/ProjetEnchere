@@ -62,12 +62,18 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 	}
 	
 	public List<Utilisateur> selectionnerTousLesUtilisateurs() throws BusinessException, DALException {
-		return this.utilisateurDAO.selectAll();
+		return this.utilisateurDAO.selectAllDiscret();
 	}
 
-	public Utilisateur selectionnerUnUtilisateurAvecSonID(int id) throws BusinessException, DALException {
-		return this.utilisateurDAO.selectById(id);
+	public Utilisateur selectionnerToutesInformationsDunUtilisateurAvecSonID(int id) throws BusinessException, DALException {
+		return this.utilisateurDAO.selectAllById(id);
 	}
+	
+	public Utilisateur selectionnerInformationDiscret(int id) throws BusinessException, DALException {
+		return this.utilisateurDAO.selectAllById(id);
+	}
+	
+	
 	
  }
 

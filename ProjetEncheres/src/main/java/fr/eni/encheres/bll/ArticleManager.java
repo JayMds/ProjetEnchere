@@ -25,13 +25,13 @@ public class ArticleManager {
 	}
 	
 	public Article selectArticle(int id) throws DALException {
-		Article a = articleDAO.selectById(id);
+		Article a = articleDAO.selectAllById(id);
 		return a;
 	}
 	
 	public List<Article> selectAllArticles() throws DALException{
 		List<Article> articles = new ArrayList<>();
-		articles = articleDAO.selectAll();
+		articles = articleDAO.selectAllDiscret();
 		return articles;
 		
 	}

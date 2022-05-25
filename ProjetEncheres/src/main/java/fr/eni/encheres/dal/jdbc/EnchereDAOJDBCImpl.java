@@ -41,7 +41,7 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	}
 
 	@Override
-	public Enchere selectById(int id) throws DALException {
+	public Enchere selectAllById(int id) throws DALException {
 		Enchere e = null;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdEnchere);
@@ -64,7 +64,7 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	}
 
 	@Override
-	public List<Enchere> selectAll() throws DALException {
+	public List<Enchere> selectAllDiscret() throws DALException {
 		List<Enchere> encheres = new ArrayList<>();
 		Enchere e = null;
 		

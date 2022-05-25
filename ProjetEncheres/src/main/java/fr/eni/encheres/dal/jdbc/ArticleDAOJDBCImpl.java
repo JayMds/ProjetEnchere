@@ -58,7 +58,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	}
 
 	@Override
-	public Article selectById(int id) {
+	public Article selectAllById(int id) {
 		Article a = null;
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -88,7 +88,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	}
 
 	@Override
-	public List<Article> selectAll() {
+	public List<Article> selectAllDiscret() {
 	//Création Liste
 		List<Article> articles = new ArrayList<>();
 		Article a = null;

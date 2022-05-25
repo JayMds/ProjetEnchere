@@ -26,13 +26,13 @@ public class EnchereManager {
 	}
 	
 	public Enchere selectEnchere(int id) throws DALException {
-		Enchere e = enchereDAO.selectById(id);
+		Enchere e = enchereDAO.selectAllById(id);
 		return e;
 	}
 	
 	public List<Enchere> selectAllEnchere() throws DALException{
 		List<Enchere> encheres = new ArrayList<>();
-		encheres = enchereDAO.selectAll();
+		encheres = enchereDAO.selectAllDiscret();
 		return encheres;
 	}
 	
