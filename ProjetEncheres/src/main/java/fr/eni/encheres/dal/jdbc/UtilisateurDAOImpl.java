@@ -1,4 +1,4 @@
-package fr.eni.encheres.dal;
+package fr.eni.encheres.dal.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.dal.DALException;
+import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 
