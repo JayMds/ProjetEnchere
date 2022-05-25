@@ -1,6 +1,7 @@
 package fr.eni.encheres.dal;
 
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.dal.jdbc.UtilisateurDAOImpl;
 
 public class Factory {
 	
