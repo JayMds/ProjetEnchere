@@ -18,21 +18,24 @@ public class CategorieManager {
 		this.categorieDAO = DAOFactory.getCategorieDAO();
 	}
 	
-	public void addArticle(String nom) throws DALException {
+	public void addCategrorie(String nom) throws DALException {
 		Categorie c = new Categorie(nom);
 		categorieDAO.insert(c);
 	}
 	
-	public Categorie selectArticle(int id) throws DALException {
+	public Categorie selectCategrorie(int id) throws DALException {
 		Categorie c = categorieDAO.selectById(id);
 		return c;
 	}
 	
-	public List<Categorie> selectAllArticles() throws DALException{
+	public List<Categorie> selectAllCategrorie() throws DALException{
 		List<Categorie> categories = new ArrayList<>();
 		categories = categorieDAO.selectAll();
 		return categories;
-		
+	}
+	
+	public void deleteCategrorie(int id) throws DALException {
+		categorieDAO.delete(id);
 	}
 
 }

@@ -15,7 +15,7 @@ public class ArticleManager {
 	
 	private ObjetsEnchereDAO<Article> articleDAO;
 
-	public ArticleManager(ObjetsEnchereDAO<Article> articleDAO) {
+	public ArticleManager() {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 	
@@ -40,8 +40,10 @@ public class ArticleManager {
 		List<Article> articles = new ArrayList<>();
 		articleDAO.selectDateEnCours(date);
 		return articles;
-		
-		
+	}
+	
+	public  void deleteArticle(int id) throws DALException {
+		articleDAO.delete(id);
 	}
 	
 	public void verifArticle() {
