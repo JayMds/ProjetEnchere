@@ -18,8 +18,8 @@ public class UtilisateurManager {
 	
 	
 	
+	a supprilmer
 	
-
 	private ObjetsEnchereDAO<Utilisateur> utilisateurDAO;
 
 	public UtilisateurManager() {
