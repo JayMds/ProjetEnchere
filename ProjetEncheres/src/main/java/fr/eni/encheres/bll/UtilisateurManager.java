@@ -66,11 +66,11 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 	}
 
 	public Utilisateur selectionnerToutesInformationsDunUtilisateurAvecSonID(int id) throws BusinessException, DALException {
-		return this.utilisateurDAO.selectAllById(id);
+		return this.utilisateurDAO.selectByIdFull(id);
 	}
 	
 	public Utilisateur selectionnerInformationDiscret(int id) throws BusinessException, DALException {
-		return this.utilisateurDAO.selectAllById(id);
+		return this.utilisateurDAO.selectByIdDiscret(id);
 	}
 	
 	

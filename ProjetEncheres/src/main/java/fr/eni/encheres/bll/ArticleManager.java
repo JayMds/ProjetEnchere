@@ -25,7 +25,7 @@ public class ArticleManager {
 	}
 	
 	public Article selectArticle(int id) throws DALException {
-		Article a = articleDAO.selectAllById(id);
+		Article a = articleDAO.selectByIdFull(id);
 		return a;
 	}
 	

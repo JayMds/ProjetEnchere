@@ -41,7 +41,7 @@ public class ServletPageAccueil extends HttpServlet {
 			
 			
 			for(Article article : listeArticle) {
-				Utilisateur user = userManager.selectionnerUnUtilisateurAvecSonID(article.getNoVendeur()); 
+				Utilisateur user = userManager.selectionnerInformationDiscret(article.getNoVendeur()); 
 				System.out.println(user.getPseudo());
 				article.setNomVendeur(user.getPseudo()); 
 			}

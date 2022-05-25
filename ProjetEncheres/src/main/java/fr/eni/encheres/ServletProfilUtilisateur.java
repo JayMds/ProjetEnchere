@@ -32,7 +32,7 @@ public class ServletProfilUtilisateur extends HttpServlet {
 	
 		int id = Integer.parseInt(request.getParameter("id") ); 
 		try {
-			Utilisateur user = userManager.selectionnerToutesInformationsDunUtilisateurAvecSonID(id);
+			Utilisateur user = userManager.selectionnerInformationDiscret(id);
 			request.setAttribute("user", user);
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
