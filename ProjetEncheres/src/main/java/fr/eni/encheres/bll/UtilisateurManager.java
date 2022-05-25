@@ -18,7 +18,7 @@ public class UtilisateurManager {
 	
 	
 	
-	a supprilm
+	a suppri
 	
 	private ObjetsEnchereDAO<Utilisateur> utilisateurDAO;
 
