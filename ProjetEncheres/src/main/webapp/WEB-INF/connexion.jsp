@@ -5,6 +5,9 @@
 <body>
 
 
+<% if( request.getAttribute("status") == "failed"){ %>
+	<p>Une erreur est survenue lors de la connexion</p>
+<%} %>
 
 
 			<div class="signin-form">
@@ -32,8 +35,9 @@
 								<input type="submit" name="signin" id="signin"
 									class="form-submit" value="Log in" />
 							</div>
-							
-<a href="<%= request.getContextPath()%>/Inscription">Inscription</a>
+				</form>
+			</div>
+<a href="<%= request.getContextPath()%>/inscription">Inscription</a>
 
 </body>
 </html>

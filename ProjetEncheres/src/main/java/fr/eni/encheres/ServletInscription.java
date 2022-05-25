@@ -39,7 +39,7 @@ public class ServletInscription extends HttpServlet {
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String email = request.getParameter("email");
-		String mot_de_passe = request.getParameter("motdepasse");
+		String mot_de_passe = request.getParameter("motDePasse");
 		String telephone = request.getParameter("telephone");
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("codePostal");
@@ -78,7 +78,7 @@ public class ServletInscription extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-		}finally {
+		} finally {
 			try {
 				cnx.close();
 			} catch (SQLException e) {
