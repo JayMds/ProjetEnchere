@@ -14,7 +14,7 @@ public class VerificationUtilisateurManager  {
 
 	
 
-	public void validerPseudo(String pseudo, BusinessException businessException) {
+	protected void validerPseudo(String pseudo, BusinessException businessException) {
 
 		if (pseudo.isBlank() ^ pseudo.isEmpty()) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
