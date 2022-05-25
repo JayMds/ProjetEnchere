@@ -14,6 +14,9 @@ import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
+
+(test)
+
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 
 	String selectById = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `no_utilisateur` =?";
