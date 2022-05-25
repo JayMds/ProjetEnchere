@@ -9,6 +9,7 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 	public T selectById(int id) throws DALException;
 	public List<T> selectAll() throws DALException;
 	public void delete(int id) throws DALException;
+	
 
 
 	

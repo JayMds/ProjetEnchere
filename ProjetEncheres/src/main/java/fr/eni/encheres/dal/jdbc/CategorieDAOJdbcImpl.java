@@ -107,6 +107,12 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		return null;
 	}
 
+	@Override
+	public List<Categorie> selectUnsellArticle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 		
 
 

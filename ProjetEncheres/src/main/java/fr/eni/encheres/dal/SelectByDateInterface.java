@@ -7,5 +7,6 @@ import java.util.List;
 public interface SelectByDateInterface<T> {
 
 	public List<T> selectDateEnCours(LocalDate date);
+	public List<T> selectUnsellArticle();
 
 }

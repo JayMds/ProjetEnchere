@@ -15,6 +15,14 @@ public class Article {
 	private int noCategorie;
 	private int noAcheteur;
 	
+	@Override
+	public String toString() {
+		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
+				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
+				+ prixInitial + ", prixVente=" + prixVente + ", noVendeur=" + noVendeur + ", noCategorie=" + noCategorie
+				+ ", noAcheteur=" + noAcheteur + "]";
+	}
+
 	public Article(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere,
 			LocalDate dateFinEnchere, int prixInitial, int prixVente, int noVendeur, int noCategorie,
 			int noAcheteur) {

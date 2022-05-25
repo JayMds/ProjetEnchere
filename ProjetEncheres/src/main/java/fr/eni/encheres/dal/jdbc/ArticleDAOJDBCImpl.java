@@ -19,6 +19,7 @@ import fr.eni.encheres.dal.DALException;
 
 public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDateInterface<Article>{
 	private final String selectByDateArticle = "select * from 'articles' where  date_fin_encheres is null;";
+	private final String SELECT_UNSELL_ARTICLE = "SELECT * FROM `ARTICLES` WHERE no_acheteur is NULL";
 	private final String selectAllArticles = "select * from 'articles'; ";
 	private final String selectByIdArticles = "select * from 'articles' where no_article = ?; ";
 	private final String insertArticle = "insert into 'articles' (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_vendeur, no_categorie, no_acheteur ) values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -145,5 +146,29 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			e.printStackTrace();		
 		}
 		return articleEnCours;
+	}
+
+	@Override
+	public List<Article> selectUnsellArticle() {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+		
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				Statement stmt = cnx.createStatement();
+				ResultSet rs = stmt.executeQuery(SELECT_UNSELL_ARTICLE);
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					System.out.println(a.toString());
+					articles.add(a);
+				}
+			
+				stmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		
+		return articles;
 	}
 }

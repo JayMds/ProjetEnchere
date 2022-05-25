@@ -38,9 +38,21 @@ public class ArticleManager {
 	
 	public List<Article> selectArticleEnVente(LocalDate date){
 		List<Article> articles = new ArrayList<>();
-		articleDAO.selectDateEnCours(date);
+		articleDAO.selectDateEnCours(date);	
+		
 		return articles;
 	}
+	
+	public List<Article> selectUnsellArticle(){
+		List<Article> articles = new ArrayList<>();
+		//articleDAO.selectDateEnCours(date);
+		
+		articleDAO.selectUnsellArticle();
+		return articles;
+		
+	}
+	
+	
 	
 	public  void deleteArticle(int id) throws DALException {
 		articleDAO.delete(id);
