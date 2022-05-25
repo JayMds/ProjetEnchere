@@ -5,7 +5,7 @@ import java.util.List;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
-import fr.eni.encheres.dal.DAOFactory;
+import fr.eni.encheres.dal.Factory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 
@@ -23,7 +23,7 @@ public class UtilisateurManager {
 	private ObjetsEnchereDAO<Utilisateur> utilisateurDAO;
 
 	public UtilisateurManager() {
-		this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
+		this.utilisateurDAO = Factory.getUtilisateurDAO();
 	}
 
 	public Utilisateur ajouterutilisateur(String pseudo, String nom, String prenom, String email, String telephone,
@@ -84,9 +84,7 @@ public class UtilisateurManager {
 				}
 		
 				
-				
-		test
-				
+		
 				
 				
 				
