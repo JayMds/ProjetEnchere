@@ -1,5 +1,7 @@
 package fr.eni.encheres.bo;
 
+import java.util.List;
+
 public class Utilisateur {
 	
 	private int noUtilisateur;
@@ -143,5 +145,7 @@ public class Utilisateur {
 
 		this.administrateur = administrateur;
 	}
-	
+
+
+
 }
