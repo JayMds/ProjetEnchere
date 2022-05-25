@@ -15,7 +15,7 @@
 <form action="<%= request.getContextPath() %>/inscription" method="post">
 <div>
 	<label for="idPseudo">Pseudo:</label>
-	<input type ="text" id="idPseudo" name="speudo" required="required" placeholder="votre speudo" >
+	<input type ="text" id="idPseudo" name="pseudo" required="required" placeholder="votre speudo" >
 </div>
 <div>
 	<label for="idNom">Nom :</label>
@@ -65,4 +65,20 @@
 
 
 </body>
+
+
+<script>
+document.getElementById("idPseudo").setAttribute("value","MonSpeudo");
+document.getElementById("idEmail").setAttribute("value","mail@gmail.com");
+document.getElementById("idNom").setAttribute("value","MonNom");
+document.getElementById("idPrenom").setAttribute("value","MonPrenom");
+document.getElementById("idTelephone").setAttribute("value","0698657485");
+document.getElementById("idRue").setAttribute("value","9 rue du clos");
+document.getElementById("idCodePostal").setAttribute("value","95000");
+document.getElementById("idVille").setAttribute("value","Paris");
+document.getElementById("idMotdePasse").setAttribute("value","123");
+document.getElementById("idConfirmation").setAttribute("value","123");
+
+
+</script>
 </html>

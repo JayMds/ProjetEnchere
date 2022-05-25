@@ -37,7 +37,7 @@ html{
 body{
     margin: 0;   
     font-family: 'Montserrat', sans-serif !important ;
-   background-color: var(--background) !important ;
+    background-color: var(--background) !important;
 }
 
 html a {
@@ -45,11 +45,12 @@ html a {
 }
 
 header{
-        display: flex !important;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin: 5vh 15vh 0 15vh ;
+          display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5vh 15vh 0 15vh;
+    
         
 }
 header a {
@@ -102,6 +103,7 @@ header a img{
             justify-content:center;
             align-items:center;
             margin-top: 20vh; 
+            margin-bottom: 10vh;
     }
     .inputResearch {
             width: 100vh;
@@ -122,6 +124,10 @@ header a img{
         border-radius: 5vh 5vh 5vh 5vh !important;
         border: 1px solid !important;
        
+    }
+    .roundRadiusNoBorder{
+        border-radius: 5vh 5vh 5vh 5vh !important;
+    
     }
 
     .SB20{
@@ -154,4 +160,43 @@ header a img{
 
     .H5{
             height: 5vh;
+    }
+
+    /** affichage produits **/
+
+    .produits{
+        background-color: white;
+        width:100vw;  
+        display: flex;
+        flex-direction: column;
+        align-items: center;       
+        
+    }
+
+    .containerArticles{     
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      
+    }
+
+    .article{
+            background-color: var(--darkBackground); 
+            display: flex;
+            flex-direction: row;
+            min-width: 450px; 
+            height: 30vh; 
+            margin: 2vh;
+    }
+
+    .article img{
+            height: inherit; 
+    }
+
+    .descriptionArticle{
+            line-height: 0.5em;
+            margin-left: 1vh;
+            color: var(--blue);
     }
