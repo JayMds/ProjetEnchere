@@ -1,3 +1,4 @@
+<%@page import="fr.eni.encheres.bo.Utilisateur"%>
 <%@page import="fr.eni.encheres.bo.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,17 +22,18 @@
        -->
        
      <%
+     
      List<Article> listeArticles = (List<Article>) request.getAttribute("listeArticle");
      if(listeArticles != null && listeArticles.size()>0){ 
 	     for(Article article : listeArticles){
-	    	 
+	    	
 	  %>
 	    <div class="article roundRadiusNoBorder">
             <img class="roundRadiusNoBorder" src="asset/img/téléchargement.png">
                 <div class="descriptionArticle">
                     <h3><%= article.getNomArticle() %></h3>
-                    <p>vendu par <a href="#"><%= article.getNomVendeur() %></a> </p>
-                    <p class="prix">prix : <span><%= article.getPrixVente() %> pts</span></p>
+                    <p>vendu par <a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getNoVendeur()%>"><%= article.getNomVendeur() %></a> </p>
+                    <p class="prix">prix : <span> <%= article.getPrixVente() %>  pts</span></p>
                     <p class="finEnchère">fin de l'énchère: <span> 3 jours et 15h</span></p>
                     <span>fin le <span><%= article.getDateFinEnchere() %></span> </span>
                 </div>

@@ -35,6 +35,16 @@
 	<servlet-name>Connexion</servlet-name>
 	<url-pattern>/connexion</url-pattern>
 </servlet-mapping>
+
+
+<servlet>
+	<servlet-name>Utilisateur</servlet-name>
+	<servlet-class>fr.eni.encheres.ServletProfilUtilisateur</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Utilisateur</servlet-name>
+	<url-pattern>/utilisateur</url-pattern>
+</servlet-mapping>
   
   
   

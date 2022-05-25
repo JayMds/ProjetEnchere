@@ -82,7 +82,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				UtilisateurCourant = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
 				Utilisateurs.add(UtilisateurCourant);
 
-				System.out.println(UtilisateurCourant.toString());
+				
 			}
 			pstmt.close();
 		} catch (SQLException e) {

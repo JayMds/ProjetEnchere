@@ -9,7 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 import fr.eni.encheres.dal.SelectByDateInterface;
 import fr.eni.encheres.dal.ConnectionProvider;
@@ -64,10 +66,14 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			pstmt.setInt(1, id);
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
+			
+			 
 		//Si rs.next renvoie un resultat creer un nouvel Article
 			if (rs.next()) 
 			{
 				a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+				
+				
 			}else{
 				
 				throw new DALException("Aucun Article ne correspont à l'id "+ id);

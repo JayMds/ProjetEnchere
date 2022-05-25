@@ -15,7 +15,9 @@ public class Article {
 	private int noCategorie;
 	private int noAcheteur;
 	private String nomVendeur;
+	private Utilisateur Vendeur;
 	
+
 
 
 	@Override
@@ -140,5 +142,13 @@ public class Article {
 		this.nomVendeur = nomVendeur;
 	}
 	
+
+	public Utilisateur getVendeur() {
+		return Vendeur;
+	}
+
+	public void setVendeur(Utilisateur vendeur) {
+		Vendeur = vendeur;
+	}
 	
 }
