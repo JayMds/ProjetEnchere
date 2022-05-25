@@ -56,6 +56,7 @@ header a {
         color: var(--blue);
         font-weight: 600;
         margin: 0vh 2vh 0 2vh;
+        font-size: small;
 }
 
 header a img{
@@ -67,41 +68,24 @@ header a img{
 
 .btn-profil{
         border-radius: 5vh 5vh 5vh 5vh !important;
+        background-color: transparent !important; 
         border: 2px solid !important;
         border-color: var(--blue) !important;
-        
-}
-.btn-profil-inside{
-        background-color: transparent !important; 
-        border: 0px;
-        color: var(--blue) !important;
         font-family: 'Montserrat', sans-serif ;
         font-weight: 600;
-}
-.btn-profil-inside:hover{        
-        border: 0px;       
-       
+        color: var(--blue) !important;
+        padding: 2vh; 
+        
 }
 
-
+.btn-profil:hover{
+        background-color: var(--blue) ! important;
+        color: white !important;
+}
 
 
 /**modification du dropdown de connexion**/
-.pl-4, .px-4 {
-         padding-left: 0 !important; 
-    }
 
-    .show>.btn-secondary.dropdown-toggle:focus {
-        background-color: var(--blue) ! important;
-        color: white !important;
-    }
-    .btn-secondary:hover {
-        background-color: var(--blue) !important;
-        color: white !important; 
-    }
-    .btn-secondary:active {
-        box-shadow: 0 0 0 0.2rem rgb(246 231 209);
-    }
     .dropdown-menu {
             padding: 1vh !important;
             background-color: var(--background);
@@ -122,10 +106,13 @@ header a img{
     .inputResearch {
             width: 100vh;
             border-color: #adadad !important;
-            color: #525252 !important;
+            color: #bfbfbf !important;
             margin-bottom: 5vh;
             font-size: 1rem !important;
             height: 5vh;
+    }
+    .research-section button{
+            cursor: pointer; 
     }
 
 
@@ -133,7 +120,7 @@ header a img{
     .roundRadius{
         padding: 1vh !important;
         border-radius: 5vh 5vh 5vh 5vh !important;
-        border: 2px solid !important;
+        border: 1px solid !important;
        
     }
 
@@ -163,4 +150,8 @@ header a img{
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 400 !important;
 
+    }
+
+    .H5{
+            height: 5vh;
     }

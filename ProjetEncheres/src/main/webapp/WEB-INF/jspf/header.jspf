@@ -8,34 +8,19 @@
     </a>
 
 <nav id="connectedNav">
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Enchères</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Vendre un article</a>
-        </li>
-        <div class="btn-group btn-profil">
-           
-            <button type="button" class="btn btn-info btn-profil-inside ">Mon profil           
-            </button>
-            <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split btn-profil-inside" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-            
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="#">Déconnexion</a>
-              
-            </div>
-          </div>
-      </ul>
+    <a class="nav-link" href="#">Enchères</a>
+    <a class="nav-link" href="#">Vendre un article</a>
+    <a class="dropdown-item" href="#">Deconnexion</a>   
+    <a  class="nav-link btn-profil " href="#">Mon profil</a>  
+      
 </nav>
-<nav id="disconnectedNav">
-    <div class="btn-group">
-               <a class="btn btn-secondary btn-profil btn-profil-inside" href="<%= request.getContextPath()%>/Connexion">Se connecter / s'inscrire</a>
-    </div>
 
-</nav>
+
+<nav id="disconnectedNav">   
+        <a class="btn-profil" href="<%= request.getContextPath()%>/Connexion">Se connecter / s'inscrire</a>
+    </nav>
+
+
 </header>
 
 
