@@ -6,18 +6,8 @@ import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
-<<<<<<< Upstream, based on origin/main
-=======
-import fr.eni.encheres.dal.ObjetsEnchereDAO;
->>>>>>> ce89590 UtilisateurManager
-
-<<<<<<< Upstream, based on origin/main
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
-
-
-=======
->>>>>>> ce89590 UtilisateurManager
 public class UtilisateurManager {
 
 	private static int TAILLE_MINI = 3;
@@ -31,11 +21,7 @@ public class UtilisateurManager {
 	private ObjetsEnchereDAO<Utilisateur> utilisateurDAO;
 
 	public UtilisateurManager() {
-<<<<<<< Upstream, based on origin/main
 		this.utilisateurDAO = DAOFactory.getUtilisateurDAO(); 
-=======
-		this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
->>>>>>> ce89590 UtilisateurManager
 	}
 
 	public Utilisateur ajouterutilisateur(String pseudo, String nom, String prenom, String email, String telephone,

@@ -151,15 +151,12 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-<<<<<<< Upstream, based on origin/main
 
 	@Override
 	public List<Utilisateur> selectUnsellArticle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-=======
->>>>>>> ce89590 UtilisateurManager
 		
 
 }
