@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +16,19 @@ import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 
-	String selectById = "SELECT * FROM Utilisateurs WHERE noUtilisateur =?";
+	String selectById = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville, FROM UTILISATEURS WHERE no_Utilisateur =?";
 	String insert = "INSERT INTO Utilisateurs (pseudo,nom, prenom, email,telephone,rue,codePostal,ville motDePasse,administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	String selectAll = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
+	String delete = "DELETE from UTILISATEURS where no_Utilisateur = ?;";
+
 
 	@Override
-	
+
 	public void insert(Utilisateur utilisateurCourant) throws DALException {
 		int rowsInserted = -1;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
-			
 
-			PreparedStatement pstmt = cnx.prepareStatement(insert,PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = cnx.prepareStatement(insert, PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = pstmt.getGeneratedKeys();
 			int index = 0;
 			pstmt.setString(index++, utilisateurCourant.getPseudo());
@@ -91,28 +94,55 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	}
 
 	@Override
-	public List selectAll() {
-		return null;
-	}
+	public List<Utilisateur> selectAll() throws DALException {
 
-	@Override
-	public void delete(int id) {
+		List<Utilisateur> ListUtilisateurs = new ArrayList<Utilisateur>();
 
-	}
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			Statement stmt = cnx.createStatement();
 
-	@Override
-	public List selectDateEnCours(LocalDate date) {
-		return null;
-	}
+			ResultSet rs = stmt.executeQuery(selectAll);
 
-	public static void close(AutoCloseable resource) {
-		if (resource != null) {
-			try {
-				resource.close();
-			} catch (Exception ex) {
-				ex.printStackTrace();
+			while (rs.next()) {
+				Utilisateur u = new Utilisateur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+				ListUtilisateurs.add(u);
+				stmt.close();
+
 			}
+
+		} catch (SQLException e) {
+
+			throw new DALException(e);
+
 		}
+
+		return ListUtilisateurs;
+
 	}
+
+	@Override
+	public void delete(int id) throws DALException {
+		int rowsAffected = 0;
+		
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(delete);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+			rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected > 0) {
+				System.out.println(rowsAffected+ " Article suprimmé");
+			}
+			pstmt.close();
+		} catch (SQLException e) {
+			throw new DALException(e);		
+			}
+		
+		if (rowsAffected == 0) {
+			throw new DALException("Erreur lors de la suppression");
+		}
+		
+	}
+		
 
 }

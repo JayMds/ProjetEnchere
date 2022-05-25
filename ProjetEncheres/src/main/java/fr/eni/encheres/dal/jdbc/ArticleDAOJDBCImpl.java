@@ -17,12 +17,12 @@ import fr.eni.encheres.dal.DALException;
 //TODO definir la/les requêtes de sélection par  date
 
 public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
-	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
+	private final String selectByDateArticle = "select * from 'articles' where  date_fin_encheres is null;";
 	private final String selectAllArticles = "select * from 'articles'; ";
 	private final String selectByIdArticles = "select * from 'articles' where no_article = ?; ";
 	private final String insertArticle = "insert into 'articles' (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_vendeur, no_categorie, no_acheteur ) values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-	private final String deleteArticle = "delete from 'articles'where no_article = ?;";
-	private final String selectByDateArticle = "select * from 'articles' where  date_fin_encheres is null;";
+	private final String deleteArticle = "delete from 'articles' where no_article = ?;";
+	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
 
 	@Override
 	public void insert(Article a) {
@@ -120,7 +120,6 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 			}
 	}
 
-	@Override
 	public List<Article> selectDateEnCours(LocalDate date) {
 		Article a = null;
 		List<Article> articleEnCours = new ArrayList<Article>();
