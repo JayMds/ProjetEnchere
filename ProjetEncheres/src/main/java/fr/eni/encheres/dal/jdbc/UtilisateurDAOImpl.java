@@ -144,13 +144,5 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		
 	}
 		
-		
-
-	
-
-	@Override
-	public List selectDateEnCours(LocalDate date) {
-		return null;
-	}
 
 }
