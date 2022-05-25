@@ -44,7 +44,7 @@ public class Article {
 	}
 	
 	public Article(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, int noUtilisateur, int noCategorie, int noAcheteur, String nomVendeur) {
+			int prixInitial, int prixVente, int noUtilisateur, int noCategorie, int noAcheteur) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
