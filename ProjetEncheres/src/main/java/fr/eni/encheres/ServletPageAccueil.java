@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Utilisateur;
 
 /**
@@ -29,16 +31,16 @@ public class ServletPageAccueil extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		 
+		
 		try {
+			//Récupération des articles en cour de vente et des informations du vendeur
 			ArticleManager artManager = new ArticleManager();
 			UtilisateurManager userManager = new UtilisateurManager(); 
 			
 			List<Article> listeArticle = artManager.selectUnsellArticle();	
 					
 			request.setAttribute("listeArticle", listeArticle); 
-			
-			
+					
 			
 			for(Article article : listeArticle) {
 				Utilisateur user = userManager.selectionnerInformationDiscret(article.getNoVendeur()); 
@@ -46,12 +48,22 @@ public class ServletPageAccueil extends HttpServlet {
 				article.setNomVendeur(user.getPseudo()); 
 			}
 			
+			//récupération de l'ensemble des catégorie sur la bdd
+			
+			CategorieManager catManager = new CategorieManager(); 
+			List<Categorie> listeCategories = catManager.selectAllCategrorie(); 			
+			request.setAttribute("Categories", listeCategories); 
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 			rd.forward(request, response);
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
+		
+		//
+		
 		
 		
 	}
