@@ -59,7 +59,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 
 	
 	@Override
-	public Article selectById(int id) {
+	public Article selectByIdFull(int id) {
 		Article a = null;
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -172,12 +172,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		return articles;
 	}
 
-	@Override
-	public Article selectByIdFull(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Article selectByIdDiscret(int id) throws DALException {
 		// TODO Auto-generated method stub
