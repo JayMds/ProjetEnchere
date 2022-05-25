@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
@@ -101,6 +100,13 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 			e.printStackTrace();		
 			}
 	}
+
+	@Override
+	public List<Categorie> selectDateEnCours(LocalDate date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 		
 
 

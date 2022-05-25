@@ -11,12 +11,13 @@ import java.util.List;
 
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
+import fr.eni.encheres.dal.SelectByDateInterface;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 
 //TODO definir la/les requêtes de sélection par  date
 
-public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
+public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDateInterface<Article>{
 	private final String selectByDateArticle = "select * from 'articles' where  date_fin_encheres is null;";
 	private final String selectAllArticles = "select * from 'articles'; ";
 	private final String selectByIdArticles = "select * from 'articles' where no_article = ?; ";
