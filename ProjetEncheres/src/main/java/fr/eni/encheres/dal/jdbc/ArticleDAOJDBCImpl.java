@@ -120,7 +120,6 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>{
 			}
 	}
 
-	@Override
 	public List<Article> selectDateEnCours(LocalDate date) {
 		Article a = null;
 		List<Article> articleEnCours = new ArrayList<Article>();

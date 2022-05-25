@@ -7,30 +7,32 @@ import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
+	private final String insertArticle = "insert into 'categrorie' (no_categorie, libelle) values(?, ?);";
 
 	@Override
 	public void insert(Categorie c) throws DALException {
 		
-		/*try (Connection cnx = ConnectionProvider.getConnection();) {
-			PreparedStatement pstmt = cnx.prepareStatement(selectByIdArticles);
-			pstmt.setInt(1, id);
-			int x = pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();(Connection cnx = ConnectionProvider.getConnection();) {
-				//Todo avant insert article: insert Categorie et Utilisateur
-				PreparedStatement pstmt = cnx.prepareStatement(insertArticle);
-				pstmt.setString(1, insertArticle);
-				pstmt.setString(1, insertArticle);
-				pstmt.setInt(1, 0);
-		//Si rs.next renvoie un resultat creer un nouvel Article
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			//Todo avant insert article: insert Categorie et Utilisateur
+			PreparedStatement pstmt = cnx.prepareStatement(insertArticle, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, c.getLibelle());
+		
 			
+			int rowsInserted = pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys(); rs.next();
+			if (rowsInserted > 0) {
+				System.out.println(rowsInserted + " Article inséré");
+				c.setNoCategorie(rowsInserted);
+			}
+			pstmt.close();
 		} catch (Exception e) {
-			// TODO: handle exception
-		}*/
-				
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -51,7 +53,6 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		
 	}
 
-	@Override
 	public List<Categorie> selectDateEnCours(LocalDate date) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
