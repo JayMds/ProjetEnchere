@@ -47,7 +47,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) 
 			{
-				e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"));
+				//e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"));
 			}
 			else{
 				
