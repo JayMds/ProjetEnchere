@@ -5,13 +5,9 @@ import fr.eni.encheres.dal.jdbc.UtilisateurDAOImpl;
 
 public class Factory {
 	
-	
-	public static class factory{
-		public static ObjetsEnchereDAO<Utilisateur> getUtilisateurDAO() {
-			return new UtilisateurDAOImpl();
-	
-		}
 
+	public static ObjetsEnchereDAO<Utilisateur> getUtilisateurDAO() {
+		return new UtilisateurDAOImpl();
 	}
 
 
