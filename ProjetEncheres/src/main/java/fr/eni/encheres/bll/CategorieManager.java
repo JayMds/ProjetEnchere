@@ -14,7 +14,7 @@ public class CategorieManager {
 	
 	private ObjetsEnchereDAO<Categorie> categorieDAO;
 
-	public CategorieManager(ObjetsEnchereDAO<Categorie> categorieDAO) {
+	public CategorieManager() {
 		this.categorieDAO = DAOFactory.getCategorieDAO();
 	}
 	
