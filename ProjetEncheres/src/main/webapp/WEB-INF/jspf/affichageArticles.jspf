@@ -29,11 +29,11 @@
 	    <div class="article roundRadiusNoBorder">
             <img class="roundRadiusNoBorder" src="asset/img/téléchargement.png">
                 <div class="descriptionArticle">
-                    <h3>Nom Produit</h3>
-                    <p>vendu par <a href="#">jojo45</a> </p>
-                    <p class="prix">prix : <span>50 pts</span></p>
+                    <h3><%= article.getNomArticle() %></h3>
+                    <p>vendu par <a href="#"><%= article.getNomVendeur() %></a> </p>
+                    <p class="prix">prix : <span><%= article.getPrixVente() %> pts</span></p>
                     <p class="finEnchère">fin de l'énchère: <span> 3 jours et 15h</span></p>
-                    <span>fin le <span>18/05/2022</span> </span>
+                    <span>fin le <span><%= article.getDateFinEnchere() %></span> </span>
                 </div>
             
         </div>

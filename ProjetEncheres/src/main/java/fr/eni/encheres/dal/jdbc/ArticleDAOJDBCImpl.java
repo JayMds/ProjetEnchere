@@ -158,7 +158,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				ResultSet rs = stmt.executeQuery(SELECT_UNSELL_ARTICLE);
 				while (rs.next()) {
 					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
-					System.out.println(a.toString());
+					
 					articles.add(a);
 				}
 			

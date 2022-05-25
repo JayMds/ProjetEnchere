@@ -14,13 +14,16 @@ public class Article {
 	private int noVendeur;
 	private int noCategorie;
 	private int noAcheteur;
+	private String nomVendeur;
 	
+
+
 	@Override
 	public String toString() {
 		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
 				+ prixInitial + ", prixVente=" + prixVente + ", noVendeur=" + noVendeur + ", noCategorie=" + noCategorie
-				+ ", noAcheteur=" + noAcheteur + "]";
+				+ ", noAcheteur=" + noAcheteur + nomVendeur + "]";
 	}
 
 	public Article(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere,
@@ -51,6 +54,7 @@ public class Article {
 		this.noVendeur = noUtilisateur;
 		this.noCategorie = noCategorie;
 		this.noAcheteur = noAcheteur;
+		this.nomVendeur = nomVendeur; 
 	}
 
 	
@@ -128,6 +132,13 @@ public class Article {
 		this.noAcheteur = noAcheteur;
 	}
 	
+	public String getNomVendeur() {
+		return nomVendeur;
+	}
+
+	public void setNomVendeur(String nomVendeur) {
+		this.nomVendeur = nomVendeur;
+	}
 	
 	
 }

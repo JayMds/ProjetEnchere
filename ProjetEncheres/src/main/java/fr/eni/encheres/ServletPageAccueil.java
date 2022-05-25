@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletPageAccueil
@@ -30,9 +32,19 @@ public class ServletPageAccueil extends HttpServlet {
 		 
 		try {
 			ArticleManager artManager = new ArticleManager();
+			UtilisateurManager userManager = new UtilisateurManager(); 
+			
 			List<Article> listeArticle = artManager.selectUnsellArticle();	
-			System.out.println(listeArticle);
+					
 			request.setAttribute("listeArticle", listeArticle); 
+			
+			
+			
+			for(Article article : listeArticle) {
+				Utilisateur user = userManager.selectionnerUnUtilisateurAvecSonID(article.getNoVendeur()); 
+				System.out.println(user.getPseudo());
+				article.setNomVendeur(user.getPseudo()); 
+			}
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 			rd.forward(request, response);

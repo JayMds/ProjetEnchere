@@ -47,7 +47,8 @@ public class ArticleManager {
 		List<Article> articles = new ArrayList<>();
 		//articleDAO.selectDateEnCours(date);
 		
-		articleDAO.selectUnsellArticle();
+		articles = articleDAO.selectUnsellArticle();
+		
 		return articles;
 		
 	}

@@ -16,7 +16,7 @@ import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 
-	String selectById = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville, FROM UTILISATEURS WHERE no_Utilisateur =?";
+	String selectById = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `no_utilisateur` =?";
 	String insert = "INSERT INTO Utilisateurs (pseudo,nom, prenom, email,telephone,rue,codePostal,ville motDePasse,administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	String selectAll = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
 	String delete = "DELETE from UTILISATEURS where no_Utilisateur = ?;";
@@ -76,12 +76,13 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				String email = rs.getString("email");
 				String telephone = rs.getString("telephone");
 				String rue = rs.getString("rue");
-				String codePostal = rs.getString("codePostal");
+				String codePostal = rs.getString("code_Postal");
 				String ville = rs.getString("ville");
 
 				UtilisateurCourant = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
 				Utilisateurs.add(UtilisateurCourant);
 
+				System.out.println(UtilisateurCourant.toString());
 			}
 			pstmt.close();
 		} catch (SQLException e) {
