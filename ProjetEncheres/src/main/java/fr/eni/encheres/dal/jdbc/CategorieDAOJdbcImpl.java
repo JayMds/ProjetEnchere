@@ -39,7 +39,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	}
 
 	@Override
-	public Categorie selectAllById(int id) throws DALException {
+	public Categorie selectByIdFull(int id) throws DALException {
 		Categorie c = null;
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -107,6 +107,18 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 
 	@Override
 	public List<Categorie> selectUnsellArticle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Categorie selectByIdDiscret(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Categorie> selectAllFull() throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

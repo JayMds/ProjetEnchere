@@ -41,7 +41,7 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	}
 
 	@Override
-	public Enchere selectAllById(int id) throws DALException {
+	public Enchere selectByIdFull(int id) throws DALException {
 		Enchere e = null;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdEnchere);
@@ -106,6 +106,18 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 
 	@Override //DNOT USE
 	public List<Enchere> selectUnsellArticle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Enchere selectByIdDiscret(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Enchere> selectAllFull() throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
