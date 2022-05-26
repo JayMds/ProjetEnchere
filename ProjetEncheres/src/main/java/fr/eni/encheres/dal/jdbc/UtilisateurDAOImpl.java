@@ -15,7 +15,7 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
-	String insert = "INSERT INTO Utilisateurs (pseudo,nom, prenom, email,telephone,rue,codePostal,ville motDePasse,administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	String insert = "INSERT INTO `UTILISATEURS`(`pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	String delete = "DELETE from UTILISATEURS where no_Utilisateur = ?;";
 	String selectByIdFull = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur =?";
 	String selectByIdDiscret = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville,  FROM UTILISATEURS WHERE no_utilisateur =?";
@@ -31,7 +31,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 
 			PreparedStatement pstmt = cnx.prepareStatement(insert, PreparedStatement.RETURN_GENERATED_KEYS);
 			ResultSet rs = pstmt.getGeneratedKeys();
-			int index = 0;
+			int index = 1;
 			pstmt.setString(index++, utilisateurCourant.getPseudo());
 			pstmt.setString(index++, utilisateurCourant.getNom());
 			pstmt.setString(index++, utilisateurCourant.getPrenom());
@@ -41,6 +41,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			pstmt.setString(index++, utilisateurCourant.getCodePostal());
 			pstmt.setString(index++, utilisateurCourant.getVille());
 			pstmt.setString(index++, utilisateurCourant.getMotDePasse());
+		
 			rs = pstmt.getGeneratedKeys();
 
 			rowsInserted = pstmt.executeUpdate();
@@ -49,7 +50,8 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			}
 			pstmt.close();
 		} catch (SQLException e) {
-			throw new DALException("");
+			//throw new DALException("");
+			e.printStackTrace();
 		}
 
 		if (rowsInserted == -1) {

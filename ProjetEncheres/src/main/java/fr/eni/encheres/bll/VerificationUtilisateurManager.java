@@ -7,10 +7,10 @@ public class VerificationUtilisateurManager  {
 	private static int TAILLE_MINI = 3;
 	private static int TAILLE_MAXI = 30;
 
-	private static String REGEX_CODE_POSTAL = "/^(([0-8][0-9])|(9[0-5]))[0-9]{3}$/";
+	private static String REGEX_CODE_POSTAL = "^[0-9]{5}(?:-[0-9]{4})?$";
 	private static String REGEX_TELEPHONE = "^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$";
-	private static String REGEX_VILLE = "[^0-9]";
-	private static String REGEX_MOT_DE_PASSE = "^(?=.*[0-9])(?=.*[az])(?=.*[AZ])(?=.*[@#$%^&-+=() ])(?=\\\\S+$).{8, 20}$";
+	private static String REGEX_VILLE = "^\\s*[a-zA-Z]{1}[0-9a-zA-Z][0-9a-zA-Z '-.=#/]*$";
+	private static String REGEX_MOT_DE_PASSE = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
 
 	
 
@@ -21,7 +21,7 @@ public class VerificationUtilisateurManager  {
 		}
 
 		if (pseudo.length() < TAILLE_MINI ^ pseudo.length() > TAILLE_MAXI) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_ERREUR_FORMAT);
+			businessException.ajouterErreur(CodesResultatBLL.ERREUR_PRENOM);
 		}
 
 	}
@@ -33,7 +33,7 @@ public class VerificationUtilisateurManager  {
 		}
 
 		if (nom.length() < TAILLE_MINI ^ nom.length() > TAILLE_MAXI) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_ERREUR_FORMAT);
+			businessException.ajouterErreur(CodesResultatBLL.ERREUR_NOM);
 		}
 
 	}
@@ -45,7 +45,7 @@ public class VerificationUtilisateurManager  {
 		}
 
 		if (prenom.length() < TAILLE_MINI ^ prenom.length() > TAILLE_MAXI) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_ERREUR_FORMAT);
+			businessException.ajouterErreur(CodesResultatBLL.ERREUR_PRENOM);
 		}
 
 	}
@@ -57,7 +57,7 @@ public class VerificationUtilisateurManager  {
 		}
 
 		if (!email.contains("@")) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_ERREUR_FORMAT);
+			businessException.ajouterErreur(CodesResultatBLL.ERREUR_EMAIL);
 		}
 	}
 
@@ -68,7 +68,7 @@ public class VerificationUtilisateurManager  {
 		}
 
 		if (!telephone.matches(REGEX_TELEPHONE)) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_ERREUR_FORMAT);
+			businessException.ajouterErreur(CodesResultatBLL.ERREUR_TELEPHONE);
 
 		}
 
@@ -88,7 +88,7 @@ public class VerificationUtilisateurManager  {
 		}
 
 		if (!codePostal.matches(REGEX_CODE_POSTAL)) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_ERREUR_FORMAT);
+			businessException.ajouterErreur(CodesResultatBLL.ERREUR_CODE_POSTAL);
 
 		}
 
@@ -101,7 +101,7 @@ public class VerificationUtilisateurManager  {
 
 		}
 		if (!ville.matches(REGEX_VILLE)) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_ERREUR_FORMAT);
+			businessException.ajouterErreur(CodesResultatBLL.ERREUR_VILLE);
 
 		}
 
@@ -112,13 +112,13 @@ public class VerificationUtilisateurManager  {
 		if (motdepasse.isBlank() ^ motdepasse.isEmpty()) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
 		}
-		
+		/**
 		if (!motdepasse.matches(REGEX_MOT_DE_PASSE)) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_MDP);
 		}
 		
 		
-		
+		**/
 		
 		
 	}
