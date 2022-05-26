@@ -49,7 +49,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			}
 			pstmt.close();
 		} catch (SQLException e) {
-			throw new DALException(e);
+			throw new DALException("");
 		}
 
 		if (rowsInserted == -1) {

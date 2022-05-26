@@ -1,14 +1,17 @@
 package fr.eni.encheres.dal;
 
-public class DALException extends Exception {
+import java.util.ArrayList;
+import java.util.List;
 
-		// Chaînage des Exceptions
-		public DALException(String message) {
-			super(message);
-		}
-		public DALException(Throwable cause ) {
-			super(cause);
-		}
+public class DALException extends Exception {
+	// Chaînage des Exceptions
+	public DALException(String message) {
+		super(message);
+	}
+	public DALException(Throwable cause ) {
+		super(cause);
+	}
+
 	}
 
 

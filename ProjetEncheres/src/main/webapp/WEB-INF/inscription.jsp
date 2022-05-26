@@ -1,6 +1,6 @@
-
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page import="fr.eni.encheres.gestionerreurs.LecteurMessage"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,6 +10,21 @@
 </head>
 <body>
 
+<%
+			List<Integer> listeCodesErreur = (List<Integer>) request.getAttribute("listeCodesErreur");
+			if(listeCodesErreur!=null)
+			{
+		%>
+				<p style="color:red;">Une erreur s'est produite :</p>
+		<%
+				for(int codeErreur:listeCodesErreur)
+				{
+		%>
+					<p><%=LecteurMessage.getMessageErreur(codeErreur)%></p>
+		<%	
+				}
+			}
+		%>
 
 
 <form action="<%= request.getContextPath() %>/inscription" method="post">

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
+<%@include file="/WEB-INF/jspf/affichageErreur.jspf" %>
 <header>
+
+
     <a href="<%= request.getContextPath() %>">
         <img src="asset/logo/Logo_eni_encheres_bleuFonce.png">
     </a>
