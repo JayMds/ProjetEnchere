@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="/WEB-INF/jspf/affichageErreur.jspf" %>
+
+
+<% String message = (String) request.getAttribute("message"); 
+if(message != null){
+%>
+	<p style="color:green; text-align: center;"  ><%= message %></p>
+	
+<%}%>
+
 <header>
 
 

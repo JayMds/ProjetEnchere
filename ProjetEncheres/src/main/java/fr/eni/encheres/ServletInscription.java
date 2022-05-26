@@ -78,6 +78,8 @@ public class ServletInscription extends HttpServlet {
 			try {
 				
 				userManager.ajouterutilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+				
+				request.setAttribute("message", "Votre inscription est réussie, bienvenue parmis nous :)");
 				RequestDispatcher rd = request.getRequestDispatcher("");
 				rd.forward(request, response);	
 				
