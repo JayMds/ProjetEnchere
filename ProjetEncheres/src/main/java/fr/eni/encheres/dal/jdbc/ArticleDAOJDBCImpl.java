@@ -23,7 +23,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	private final String selectByDateArticle = "select * from 'articles' where  date_fin_encheres is null;";
 	private final String SELECT_UNSELL_ARTICLE = "SELECT * FROM `ARTICLES` WHERE no_acheteur is NULL";
 	private final String selectAllArticles = "select * from 'articles'; ";
-	private final String selectByIdArticles = "select * from 'articles' where no_article = ?; ";
+	private final String selectByIdArticles = "SELECT `no_article`, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` WHERE `no_article` = ?; ";
 	private final String insertArticle = "insert into 'articles' (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_vendeur, no_categorie, no_acheteur ) values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	private final String deleteArticle = "delete from 'articles' where no_article = ?;";
 	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
@@ -69,6 +69,8 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			if (rs.next()) 
 			{
 				a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+				//a.toString(); 
+			
 			}else{
 				throw new DALException("Aucun Article ne correspont à l'id "+ id);
 			}

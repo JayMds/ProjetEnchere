@@ -31,6 +31,9 @@ public class ServletPageAccueil extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		/**
+		 * @author AlexG
+		 */
 		
 		try {
 			//Récupération des articles en cour de vente et des informations du vendeur

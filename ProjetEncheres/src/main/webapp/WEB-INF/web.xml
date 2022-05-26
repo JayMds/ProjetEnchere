@@ -45,6 +45,17 @@
 	<servlet-name>Utilisateur</servlet-name>
 	<url-pattern>/utilisateur</url-pattern>
 </servlet-mapping>
+
+
+<servlet>
+	<servlet-name>Article</servlet-name>
+	<servlet-class>fr.eni.encheres.ServletArticle</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Article</servlet-name>
+	<url-pattern>/article</url-pattern>
+</servlet-mapping>
+
   
   
   
