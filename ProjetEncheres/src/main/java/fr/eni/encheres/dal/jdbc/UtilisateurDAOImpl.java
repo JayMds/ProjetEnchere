@@ -214,7 +214,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	}
 
 	@Override
-	public List<Utilisateur> selectDateEnCours(LocalDate date) {
+	public List<Utilisateur> selectDateEnCours() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +37,8 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			PreparedStatement pstmt = cnx.prepareStatement(insertArticle, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, a.getNomArticle());
 			pstmt.setString(2, a.getDescription());
-			pstmt.setDate(3, java.sql.Date.valueOf(a.getDateDebutEnchere()));
-			pstmt.setDate(4, java.sql.Date.valueOf(a.getDateFinEnchere()));
+			pstmt.setObject(3, a.getDateDebutEnchere());
+			pstmt.setObject(4, a.getDateFinEnchere());
 			pstmt.setInt(5, a.getPrixInitial());
 			pstmt.setInt(6, a.getPrixVente());
 			pstmt.setInt(7, a.getNoVendeur());
@@ -68,9 +69,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) 
 			{
-				a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
-				//a.toString(); 
-			
+				a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
 			}else{
 				throw new DALException("Aucun Article ne correspont à l'id "+ id);
 			}
@@ -93,7 +92,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				Statement stmt = cnx.createStatement();
 				ResultSet rs = stmt.executeQuery(selectAllArticles);
 				while (rs.next()) {
-					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
 					articles.add(a);
 				}
 			
@@ -124,7 +123,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			}
 	}
 
-	public List<Article> selectDateEnCours(LocalDate date) {
+	public List<Article> selectDateEnCours() {
 		Article a = null;
 		List<Article> articleEnCours = new ArrayList<Article>();
 		
@@ -134,8 +133,8 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			if (rs != null) {
 				while (rs.next()) {
 					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),
-							(rs.getDate("date_debut_encheres")).toLocalDate(),
-							(rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"),
+							rs.getObject("date_debut_encheres", LocalDateTime.class),
+							rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"),
 							rs.getInt("prix_vente"), rs.getInt("no_vendeur"), rs.getInt("no_categorie"),
 							rs.getInt("no_acheteur"));
 					articleEnCours.add(a);
@@ -159,7 +158,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				Statement stmt = cnx.createStatement();
 				ResultSet rs = stmt.executeQuery(SELECT_UNSELL_ARTICLE);
 				while (rs.next()) {
-					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(), (rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
 					
 					articles.add(a);
 				}

@@ -100,7 +100,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	}
 
 	@Override
-	public List<Categorie> selectDateEnCours(LocalDate date) {
+	public List<Categorie> selectDateEnCours( ) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,10 +1,9 @@
 package fr.eni.encheres.bll;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.jni.Local;
 
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DALException;
@@ -20,7 +19,7 @@ public class EnchereManager {
 	}
 	
 	
-	public void addEnchere(int idUser, int idArticle, LocalDate dateEnchere, int montant) throws DALException {
+	public void addEnchere(int idUser, int idArticle, LocalDateTime dateEnchere, int montant) throws DALException {
 		Enchere e = new Enchere(idUser, idArticle, dateEnchere, montant);
 		enchereDAO.insert(e);
 	}

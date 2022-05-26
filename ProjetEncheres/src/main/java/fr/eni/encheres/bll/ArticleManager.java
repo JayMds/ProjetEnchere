@@ -1,6 +1,6 @@
 package fr.eni.encheres.bll;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class ArticleManager {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 	
-	public void addArticle(String nom, String description, LocalDate dateDebut, LocalDate dateFin, int prixInit, int prixFin, int vendeur, int categorie, int acheteur) throws DALException {
+	public void addArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, int prixFin, int vendeur, int categorie, int acheteur) throws DALException {
 		Article a = new Article(nom, description, dateDebut, dateFin, prixInit, prixFin, vendeur, categorie, acheteur);
 				articleDAO.insert(a);
 	}
@@ -36,9 +36,9 @@ public class ArticleManager {
 		
 	}
 	
-	public List<Article> selectArticleEnVente(LocalDate date){
+	public List<Article> selectArticleEnVente(){
 		List<Article> articles = new ArrayList<>();
-		articleDAO.selectDateEnCours(date);	
+		articleDAO.selectDateEnCours();	
 		
 		return articles;
 	}

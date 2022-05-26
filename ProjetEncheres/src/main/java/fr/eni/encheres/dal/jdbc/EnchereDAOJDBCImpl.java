@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +19,13 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	private final String selectAllEnchere= "select * from 'encheres'; ";
 	private final String deleteEnchere = "delete from 'encheres' where no_article = ?;";
 
-
-
 	@Override
 	public void insert(Enchere e) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(insertEnchere);
 			pstmt.setInt(1, e.getNoUtilisateur());
 			pstmt.setInt(2, e.getNoArticle());
-			pstmt.setDate(3, java.sql.Date.valueOf(e.getDateEnchere()));
+			pstmt.setObject(3, e.getDateEnchere());
 			pstmt.setInt(4, e.getMontant());
 			
 			int rowsInserted = pstmt.executeUpdate();
@@ -46,11 +44,10 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdEnchere);
 			pstmt.setInt(1, id);
-			pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();
+			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) 
 			{
-				e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"));
+				e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getObject("date_enchere", LocalDateTime.class), rs.getInt("montant_enchere"));
 			}
 			else{
 				
@@ -72,7 +69,7 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 				Statement stmt = cnx.createStatement();
 				ResultSet rs = stmt.executeQuery(selectAllEnchere);
 				while (rs.next()) {
-					e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"));
+					e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getObject("date_enchere", LocalDateTime.class), rs.getInt("montant_enchere"));
 					encheres.add(e);
 				}
 				stmt.close();
@@ -98,24 +95,25 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 			}		
 	}
 
-	@Override //DO NOT USE
-	public List<Enchere> selectDateEnCours(LocalDate date) {
+	/*
+	 * DO NOT USE
+	 * 
+	 */
+	@Override 
+	public List<Enchere> selectDateEnCours() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override //DNOT USE
+	@Override
 	public List<Enchere> selectUnsellArticle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public Enchere selectByIdDiscret(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public List<Enchere> selectAllFull() throws DALException {
 		// TODO Auto-generated method stub

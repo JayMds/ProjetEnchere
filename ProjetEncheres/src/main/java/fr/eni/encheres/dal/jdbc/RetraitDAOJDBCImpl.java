@@ -66,7 +66,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	}
 	
 	@Override //DO NOT USE
-	public List<Retrait> selectDateEnCours(LocalDate date) {
+	public List<Retrait> selectDateEnCours() {
 		return null;
 	}
 	@Override //DO NOT USE
