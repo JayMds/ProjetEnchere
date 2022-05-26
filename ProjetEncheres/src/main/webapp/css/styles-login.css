@@ -2,18 +2,13 @@
 
 
 .formConnexion{
-	height: 100vh; 
+    height: 100vh; 
     width: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto;
-   
 }
-
-.formConnexion .logo{
-	padding-top: 15vh; 
-	}
 
 .formConnexion a img{
     height: 20vh; 

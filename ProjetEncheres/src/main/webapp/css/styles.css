@@ -29,6 +29,7 @@ html{
 }
 
 body{
+        min-height: 100vh;
     margin: 0;   
     font-family: 'Montserrat', sans-serif !important ;
     /**background-color: var(--background) !important;**/
