@@ -1,15 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,900;1,900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,900;1,900&display=swap');
-* {
-    -moz-box-sizing: inherit;
-         box-sizing: inherit;
-    -webkit-transition-property: all;
-            transition-property: all;
-    -webkit-transition-duration: .6s;
-            transition-duration: .6s;
-    -webkit-transition-timing-function: ease;
-            transition-timing-function: ease;
-  }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
 * {
@@ -23,11 +13,15 @@
           transition-timing-function: ease;
 }
 
+
+
 :root{
  --background: #FFF2DF;
  --blue: #41417F; 
  --lightBlue: #A9C8D4;
  --darkBackground: #F6E7D1;
+--darkBackground2: #ebdecc;
+--opacity: 0.5;
 }
 
 html{
@@ -37,9 +31,14 @@ html{
 body{
     margin: 0;   
     font-family: 'Montserrat', sans-serif !important ;
-    background-color: var(--background) !important;
+    /**background-color: var(--background) !important;**/
+    /**background-image: linear-gradient(to right top, #fff2df, #ffdfd4, #f6ced5, #dfc2db, #babade);**/
+    background-image: url("../asset/img/Brazuca - Planning.png"), linear-gradient(to right top, rgba(255,242,223,var(--opacity)), rgba(255,223,212,var(--opacity)),rgba(246,206,213,var(--opacity)), rgba(223,194,219,var(--opacity)), rgba(186,186,222,var(--opacity)));
+    background-repeat: no-repeat;
+    background-position: right;
+   
+   
 }
-
 html a {
         text-decoration: none ;
 }
@@ -64,8 +63,32 @@ header a img{
         height: 20vh;
 }
 
+
+/** Slogan**/
+
+.slogan{
+        font-family: 'Amatic SC', sans-serif !important ;
+        color: var(--blue);       
+        font-size: xxx-large;
+        text-align: center;
+}
+
+.slogan span{
+        font-size: xx-large;
+}
+
+
 /** Bouton header profil **/
 
+.btn{
+        cursor: pointer;
+}
+
+.btn:hover{
+        background-color: var(--blue) !important;
+        color:white !important; 
+
+}
 
 .btn-profil{
         border-radius: 5vh 5vh 5vh 5vh !important;
@@ -100,9 +123,10 @@ header a img{
     /*input research*/
     .research-section{
             display:flex;
+            flex-direction: column;
             justify-content:center;
             align-items:center;
-            margin-top: 20vh; 
+            margin-top: -5vh; 
             margin-bottom: 10vh;
     }
     .inputResearch {
@@ -199,4 +223,11 @@ header a img{
             line-height: 0.5em;
             margin-left: 1vh;
             color: var(--blue);
+    }
+
+    .divider{
+            background-color: var(--darkBackground);
+            height: 2px; 
+            width : 20vw;
+            margin: 10px;  
     }

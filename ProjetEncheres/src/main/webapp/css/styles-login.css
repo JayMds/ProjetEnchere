@@ -1,0 +1,36 @@
+
+
+
+.formConnexion{
+	height: 100vh; 
+    width: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+   
+}
+
+.formConnexion .logo{
+	padding-top: 15vh; 
+	}
+
+.formConnexion a img{
+    height: 20vh; 
+}
+
+.formConnexion form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formConnexion .form-control{
+    height: 5vh;
+    min-width: 20vw;
+    margin: 2vh; 
+}
+
+.link-item{
+    margin: 10px; 
+}

@@ -10,6 +10,10 @@
 
 
 <section class="research-section">
+
+ 	<div class="slogan">
+        <h1>Donnez <span>une</span>  seconde vie </br> <span>à vos</span> objets</h1>
+    </div>
     <form>
         <input  class="roundRadius form-control form-control-lg inputResearch" type="text" name="research" placeholder="Trouvez l'objet de vos envies...">
 		<!-- Faire itération à partir des catagorie recupérer sur serveur -->

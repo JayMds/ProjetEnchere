@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jspf/head.jspf" %>
+<link rel="stylesheet" href="css/styles-login.css">
  </head>
 <body>
 
@@ -10,34 +11,33 @@
 <%} %>
 
 
-			<div class="signin-form">
-						<h2 class="form-title">Sign up</h2>
-						<form method="" action="" class="register-form"
-							id="login-form">
-							<div class="form-group">
-								<label for="username"><i
-									class="zmdi zmdi-account material-icons-name"></i></label> <input
-									type="text" name="username" id="username"
-									placeholder="Your Name" />
-							</div>
-							<div class="form-group">
-								<label for="password"><i class="zmdi zmdi-lock"></i></label> <input
-									type="password" name="password" id="password"
-									placeholder="Password" />
-							</div>
-							<div class="form-group">
-								<input type="checkbox" name="remember-me" id="remember-me"
-									class="agree-term" /> <label for="remember-me"
-									class="label-agree-term"><span><span></span></span>Remember
-									me</label>
-							</div>
-							<div class="form-group form-button">
-								<input type="submit" name="signin" id="signin"
-									class="form-submit" value="Log in" />
-							</div>
-				</form>
-			</div>
-<a href="<%= request.getContextPath()%>/inscription">Inscription</a>
+			<div class="formConnexion">
+
+    <a class="logo" href="<%= request.getContextPath() %>">
+        <img src="asset/logo/Logo_eni_encheres_bleuFonce.png">
+    </a>
+
+
+    <form >
+        <input type="email" class="form-control roundRadius" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+        <input type="password" class="form-control roundRadius" id="exampleDropdownFormPassword1" placeholder="Password">
+
+       
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="dropdownCheck">
+          <label class="form-check-label" for="dropdownCheck">
+            Se rappeler de moi
+          </label>
+        </div>
+        <button type="submit" class="montserrat600 bg-blue btn roundRadius SB30 H5">Se connecter</button>
+      </form>
+
+      <div class="divider"></div>
+      <a class="link-item" href="<%= request.getContextPath()%>/inscription">Nouveau ici? inscris-toi ici</a>
+      <a  class="link-item" href="#">Mot de passe oublié?</a>
+
+</div>
+
 
 </body>
 </html>
