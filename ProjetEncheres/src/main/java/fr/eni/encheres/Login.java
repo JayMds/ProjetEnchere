@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.encheres.bll.UtilisateurManager;
+
 /**
  * Servlet implementation class Login
  */
@@ -23,9 +25,26 @@ public class Login extends HttpServlet {
        
 	
 	@Override
+		public void init() throws ServletException {
+			UtilisateurManager userManager = new UtilisateurManager(); 
+		}
+	
+	@Override
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
-		rd.forward(request, response);
+		//on verifie si une session existe deja
+		
+		if(request.getSession(false) != null){
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+			rd.forward(request, response);
+		    
+		}
+		else {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+			rd.forward(request, response);
+		}
+		
+		
+		
 		}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

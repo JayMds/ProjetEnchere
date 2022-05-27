@@ -43,7 +43,7 @@ public class ServletPageAccueil extends HttpServlet {
 			List<Article> listeArticle = artManager.selectUnsellArticle();	
 					
 			request.setAttribute("listeArticle", listeArticle); 
-					
+		
 			
 			for(Article article : listeArticle) {
 				Utilisateur user = userManager.selectionnerInformationDiscret(article.getNoVendeur()); 

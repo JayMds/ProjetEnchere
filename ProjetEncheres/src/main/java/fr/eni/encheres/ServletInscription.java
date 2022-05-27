@@ -1,6 +1,7 @@
 package fr.eni.encheres;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +24,7 @@ import fr.eni.encheres.dal.DALException;
 /**
  * Servlet implementation class ServletInscription
  */
-@WebServlet("/ServletInscription")
+
 public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -70,7 +72,7 @@ public class ServletInscription extends HttpServlet {
 		//traitement
 		if(listeCodesErreur.size()>0) {
 			request.setAttribute("listeCodesErreur",listeCodesErreur);
-			System.out.println("listecodeErreur");
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
 			rd.forward(request, response);		
 		}else {
@@ -78,10 +80,15 @@ public class ServletInscription extends HttpServlet {
 			try {
 				
 				userManager.ajouterutilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+				//création du cookie pour l'affichage du message
+				//TODO création methode et fichier proprietes 
+				String message = "Votre inscription est réussie, bienvenue parmis nous.";
+				response.setCharacterEncoding("UTF-8" );				
+				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );
 				
-				request.setAttribute("message", "Votre inscription est réussie, bienvenue parmis nous :)");
-				RequestDispatcher rd = request.getRequestDispatcher("");
-				rd.forward(request, response);	
+				
+				System.out.println("cookie créer");
+				response.sendRedirect(request.getContextPath());
 				
 				
 			} catch (BusinessException e) {
