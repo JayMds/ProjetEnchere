@@ -11,16 +11,5 @@
 <% Utilisateur user = (Utilisateur) request.getAttribute("user");  %>
 
 <p><%= user.toString() %></p>
-
-
-
-<%
-	Utilisateur connectedUser = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
-	if(connectedUser == user ){
-%>
-
-<a href="#">Modifier</a>
-
-<% } %>
 </body>
 </html>

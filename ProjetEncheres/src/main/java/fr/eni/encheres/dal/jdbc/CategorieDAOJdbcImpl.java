@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
@@ -104,33 +105,36 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public List<Categorie> selectUnsellArticle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public Categorie selectByIdDiscret(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public List<Categorie> selectAllFull() throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public Categorie verificationLogin(String a, String b) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void update(Categorie type, boolean fullOrNot) {
+
+	@Override
+	public Categorie verificationPseudo(String login) throws BusinessException, DALException {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
-
-
-
 
 		
 

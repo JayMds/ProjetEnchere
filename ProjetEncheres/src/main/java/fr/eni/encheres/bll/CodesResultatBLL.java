@@ -19,5 +19,6 @@ public class CodesResultatBLL {
 	public static final int ERREUR_RUE = 20010;
 	public static final int ERREUR_CODE_POSTAL= 20011; 
 	public static final int ERREUR_VILLE = 20012;
+	public static final int PSEUDO_DEJA_PRIS = 200013;
 	
 }

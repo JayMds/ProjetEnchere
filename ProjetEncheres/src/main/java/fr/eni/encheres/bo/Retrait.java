@@ -6,18 +6,7 @@ public class Retrait {
 	private int noArticle;
 	private String rue;
 	private String codePostal;
-	
-	public Retrait(int noArticle, String rue, String codePostal, String ville) {
-		super();
-		this.noArticle = noArticle;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-	}
 	private String ville;
-	
-	
-	
 	public int getNoArticle() {
 		return noArticle;
 	}

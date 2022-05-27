@@ -2,6 +2,8 @@ package fr.eni.encheres.dal;
 
 import java.util.List;
 
+import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.bo.Utilisateur;
 
 public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 	
@@ -15,10 +17,10 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 	public List<T> selectAllDiscret() throws DALException;
 	public void delete(int id) throws DALException;
 	public T verificationLogin(String a, String b) throws DALException;
-	public void update(T type, boolean fullOrNot);
+	public T verificationPseudo(String login) throws BusinessException, DALException;
+	}
 	
-
-}
+	
 
 
 	

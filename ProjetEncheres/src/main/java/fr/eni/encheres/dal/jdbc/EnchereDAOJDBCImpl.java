@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Enchere;
-import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
@@ -126,10 +126,11 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void update(Enchere e, boolean fullOrNot) {
-		// TODO Auto-generated method stub
-		
-	}
 
+	@Override
+	public Enchere verificationPseudo(String login) throws BusinessException, DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

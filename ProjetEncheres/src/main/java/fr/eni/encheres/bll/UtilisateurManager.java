@@ -23,6 +23,8 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 			String rue, String codePostal, String ville, String motDePasse) throws BusinessException, DALException {
 
 		BusinessException businessException = new BusinessException();
+		
+		
 		this.validerPseudo(pseudo, businessException);
 		this.validerNom(nom, businessException);
 		this.validerPrenom(prenom, businessException);
@@ -77,7 +79,9 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 		return this.utilisateurDAO.verificationLogin(login, mdp); 
 	}
 
-	
+	public Utilisateur VerificationSiPseudoExistant(String pseudo) throws BusinessException, DALException{
+		return this.utilisateurDAO.verificationPseudo(pseudo); 
+	}
 	
 	
 	

@@ -1,7 +1,6 @@
 package fr.eni.encheres.bo;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Enchere {
 
@@ -9,9 +8,6 @@ public class Enchere {
 	private int noArticle;
 	private LocalDateTime dateEnchere;
 	private int montant;
-	
-	public final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-
 	
 	public Enchere(int noUtilisateur, int noArticle, LocalDateTime dateEnchere, int montant) {
 		super();
@@ -32,14 +28,8 @@ public class Enchere {
 	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
-	public String getSTRDateEnchere() {
-		String date = this.dateEnchere.format(FORMAT);
-		System.out.println(date);
-		return date;
-	}
 	public LocalDateTime getDateEnchere() {
-		return this.dateEnchere ;
-		
+		return dateEnchere;
 	}
 	public void setDateEnchere(LocalDateTime dateEnchere) {
 		this.dateEnchere = dateEnchere;

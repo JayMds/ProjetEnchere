@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +23,10 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String selectByIdDiscret = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville,  FROM UTILISATEURS WHERE no_utilisateur =?";
 	String selectAllDiscret = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
 	String selectAllFull = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
-	String SELECT_BY_LOG = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `email` = ? And `mot_de_passe`=? ;";
-	String updateUtilisateur = "UPDATE 'UTILISATEURS' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
-	String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
-
-
+	String SELECT_BY_LOG = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `email` = ? And `mot_de_passe`=?";
+	String VERIF_PSEUDO = "SELECT PSEUDO FROM UTILISATEURS WHERE PSEUDO=?";
+	
 	@Override
-
 	public void insert(Utilisateur utilisateurCourant) throws DALException {
 		int rowsInserted = -1;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -173,7 +171,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			Statement stmt = cnx.createStatement();
 
-			ResultSet rs = stmt.executeQuery(selectAllDiscret);
+			ResultSet rs = stmt.executeQuery(selectAllFull);
 
 			while (rs.next()) {
 				Utilisateur u = new Utilisateur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
@@ -216,58 +214,6 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		}
 
 	}
-
-	@Override
-	public List<Utilisateur> selectDateEnCours() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Utilisateur> selectUnsellArticle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-//	String updateUtilisateur = "UPDATE 'UTILISATEURS' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
-//	String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
-
-	@Override
-	public void update(Utilisateur utilisateurCourant, boolean infosOrMdp) {
-		int index= 1;
-		try (Connection cnx = ConnectionProvider.getConnection();){
-			 
-			if (!infosOrMdp) {
-				
-				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateur);
-				pstmt.setString(index++, utilisateurCourant.getPseudo());
-				pstmt.setString(index++, utilisateurCourant.getNom());
-				pstmt.setString(index++, utilisateurCourant.getPrenom());
-				pstmt.setString(index++, utilisateurCourant.getEmail());
-				pstmt.setString(index++, utilisateurCourant.getTelephone());
-				pstmt.setString(index++, utilisateurCourant.getRue());
-				pstmt.setString(index++, utilisateurCourant.getCodePostal());
-				pstmt.setString(index++, utilisateurCourant.getVille());
-				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
-				int rowsAffected = pstmt.executeUpdate();
-				System.out.println(rowsAffected+" utilisateur modifié");
-				pstmt.close();
-			}else {
-				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateurmdp);
-				pstmt.setString(index++, utilisateurCourant.getMotDePasse());
-				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
-				int rowsAffected = pstmt.executeUpdate();
-				System.out.println(rowsAffected+" utilisateur modifié");
-				pstmt.close();
-			}
-		} catch (Exception e) {
-		e.printStackTrace();
-		}  
-		
-
-	}
-
-	
-	
 	
 	public Utilisateur verificationLogin(String login, String motdepasse) throws DALException {
 		
@@ -308,10 +254,52 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			throw new DALException(e);
 
 		}
-		
-		
+	}
+	
+		public Utilisateur verificationPseudo(String pseudo) throws DALException {
+			
+
+			Utilisateur UtilisateurCourant = new Utilisateur();
+
+
+			
+			try (Connection cnx = ConnectionProvider.getConnection();) {
+
+				PreparedStatement pstmt = cnx.prepareStatement(VERIF_PSEUDO);
+				pstmt.setString(1, pseudo);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+
+					String pseudoTest = rs.getString("pseudo");
+			
+
+					UtilisateurCourant = new Utilisateur(pseudoTest);
+
+				}
+				pstmt.close();
+			} catch (SQLException e) {
+				throw new DALException(e);
+
+			}
+
+			return UtilisateurCourant;
+
 		
 	}
+
+		@Override
+		public List<Utilisateur> selectDateEnCours() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<Utilisateur> selectUnsellArticle() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	
 
 }

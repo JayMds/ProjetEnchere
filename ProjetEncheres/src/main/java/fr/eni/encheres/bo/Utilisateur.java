@@ -1,8 +1,8 @@
 package fr.eni.encheres.bo;
 
-
 public class Utilisateur {
 	
+
 	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
@@ -21,7 +21,14 @@ public class Utilisateur {
 	
 	public Utilisateur() {
 	}
+
 	
+	
+	
+	public Utilisateur(String pseudo) {
+		this.pseudo = pseudo;
+	}
+
 	
 	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
@@ -83,6 +90,9 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 	}
+
+
+
 
 
 
