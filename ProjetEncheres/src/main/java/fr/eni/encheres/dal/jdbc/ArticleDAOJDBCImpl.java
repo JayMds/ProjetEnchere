@@ -185,4 +185,14 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public void update(Article type, boolean fullOrNot) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 }

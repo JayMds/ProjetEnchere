@@ -3,11 +3,10 @@ package fr.eni.encheres.dal.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.List;
 
-import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
@@ -47,7 +46,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) 
 			{
-				//e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"));
+				e = new Retrait(rs.getInt("no_article"), rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
 			}
 			else{
 				
@@ -58,6 +57,13 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 			ex.printStackTrace();		
 			}
 		return e;
+	}
+	
+	@Override
+	public List<Retrait> selectAllFull() throws DALException {
+		
+		
+		return null;
 	}
 	@Override 
 	public void delete(int id) throws DALException {
@@ -78,16 +84,18 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public List<Retrait> selectAllFull() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public List<Retrait> selectAllDiscret() throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void update(Retrait r, boolean fullOrNot) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

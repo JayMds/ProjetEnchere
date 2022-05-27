@@ -2,6 +2,7 @@ package fr.eni.encheres.dal;
 
 import java.util.List;
 
+
 public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 	
 	
@@ -13,6 +14,8 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 	public List<T> selectAllFull() throws DALException;
 	public List<T> selectAllDiscret() throws DALException;
 	public void delete(int id) throws DALException;
+	public void update(T type, boolean fullOrNot);
+	
 	}
 	
 	

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
@@ -119,5 +120,12 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void update(Enchere e, boolean fullOrNot) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
