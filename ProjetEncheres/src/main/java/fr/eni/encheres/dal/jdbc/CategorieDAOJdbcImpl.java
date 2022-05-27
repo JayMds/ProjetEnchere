@@ -123,6 +123,12 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		return null;
 	}
 
+	@Override
+	public Categorie verificationLogin(String a, String b) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 		
 
 

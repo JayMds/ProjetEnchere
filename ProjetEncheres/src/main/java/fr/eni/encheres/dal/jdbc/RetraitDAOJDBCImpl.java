@@ -88,6 +88,11 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public Retrait verificationLogin(String a, String b) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

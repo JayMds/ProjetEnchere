@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
@@ -21,7 +23,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String selectByIdDiscret = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville,  FROM UTILISATEURS WHERE no_utilisateur =?";
 	String selectAllDiscret = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
 	String selectAllFull = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
-	
+	String SELECT_BY_LOG = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `email` = ? And `mot_de_passe`=? ;";
 
 	@Override
 
@@ -223,6 +225,52 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	public List<Utilisateur> selectUnsellArticle() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	
+	public Utilisateur verificationLogin(String login, String motdepasse) throws DALException {
+		
+		//motdepasse= HashClass.sha1(motdepasse);
+		
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOG);
+			pstmt.setString(1, login);
+			pstmt.setString(2, motdepasse);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				int noUser = rs.getInt("no_utilisateur");
+				String pseudo = rs.getString("pseudo");
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String email = rs.getString("email");
+				String telephone = rs.getString("telephone");
+				String rue = rs.getString("rue");
+				String codePostal = rs.getString("code_Postal");
+				String ville = rs.getString("ville");
+				String motDePasse = rs.getString("mot_De_Passe");
+				String credit = rs.getString("credit");
+				Boolean administrateur = rs.getBoolean("administrateur");
+
+
+				 return new Utilisateur(noUser ,pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+
+			}
+			else {
+				return null;
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new DALException(e);
+
+		}
+		
+		
+		
 	}
 	
 

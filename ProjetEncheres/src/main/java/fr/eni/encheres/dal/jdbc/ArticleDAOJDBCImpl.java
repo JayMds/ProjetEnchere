@@ -185,4 +185,11 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public Article verificationLogin(String a, String b) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

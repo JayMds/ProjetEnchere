@@ -120,4 +120,10 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		return null;
 	}
 
+	@Override
+	public Enchere verificationLogin(String a, String b) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

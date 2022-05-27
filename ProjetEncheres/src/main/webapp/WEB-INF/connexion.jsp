@@ -18,9 +18,9 @@
     </a>
 
 
-    <form >
-        <input type="email" class="form-control roundRadius" id="exampleDropdownFormEmail1" placeholder="email@example.com">
-        <input type="password" class="form-control roundRadius" id="exampleDropdownFormPassword1" placeholder="Password">
+    <form action="<%= request.getContextPath() %>/connexion" method="post" >
+        <input type="email" name="email" class="form-control roundRadius" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+        <input type="password" name="password" class="form-control roundRadius" id="exampleDropdownFormPassword1" placeholder="Password">
 
        
         <div class="form-check">

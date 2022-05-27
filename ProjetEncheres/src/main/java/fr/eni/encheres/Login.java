@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.UtilisateurManager;
+import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.dal.DALException;
 
 /**
  * Servlet implementation class Login
@@ -23,25 +25,36 @@ import fr.eni.encheres.bll.UtilisateurManager;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	
-	@Override
-		public void init() throws ServletException {
-			UtilisateurManager userManager = new UtilisateurManager(); 
-		}
+
 	
 	@Override
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//on verifie si une session existe deja
 		
-		if(request.getSession(false) != null){
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
-			rd.forward(request, response);
+	/**	if(request.getSession(false) != null){
+			// on envoie un message sur l'accueil
+			String message = "Vous etes deja connecter";
+			response.setCharacterEncoding("UTF-8" );				
+			response.addCookie( CookieUtils.SetCookie("message", message, 10)  );
+			response.sendRedirect(request.getContextPath());
 		    
 		}
 		else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
-			rd.forward(request, response);
-		}
+			**/
+			//on redirige vers la connexion
+			
+		String login=request.getParameter("txtLogin");
+		String password=request.getParameter("txtPassword");
+		if(login==null)login="inscrire";
+		if(password==null)password="";
+		// Stocker dans le modele
+		HttpSession session=request.getSession(true); // creer session meme si elle n'existe pas 
+		session.setAttribute("login", login);
+		session.setAttribute("password", password);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+		rd.forward(request, response);
+		//}
 		
 		
 		
@@ -49,33 +62,42 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		UtilisateurManager userManager = new UtilisateurManager(); 
+		
+		
 		String email = request.getParameter("email");
-		String mot_de_passe = request.getParameter("motdepasse");
-		HttpSession session = request.getSession();
-		RequestDispatcher dispatcher = null;
+		String mot_de_passe = request.getParameter("password");
+	
+		
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "nanou");
-			PreparedStatement pst = cnx.prepareStatement("select * from users where email = ? and motdepasse = ?");
-			pst.setString(1, email);
-			pst.setString(2, mot_de_passe);
+			Utilisateur user = userManager.VerificationLogin(email, mot_de_passe);
 			
-			ResultSet rs = pst.executeQuery();
-			if (rs.next()) {
-				session.setAttribute("nom", rs.getString("nom"));
-				dispatcher = request.getRequestDispatcher("/WEB-INF/index.jsp");
-				
-			}else {
-				request.setAttribute("status", "failed");
-				dispatcher = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+			if(user != null)
+			{
+				HttpSession session = request.getSession(true);
+				session.setAttribute("connectedUser", user); 
+				String message = "Bonjour " + user.getNom();
+				System.out.println(user.toString());
+				response.setCharacterEncoding("UTF-8" );				
+				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
+				response.sendRedirect(request.getContextPath());
+			}
+			else
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+				rd.forward(request, response);
 				
 			}
-			dispatcher.forward(request, response);
-			
-		} catch (Exception e) {
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
+		
+		
+		
+		
+	
 	}
 
 }

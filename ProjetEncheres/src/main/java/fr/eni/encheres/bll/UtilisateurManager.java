@@ -73,6 +73,12 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 		return this.utilisateurDAO.selectByIdDiscret(id);
 	}
 	
+	public Utilisateur VerificationLogin(String login, String mdp) throws DALException {
+		return this.utilisateurDAO.verificationLogin(login, mdp); 
+	}
+
+	
+	
 	
 	
  }

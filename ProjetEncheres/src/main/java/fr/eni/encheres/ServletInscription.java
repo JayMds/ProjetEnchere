@@ -84,10 +84,7 @@ public class ServletInscription extends HttpServlet {
 				//TODO création methode et fichier proprietes 
 				String message = "Votre inscription est réussie, bienvenue parmis nous.";
 				response.setCharacterEncoding("UTF-8" );				
-				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );
-				
-				
-				System.out.println("cookie créer");
+				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
 				response.sendRedirect(request.getContextPath());
 				
 				
