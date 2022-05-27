@@ -226,6 +226,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		return null;
 	}
 //	String updateUtilisateur = "UPDATE 'UTILISATEURS' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
+//	String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
 
 	@Override
 	public void update(Utilisateur utilisateurCourant, boolean infosOrMdp) {
@@ -243,12 +244,14 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				pstmt.setString(index++, utilisateurCourant.getRue());
 				pstmt.setString(index++, utilisateurCourant.getCodePostal());
 				pstmt.setString(index++, utilisateurCourant.getVille());
+				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
 				int rowsAffected = pstmt.executeUpdate();
 				System.out.println(rowsAffected+" utilisateur modifié");
 				pstmt.close();
 			}else {
 				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateurmdp);
 				pstmt.setString(index++, utilisateurCourant.getMotDePasse());
+				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
 				int rowsAffected = pstmt.executeUpdate();
 				System.out.println(rowsAffected+" utilisateur modifié");
 				pstmt.close();
