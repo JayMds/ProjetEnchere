@@ -3,10 +3,11 @@ package fr.eni.encheres.dal.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.Retrait;
-import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
@@ -61,15 +62,44 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	
 	@Override
 	public List<Retrait> selectAllFull() throws DALException {
-		
-		
-		return null;
+		List<Retrait> retraits = new ArrayList<>();
+		Retrait r = null;
+		try(Connection cnx = ConnectionProvider.getConnection();){
+			Statement stmt = cnx.createStatement();
+			ResultSet rs = stmt.executeQuery(selectAllRetrait);
+			while (rs.next()) {
+				r = new Retrait(rs.getInt("no-article"), rs.getString("rue"), rs.getString("code_postal"),rs.getString("ville"));
+				retraits.add(r);
+			}
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	return retraits;
 	}
+	
+	
 	@Override 
 	public void delete(int id) throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(deleteRetrait);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+			int rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected > 0) {
+				System.out.println(rowsAffected+ " Categorie suprimmée");
+			}
+			pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();		
+			}
+	}
+	
+	public void update(Retrait r, boolean fullOrNot) {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 	@Override //DO NOT USE
 	public List<Retrait> selectDateEnCours() {
@@ -95,10 +125,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void update(Retrait r, boolean fullOrNot) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	
 
