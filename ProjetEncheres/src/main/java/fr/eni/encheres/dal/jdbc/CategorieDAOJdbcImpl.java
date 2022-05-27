@@ -104,25 +104,21 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public List<Categorie> selectUnsellArticle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public Categorie selectByIdDiscret(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public List<Categorie> selectAllFull() throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public Categorie verificationLogin(String a, String b) throws DALException {
 		// TODO Auto-generated method stub

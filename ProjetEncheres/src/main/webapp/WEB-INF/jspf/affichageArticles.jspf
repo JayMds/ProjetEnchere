@@ -36,7 +36,7 @@
                     <p>vendu par <a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getNoVendeur()%>"><%= article.getNomVendeur() %></a> </p>
                     <p class="prix">prix : <span> <%= article.getPrixVente() %>  pts</span></p>
                     <p class="finEnchère">fin de l'énchère: <span> 3 jours et 15h</span></p>
-                    <span>fin le <span><%= article.getDateFinEnchere() %></span> </span>
+                    <span>fin le <span><%= article.getSTRDateFinEnchere() %></span> </span>
                 </div>
             
         </div>
