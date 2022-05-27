@@ -34,7 +34,7 @@ if(user != null ){
 <nav id="connectedNav">
     <a class="nav-link" href="#">Enchères</a>
     <a class="nav-link" href="#">Vendre un article</a>
-    <a class="dropdown-item" href="#">Deconnexion</a>   
+    <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Deconnexion</a>   
     <a  class="nav-link btn-profil " href="#">Mon profil</a>  
       
 </nav>

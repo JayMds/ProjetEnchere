@@ -56,6 +56,18 @@
 	<url-pattern>/article</url-pattern>
 </servlet-mapping>
 
+
+
+<servlet>
+	<servlet-name>Logout</servlet-name>
+	<servlet-class>fr.eni.encheres.ServletLogout</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Logout</servlet-name>
+	<url-pattern>/logout</url-pattern>
+</servlet-mapping>
+
+  
   
   
   

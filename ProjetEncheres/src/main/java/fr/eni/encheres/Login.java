@@ -24,80 +24,69 @@ import fr.eni.encheres.dal.DALException;
 
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-	
 	@Override
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//on verifie si une session existe deja
-		
-	/**	if(request.getSession(false) != null){
-			// on envoie un message sur l'accueil
-			String message = "Vous etes deja connecter";
-			response.setCharacterEncoding("UTF-8" );				
-			response.addCookie( CookieUtils.SetCookie("message", message, 10)  );
-			response.sendRedirect(request.getContextPath());
-		    
-		}
-		else {
-			**/
-			//on redirige vers la connexion
-			
-		String login=request.getParameter("txtLogin");
-		String password=request.getParameter("txtPassword");
-		if(login==null)login="inscrire";
-		if(password==null)password="";
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// on verifie si une session existe deja
+
+		/**
+		 * if(request.getSession(false) != null){ // on envoie un message sur l'accueil
+		 * String message = "Vous etes deja connecter";
+		 * response.setCharacterEncoding("UTF-8" ); response.addCookie(
+		 * CookieUtils.SetCookie("message", message, 10) );
+		 * response.sendRedirect(request.getContextPath());
+		 * 
+		 * } else {
+		 **/
+		// on redirige vers la connexion
+
+		String login = request.getParameter("txtLogin");
+		String password = request.getParameter("txtPassword");
+		if (login == null)
+			login = "inscrire";
+		if (password == null)
+			password = "";
 		// Stocker dans le modele
-		HttpSession session=request.getSession(true); // creer session meme si elle n'existe pas 
+		HttpSession session = request.getSession(true); // creer session meme si elle n'existe pas
 		session.setAttribute("login", login);
 		session.setAttribute("password", password);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 		rd.forward(request, response);
-		//}
-		
-		
-		
-		}
+		// }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		UtilisateurManager userManager = new UtilisateurManager(); 
-		
-		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		UtilisateurManager userManager = new UtilisateurManager();
+
 		String email = request.getParameter("email");
 		String mot_de_passe = request.getParameter("password");
-	
-		
-		
+
 		try {
 			Utilisateur user = userManager.VerificationLogin(email, mot_de_passe);
-			
-			if(user != null)
-			{
+
+			if (user != null) {
 				HttpSession session = request.getSession(true);
-				session.setAttribute("connectedUser", user); 
+				session.setAttribute("connectedUser", user);
 				String message = "Bonjour " + user.getNom();
 				System.out.println(user.toString());
-				response.setCharacterEncoding("UTF-8" );				
-				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
+				response.setCharacterEncoding("UTF-8");
+				response.addCookie(CookieUtils.SetCookie("message", message, 10));
 				response.sendRedirect(request.getContextPath());
-			}
-			else
-			{
+			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 				rd.forward(request, response);
-				
+
 			}
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
-		
-		
-		
-	
+		}
+
 	}
 
 }
