@@ -29,7 +29,7 @@ if (CookieUtils.readCookie("message", cookies) != null) {
 
 <%
 Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
-if(user != null){
+if(user != null ){
 %>
 <nav id="connectedNav">
     <a class="nav-link" href="#">Enchères</a>
