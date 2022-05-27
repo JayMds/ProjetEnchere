@@ -128,6 +128,13 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public void update(Categorie type, boolean fullOrNot) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 
 		
 

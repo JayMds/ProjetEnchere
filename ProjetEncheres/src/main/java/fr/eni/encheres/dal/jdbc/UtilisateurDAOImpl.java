@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +23,9 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String selectAllDiscret = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
 	String selectAllFull = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
 	String SELECT_BY_LOG = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `email` = ? And `mot_de_passe`=? ;";
+	String updateUtilisateur = "UPDATE 'UTILISATEURS' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
+	String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
+
 
 	@Override
 
@@ -226,6 +228,44 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+//	String updateUtilisateur = "UPDATE 'UTILISATEURS' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
+//	String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
+
+	@Override
+	public void update(Utilisateur utilisateurCourant, boolean infosOrMdp) {
+		int index= 1;
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			 
+			if (!infosOrMdp) {
+				
+				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateur);
+				pstmt.setString(index++, utilisateurCourant.getPseudo());
+				pstmt.setString(index++, utilisateurCourant.getNom());
+				pstmt.setString(index++, utilisateurCourant.getPrenom());
+				pstmt.setString(index++, utilisateurCourant.getEmail());
+				pstmt.setString(index++, utilisateurCourant.getTelephone());
+				pstmt.setString(index++, utilisateurCourant.getRue());
+				pstmt.setString(index++, utilisateurCourant.getCodePostal());
+				pstmt.setString(index++, utilisateurCourant.getVille());
+				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
+				int rowsAffected = pstmt.executeUpdate();
+				System.out.println(rowsAffected+" utilisateur modifié");
+				pstmt.close();
+			}else {
+				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateurmdp);
+				pstmt.setString(index++, utilisateurCourant.getMotDePasse());
+				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
+				int rowsAffected = pstmt.executeUpdate();
+				System.out.println(rowsAffected+" utilisateur modifié");
+				pstmt.close();
+			}
+		} catch (Exception e) {
+		e.printStackTrace();
+		}  
+		
+
+	}
+
 	
 	
 	

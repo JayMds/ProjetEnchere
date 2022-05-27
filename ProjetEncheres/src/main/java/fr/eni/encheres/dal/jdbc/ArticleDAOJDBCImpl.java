@@ -5,14 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Article;
-import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 import fr.eni.encheres.dal.SelectByDateInterface;
 import fr.eni.encheres.dal.ConnectionProvider;
@@ -192,4 +189,11 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public void update(Article type, boolean fullOrNot) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 }
