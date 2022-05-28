@@ -1,6 +1,7 @@
 package fr.eni.encheres.bo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Article {
 	private int noArticle;
@@ -16,7 +17,14 @@ public class Article {
 	private String nomVendeur;
 	private Utilisateur Vendeur;
 
+	public final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
+	/**
+	 *   LocalDate date = LocalDate.now();
+  String text = date.format(formatter);
+  LocalDate parsedDate = LocalDate.parse(text, formatter);
+
+	 */
 
 	@Override
 	public String toString() {
@@ -85,7 +93,12 @@ public class Article {
 		this.description = description;
 	}
 	public LocalDateTime getDateDebutEnchere() {
-		return dateDebutEnchere;
+		return this.dateDebutEnchere;
+	}
+	public String getSTRDateDebutEnchere() {
+		String date = this.dateDebutEnchere.format(FORMAT);
+		System.out.println(date);
+		return date;
 	}
 	public void setDateDebutEnchere(LocalDateTime dateDebutEnchere) {
 		this.dateDebutEnchere = dateDebutEnchere;
@@ -93,7 +106,13 @@ public class Article {
 	public LocalDateTime getDateFinEnchere() {
 		return this.dateFinEnchere;
 	}
+	public String getSTRDateFinEnchere() {
+		String date = this.dateFinEnchere.format(FORMAT);
+		System.out.println(date);
+		return date;
+	}
 	public void setDateFinEnchere(LocalDateTime dateFinEnchere) {
+		
 		this.dateFinEnchere = dateFinEnchere;
 	}
 	public int getPrixInitial() {
