@@ -19,8 +19,8 @@ public class ArticleManager {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 	
-	public void addArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, int prixFin, int vendeur, int categorie, int acheteur) throws DALException {
-		Article a = new Article(nom, description, dateDebut, dateFin, prixInit, prixFin, vendeur, categorie, acheteur);
+	public void addArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, int vendeur, int categorie) throws DALException {
+		Article a = new Article(nom, description, dateDebut, dateFin, prixInit, vendeur, categorie);
 				articleDAO.insert(a);
 	}
 	

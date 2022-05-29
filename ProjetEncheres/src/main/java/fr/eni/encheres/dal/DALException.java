@@ -11,6 +11,10 @@ public class DALException extends Exception {
 	public DALException(Throwable cause ) {
 		super(cause);
 	}
+	public Object getListeCodesErreur() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	}
 

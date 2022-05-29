@@ -69,6 +69,16 @@
 
   
   
+
+<servlet>
+	<servlet-name>NouvelleVente</servlet-name>
+	<servlet-class>fr.eni.encheres.ServletNouvelleVente</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>NouvelleVente</servlet-name>
+	<url-pattern>/nouvelle-vente</url-pattern>
+</servlet-mapping>
+  
   
   
   

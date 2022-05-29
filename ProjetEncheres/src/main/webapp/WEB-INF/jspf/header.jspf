@@ -33,7 +33,7 @@ if(user != null ){
 %>
 <nav id="connectedNav">
     <a class="nav-link" href="#">Enchères</a>
-    <a class="nav-link" href="#">Vendre un article</a>
+    <a class="nav-link" href="<%= request.getContextPath() %>/nouvelle-vente">Vendre un article</a>
     <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Deconnexion</a>   
     <a  class="nav-link btn-profil " href="<%= request.getContextPath() %>/utilisateur?id=<%= user.getNoUtilisateur() %>">Mon profil</a>  
       
@@ -41,7 +41,7 @@ if(user != null ){
 <%}else{ %>
 
 <nav id="disconnectedNav">   
-        <a class="btn-profil" href="<%= request.getContextPath()%>/connexion">Se connecter / s'inscrire</a>
+      <a class="btn-profil" href="<%= request.getContextPath()%>/connexion">Se connecter / s'inscrire</a>
 </nav>
 <%} %>
 
