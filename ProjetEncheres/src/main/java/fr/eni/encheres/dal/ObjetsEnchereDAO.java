@@ -18,7 +18,8 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 	public void delete(int id) throws DALException;
 	public T verificationLogin(String a, String b) throws DALException;
 	public T verificationPseudo(String login) throws BusinessException, DALException;
-	}
+	public void update(T type, boolean fullOrNot);
+}
 	
 	
 

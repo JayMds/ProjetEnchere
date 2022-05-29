@@ -113,8 +113,8 @@ public class ServletNouvelleVente extends HttpServlet {
 				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
 				response.sendRedirect(request.getContextPath());
 			
-			} catch (DALException e) {
-				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
+			} catch (Exception e) {
+				request.setAttribute("listeCodesErreur",((DALException) e).getListeCodesErreur());
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
 				rd.forward(request, response);	
 				e.printStackTrace();

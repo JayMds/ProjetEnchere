@@ -19,6 +19,16 @@ public class CodesResultatBLL {
 	public static final int ERREUR_RUE = 20010;
 	public static final int ERREUR_CODE_POSTAL= 20011; 
 	public static final int ERREUR_VILLE = 20012;
-	public static final int PSEUDO_DEJA_PRIS = 200013;
+	public static final int PSEUDO_DEJA_PRIS = 20013;
+	public static final int ERREUR_DESCRIPTION = 20014;
+	public static final int ERREUR_DATE_JOUR_DEBUT = 20015;
+	public static final int ERREUR_DATE_JOUR_FIN = 20016;
+	public static final int ERREUR_PRIX_INITIAL = 20017;
+	public static final int ERREUR_PRIX_VENTE = 20018;
+	public static final int ERREUR_VENDEUR = 20019;
+	public static final int ERREUR_CATEGORIE = 20020;
+	public static final int ERREUR_ACHETEUR = 20021;
+	public static final int ERREUR_N_ARTICLE = 20022;
+	public static final int ERREUR_DATE_ENCHERE = 20023;
 	
 }

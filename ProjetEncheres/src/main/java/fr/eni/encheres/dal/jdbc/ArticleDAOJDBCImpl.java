@@ -5,15 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
-import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Article;
-import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 import fr.eni.encheres.dal.SelectByDateInterface;
 import fr.eni.encheres.dal.ConnectionProvider;
@@ -22,12 +19,15 @@ import fr.eni.encheres.dal.DALException;
 //TODO definir la/les requêtes de sélection par  date
 
 public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDateInterface<Article>{
-	private final String selectByDateArticle = "select * from 'articles' where  date_fin_encheres is null;";
+	private final String selectByDateArticle = "SELECT * from 'ARTICLES' where  date_fin_encheres is null;";
 	private final String SELECT_UNSELL_ARTICLE = "SELECT * FROM `ARTICLES` WHERE no_acheteur is NULL";
-	private final String selectAllArticles = "select * from 'articles'; ";
+	private final String selectAllArticles = "SELECT * from 'ARTICLES'; ";
 	private final String selectByIdArticles = "SELECT `no_article`, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` WHERE `no_article` = ?; ";
 	private final String insertArticle = "INSERT INTO `ARTICLES`(`nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`) VALUES(?, ?, ?, ?, ?, ?, ?,?);";
-	private final String deleteArticle = "delete from 'articles' where no_article = ?;";
+	private final String deleteArticle = "DELETE from 'ARTICLES' where no_article = ?;";
+	//TODO
+	private final String updateArticle = "UPDATE 'ARTICLES' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
+
 	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
 
 	@Override
@@ -154,24 +154,44 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	public List<Article> selectUnsellArticle() {
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
-		
 			try(Connection cnx = ConnectionProvider.getConnection();){
 				Statement stmt = cnx.createStatement();
 				ResultSet rs = stmt.executeQuery(SELECT_UNSELL_ARTICLE);
 				while (rs.next()) {
 					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
-					
 					articles.add(a);
 				}
-			
 				stmt.close();
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-		
 		return articles;
+	}
+	
+	@Override
+	public void update(Article a, boolean fullOrNot) {
+		/*try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(updateArticle);
+			pstmt.setString(1, a.getNomArticle());
+			pstmt.setString(2, a.getDescription());
+			pstmt.setObject(3, a.getDateDebutEnchere());
+			pstmt.setObject(4, a.getDateFinEnchere());
+			pstmt.setInt(5, a.getPrixInitial());	
+			pstmt.setInt(6, a.getPrixInitial());
+			pstmt.setInt(7, a.getNoVendeur());
+			pstmt.setInt(8, a.getNoCategorie());
+			
+			int rowsInserted = pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys(); rs.next();
+			if (rowsInserted > 0) {
+				System.out.println(rowsInserted + " Article inséré");
+				a.setNoArticle(rs.getInt(1));
+			}
+			pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
 	}
 
 	
@@ -200,4 +220,5 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

@@ -136,6 +136,12 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		return null;
 	}
 
+	@Override
+	public void update(Categorie type, boolean fullOrNot) {
+		// TODO Auto-generated method stub
+		
+	}
+
 		
 
 

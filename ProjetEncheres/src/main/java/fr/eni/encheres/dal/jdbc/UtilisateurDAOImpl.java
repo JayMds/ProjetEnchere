@@ -301,5 +301,10 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			return null;
 		}
 	
+		@Override
+		public void update(Utilisateur utilisateurCourant, boolean infosOrMdp) {
+			
+		}
+
 
 }

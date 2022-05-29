@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
-public class EnchereManager {
+public class EnchereManager extends VerificationEnchereManager {
 
 	private ObjetsEnchereDAO<Enchere> enchereDAO;
 
@@ -19,23 +19,34 @@ public class EnchereManager {
 	}
 	
 	
-	public void addEnchere(int idUser, int idArticle, LocalDateTime dateEnchere, int montant) throws DALException {
-		Enchere e = new Enchere(idUser, idArticle, dateEnchere, montant);
-		enchereDAO.insert(e);
-	}
+	public void addEnchere(int idUser, int idArticle, LocalDateTime dateEnchere, int montant) throws DALException, BusinessException {
+		BusinessException exception = new BusinessException();
+		this.validerNoUtilisateur(montant, exception);
+		this.validerNoArticle(idArticle, exception);
+		this.validerDateEnchere(dateEnchere, exception);
+		this.validerMonttantEnchere(montant, exception);
+		if (!exception.hasErreurs()) {
+			Enchere e = new Enchere(idUser, idArticle, dateEnchere, montant);
+			enchereDAO.insert(e);
+		}
+		if (exception.hasErreurs()) {
+			throw exception;
+		}
+	 }
 	
 	public Enchere selectEnchere(int id) throws DALException {
-		Enchere e = enchereDAO.selectByIdFull(id);
-		return e;
+		return this.enchereDAO.selectByIdFull(id);
 	}
 	
 	public List<Enchere> selectAllEnchere() throws DALException{
-		List<Enchere> encheres = new ArrayList<>();
-		encheres = enchereDAO.selectAllDiscret();
-		return encheres;
+		return this.enchereDAO.selectAllDiscret();
 	}
 	
-	public void deleteEnchere() {
-		
+	public void deleteEnchere(int id) throws DALException {
+		this.enchereDAO.delete(id);
+	}
+	
+	public void updateEnchere(Enchere e) {
+		this.enchereDAO.update(e, false);
 	}
 }

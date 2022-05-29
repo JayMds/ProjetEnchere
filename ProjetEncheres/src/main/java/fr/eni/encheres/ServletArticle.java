@@ -36,7 +36,7 @@ public class ServletArticle extends HttpServlet {
 			request.setAttribute("article", article);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article.jsp"); 
 			rd.forward(request, response);
-		} catch (DALException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 

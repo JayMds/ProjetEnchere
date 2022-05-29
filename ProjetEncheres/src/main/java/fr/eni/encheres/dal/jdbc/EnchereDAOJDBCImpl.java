@@ -15,11 +15,11 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
-	private final String insertEnchere= "insert into 'encheres' (no_utilisateur, no_article, date_enchere, montant_enchere) values(?, ?, ?, ?);";
-	private final String selectByIdEnchere = "select * from 'encheres' where no_article = ?; ";
-	private final String selectAllEnchere= "select * from 'encheres'; ";
-	private final String deleteEnchere = "delete from 'encheres' where no_article = ?;";
-
+	private final String insertEnchere= "INSERT into 'ENCHERES' (no_utilisateur, no_article, date_enchere, montant_enchere) values(?, ?, ?, ?);";
+	private final String selectByIdEnchere = "SELECT* from 'ENCHERES' WHERE no_article = ?; ";
+	private final String selectAllEnchere= "SELECT * from 'ENCHERES'; ";
+	private final String deleteEnchere = "DELETE from 'ENCHERES' WHERE no_article = ?;";
+	private final String updateEnchere = "UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
 	@Override
 	public void insert(Enchere e) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -94,6 +94,26 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		} catch (Exception e) {
 			e.printStackTrace();		
 			}		
+	}
+	
+	//	"UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
+
+	@Override
+	public void update(Enchere e, boolean fullOrNot) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(updateEnchere);
+			pstmt.setInt(1, e.getNoUtilisateur());
+			pstmt.setObject(2, e.getDateEnchere());
+			pstmt.setInt(3, e.getMontant());
+			pstmt.setInt(4, e.getNoArticle());
+			int rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected> 0) {
+				System.out.println(rowsAffected+ " Article inséré");
+			}
+			pstmt.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}		
 	}
 
 	/*

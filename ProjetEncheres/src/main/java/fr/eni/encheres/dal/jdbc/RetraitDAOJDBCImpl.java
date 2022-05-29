@@ -99,6 +99,11 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void update(Retrait type, boolean fullOrNot) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
