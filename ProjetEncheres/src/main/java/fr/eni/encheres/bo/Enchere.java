@@ -10,10 +10,6 @@ public class Enchere {
 	private LocalDateTime dateEnchere;
 	private int montant;
 	private Utilisateur encherisseur; 
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'main' of https://github.com/JayMds/ProjetEnchere.git
 	
 	public final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
