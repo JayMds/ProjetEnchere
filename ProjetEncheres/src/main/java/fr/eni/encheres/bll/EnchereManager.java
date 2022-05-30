@@ -49,4 +49,10 @@ public class EnchereManager extends VerificationEnchereManager {
 	public void updateEnchere(Enchere e) {
 		this.enchereDAO.update(e, false);
 	}
+
+
+	public void addEnchere(Enchere e) throws DALException {
+		this.enchereDAO.insert(e); 
+		
+	}
 }

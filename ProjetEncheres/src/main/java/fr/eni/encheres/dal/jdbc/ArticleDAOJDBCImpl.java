@@ -31,7 +31,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
 
 	@Override
-	public void insert(Article a) {
+	public Article insert(Article a) {
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			//Todo avant insert article: insert Categorie et Utilisateur
@@ -57,6 +57,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			e.printStackTrace();
 		}
 		
+		return a; 
 	}
 
 	

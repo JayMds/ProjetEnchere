@@ -21,7 +21,7 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	private final String deleteEnchere = "DELETE from 'ENCHERES' WHERE no_article = ?;";
 	private final String updateEnchere = "UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
 	@Override
-	public void insert(Enchere e) throws DALException {
+	public Enchere insert(Enchere e) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(insertEnchere);
 			pstmt.setInt(1, e.getNoUtilisateur());
@@ -36,7 +36,8 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 			pstmt.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}		
+		}
+		return null;		
 	}
 
 	@Override

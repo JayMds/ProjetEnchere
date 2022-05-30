@@ -19,15 +19,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.RetraitManager;
+import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 
 /**
  * Servlet implementation class NouvelleVente
  */
-@WebServlet("/NouvelleVente")
+
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -89,6 +92,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		ArticleManager artManager = new ArticleManager(); 
 		RetraitManager retraitManager = new RetraitManager(); 
+		EnchereManager enchereManager = new EnchereManager(); 
 		
 				
 		
@@ -102,9 +106,13 @@ public class ServletNouvelleVente extends HttpServlet {
 		}else {
 			
 			try {
-				artManager.addArticle(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInit , vendeur.getNoUtilisateur(), categorie);
-		
+				//création d'un nouvel article
+				Article a = artManager.addArticle(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInit , vendeur.getNoUtilisateur(), categorie);
+				//création d'une enchère vierge
+				enchereManager.addEnchere(new Enchere(a.getNoArticle(), a.getPrixInitial()));
 				String message = "Votre article est maintenant en vente";
+				
+				// TODO création d'un point de retrait
 				response.setCharacterEncoding("UTF-8" );				
 				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
 				response.sendRedirect(request.getContextPath());

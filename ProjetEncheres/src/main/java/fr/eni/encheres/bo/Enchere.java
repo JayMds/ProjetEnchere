@@ -15,6 +15,12 @@ public class Enchere {
 	public final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
 	
+	public Enchere(int noArticle, int montant) {
+		this.noArticle = noArticle; 
+		this.montant = montant; 
+		
+	}
+	
 	public Enchere(int noUtilisateur, int noArticle, LocalDateTime dateEnchere, int montant) {
 		super();
 		this.noUtilisateur = noUtilisateur;

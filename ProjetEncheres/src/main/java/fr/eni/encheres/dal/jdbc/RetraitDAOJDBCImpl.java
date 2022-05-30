@@ -24,7 +24,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	private final String updateEnchere = "UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
 
 	@Override
-	public void insert(Retrait r) throws DALException {
+	public Retrait insert(Retrait r) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(insertRetrait);
 			pstmt.setInt(1, r.getNoArticle());
@@ -39,7 +39,8 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 			pstmt.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}		
+		}
+		return null;		
 		
 	}
 	 

@@ -20,7 +20,9 @@ public class ArticleManager extends  VerificationArticleManager {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 	
-	public void addArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, int vendeur, int categorie) throws DALException, BusinessException {
+	public Article addArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, int vendeur, int categorie) throws DALException, BusinessException {
+		
+		Article a = null; 
 		BusinessException exception = new BusinessException();
 		this.validerNom(nom, exception);
 		this.validerDescription(description, exception);
@@ -32,14 +34,16 @@ public class ArticleManager extends  VerificationArticleManager {
 		
 		if (!exception.hasErreurs()) 
 		{
-			Article a = new Article(nom, description, dateDebut, dateFin, prixInit, vendeur, categorie);
-			articleDAO.insert(a);
+			a = new Article(nom, description, dateDebut, dateFin, prixInit, vendeur, categorie);
+			a = articleDAO.insert(a);
 		}
 				
 		if (exception.hasErreurs()) 
 		{
 			throw exception;
 		}
+		
+		return a; 
 		
 	}
 	
