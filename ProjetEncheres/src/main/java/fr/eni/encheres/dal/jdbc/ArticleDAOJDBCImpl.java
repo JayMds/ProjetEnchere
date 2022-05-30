@@ -26,7 +26,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	private final String insertArticle = "INSERT INTO `ARTICLES`(`nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`) VALUES(?, ?, ?, ?, ?, ?, ?,?);";
 	private final String deleteArticle = "DELETE from 'ARTICLES' where no_article = ?;";
 	//TODO
-	private final String updateArticle = "UPDATE 'ARTICLES' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
+	private final String updateArticle = "UPDATE 'ARTICLES' SET 'nom'=?, 'description'=?, WHERE 'no_article'=?";
 
 	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
 
@@ -171,27 +171,20 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	
 	@Override
 	public void update(Article a, boolean fullOrNot) {
-		/*try (Connection cnx = ConnectionProvider.getConnection();) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(updateArticle);
 			pstmt.setString(1, a.getNomArticle());
 			pstmt.setString(2, a.getDescription());
-			pstmt.setObject(3, a.getDateDebutEnchere());
-			pstmt.setObject(4, a.getDateFinEnchere());
-			pstmt.setInt(5, a.getPrixInitial());	
-			pstmt.setInt(6, a.getPrixInitial());
-			pstmt.setInt(7, a.getNoVendeur());
-			pstmt.setInt(8, a.getNoCategorie());
+			pstmt.setInt(8, a.getNoArticle());
 			
 			int rowsInserted = pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys(); rs.next();
 			if (rowsInserted > 0) {
-				System.out.println(rowsInserted + " Article inséré");
-				a.setNoArticle(rs.getInt(1));
+				System.out.println(rowsInserted + " Article mis à jour");
 			}
 			pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 
 	

@@ -3,7 +3,10 @@ package fr.eni.encheres.dal.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
@@ -17,8 +20,9 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	private final String insertRetrait= "insert into 'retraits' (no_article, rue, code_postal, ville) values(?, ?, ?, ?);";
 	private final String selectByIdRetrait= "select * from 'retraits' where no_article = ?; ";
 	private final String selectAllRetrait= "select * from 'retraits'; ";
-	private final String deleteRetrait = "delete from 'retraits' where no_article = ?;";
-	
+	private final String deleteRetrait = "delete from 'retraits' where 'no_article' = ?;";
+	private final String updateEnchere = "UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
+
 	@Override
 	public void insert(Retrait r) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -38,6 +42,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		}		
 		
 	}
+	 
 	@Override
 	public Retrait selectByIdFull(int id) throws DALException {
 		Retrait e = null;
@@ -48,7 +53,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) 
 			{
-				//e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"));
+				e = new Retrait(rs.getInt("no_utilisateur"), rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
 			}
 			else{
 				
@@ -60,10 +65,59 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 			}
 		return e;
 	}
+	
+	@Override
+	public List<Retrait> selectAllFull() throws DALException {
+		List<Retrait> retraits= new ArrayList<>();
+		Retrait e = null;
+		
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				Statement stmt = cnx.createStatement();
+				ResultSet rs = stmt.executeQuery(selectAllRetrait);
+				while (rs.next()) {
+					e = new Retrait(rs.getInt("no_utilisateur"), rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
+					retraits.add(e);
+				}
+				stmt.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		return retraits;
+	}
+	
 	@Override 
 	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
-		
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(deleteRetrait);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+			int rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected > 0) {
+				System.out.println(rowsAffected+ " Article suprimmé");
+			}
+			pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();		
+			}				
+	}
+	
+	
+	@Override
+	public void update(Retrait r, boolean fullOrNot) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(updateEnchere);
+			pstmt.setInt(1, r.getNoArticle());
+			pstmt.setString(2, r.getRue());
+			pstmt.setString(3, r.getCodePostal());
+			pstmt.setString(4, r.getVille());
+			int rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected> 0) {
+				System.out.println(rowsAffected+ " Article inséré");
+			}
+			pstmt.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}		
 	}
 	
 	@Override //DO NOT USE
@@ -79,11 +133,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public List<Retrait> selectAllFull() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public List<Retrait> selectAllDiscret() throws DALException {
 		// TODO Auto-generated method stub
@@ -99,11 +149,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public void update(Retrait type, boolean fullOrNot) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 
 }

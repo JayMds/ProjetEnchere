@@ -31,13 +31,9 @@ public class VerificationUtilisateurManager  {
 		
 		if(u.getPseudo() == null) {
 			
-			PseudoOK=true;
-			
 		}
 		
 		else {
-			
-			PseudoOK=false;
 			businessException.ajouterErreur(CodesResultatBLL.PSEUDO_DEJA_PRIS);
 		}
 		

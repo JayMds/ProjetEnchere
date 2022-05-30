@@ -83,6 +83,14 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 		return this.utilisateurDAO.verificationPseudo(pseudo); 
 	}
 	
+	public void UdpateUtilisateurComplet(Utilisateur utilisateur) throws BusinessException, DALException{
+		this.utilisateurDAO.update(utilisateur, false);
+	}
+	public void UdpateUtilisateurMdp(Utilisateur utilisateur) throws BusinessException, DALException{
+		this.utilisateurDAO.update(utilisateur, true);
+	}
+	
+	
 	
 	
  }
