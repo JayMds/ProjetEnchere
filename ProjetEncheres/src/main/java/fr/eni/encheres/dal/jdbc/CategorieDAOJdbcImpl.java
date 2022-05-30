@@ -22,7 +22,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	private final String updateEnchere = "UPDATE 'RETRAITS' SET 'nom'=? WHERE 'no_categorie'=?";
 
 	@Override
-	public void insert(Categorie c) throws DALException {
+	public Categorie insert(Categorie c) throws DALException {
 		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(insertCategorie, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -38,6 +38,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override

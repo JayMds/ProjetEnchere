@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
 /**
@@ -39,6 +41,8 @@ public class ServletPageAccueil extends HttpServlet {
 			//Récupération des articles en cour de vente et des informations du vendeur
 			ArticleManager artManager = new ArticleManager();
 			UtilisateurManager userManager = new UtilisateurManager(); 
+			EnchereManager enchereManager = new EnchereManager(); 
+			
 			
 			List<Article> listeArticle = artManager.selectUnsellArticle();	
 					
@@ -47,8 +51,10 @@ public class ServletPageAccueil extends HttpServlet {
 			
 			for(Article article : listeArticle) {
 				Utilisateur user = userManager.selectionnerInformationDiscret(article.getNoVendeur()); 
+				Enchere enchere = enchereManager.selectEnchere(article.getNoArticle()); 
 				System.out.println(user.getPseudo());
 				article.setNomVendeur(user.getPseudo()); 
+				article.setEnchere(enchere); 
 			}
 			
 			//récupération de l'ensemble des catégorie sur la bdd

@@ -29,7 +29,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
     String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
 	
 	@Override
-	public void insert(Utilisateur utilisateurCourant) throws DALException {
+	public Utilisateur insert(Utilisateur utilisateurCourant) throws DALException {
 		int rowsInserted = -1;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 
@@ -61,6 +61,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		if (rowsInserted == -1) {
 			throw new DALException("erreur lors de l'insert");
 		}
+		return null;
 	}
 
 	@Override

@@ -24,7 +24,7 @@ import fr.eni.encheres.dal.DALException;
 /**
  * Servlet implementation class ServletArticle
  */
-@WebServlet("/ServletArticle")
+
 public class ServletArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -45,9 +45,13 @@ public class ServletArticle extends HttpServlet {
 		int idArticle = Integer.parseInt(request.getParameter("idArticle") ); 
 		try {
 			Article article = artManager.selectArticle(idArticle);
+			
+			
 			//recupération de la categorie
 			Categorie categorie = catManager.selectCategrorie(article.getNoCategorie());
 			article.setCatagorie(categorie); 
+			
+			
 			//récupération du meilleur encherisseur
 			Enchere enchere = encheresManager.selectEnchere(idArticle);
 			Utilisateur meilleureEncherisseur =  userManager.selectionnerInformationDiscret(enchere.getNoUtilisateur()); 
@@ -76,7 +80,7 @@ public class ServletArticle extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Utilisateur user = (Utilisateur) request.getSession().getAttribute("connectedUser");
+		Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
 		
 
 		System.out.println(user.toString());

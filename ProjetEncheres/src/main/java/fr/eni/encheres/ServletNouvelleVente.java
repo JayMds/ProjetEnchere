@@ -1,5 +1,9 @@
 package fr.eni.encheres;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -16,10 +20,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bll.RetraitManager;
+import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
@@ -30,7 +36,9 @@ import fr.eni.encheres.dal.DALException;
 @WebServlet("/NouvelleVente")
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final int TAILLE_TAMPON = 10240;
+	public final String imgMax = "/ProjetEncheres/src/main/webapp/asset/img/imgArticleMax";  
+	public final String imgMini = "/ProjetEncheres/src/main/webapp/asset/img/imgArticleMini";
  	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -62,6 +70,7 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		List<Integer> listeCodesErreur=new ArrayList<>();
 		
 		String nomArticle = request.getParameter("nomArticle");
@@ -87,13 +96,14 @@ public class ServletNouvelleVente extends HttpServlet {
 		String CPReatrait = request.getParameter("codePostal");
 		String villeRetrait = request.getParameter("ville");
 		
+	
 		ArticleManager artManager = new ArticleManager(); 
 		RetraitManager retraitManager = new RetraitManager(); 
 		
-				
-		
 		Utilisateur vendeur = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
-	
+		
+		Article a = null;
+		FichierUtils fichierUtils = new FichierUtils();
 		
 		if(listeCodesErreur.size()>0) {
 			request.setAttribute("listeCodesErreur",listeCodesErreur);			
@@ -102,15 +112,29 @@ public class ServletNouvelleVente extends HttpServlet {
 		}else {
 			
 			try {
-				artManager.addArticle(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInit , vendeur.getNoUtilisateur(), categorie);
+				try {
+					a =	artManager.addArticle(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInit , vendeur.getNoUtilisateur(), categorie);
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		
+				Part part = request.getPart("photoProduit");
+				
+				String fileName = fichierUtils.getNomFichier(part);
+				if (fileName != null && !fileName.isEmpty()) {
+					System.out.println(fileName);
+					fileName = "Article"+a.getNoArticle();
+					fichierUtils.ecrireFichier(part, fileName, imgMax);
+				}
+				
 				String message = "Votre article est maintenant en vente";
 				response.setCharacterEncoding("UTF-8" );				
 				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
 				response.sendRedirect(request.getContextPath());
 			
-			} catch (Exception e) {
-				request.setAttribute("listeCodesErreur",((DALException) e).getListeCodesErreur());
+			} catch (DALException e) {
+				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
 				rd.forward(request, response);	
 				e.printStackTrace();
@@ -127,4 +151,6 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 	}
 
+
+  
 }
