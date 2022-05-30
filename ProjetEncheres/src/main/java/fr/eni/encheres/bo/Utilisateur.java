@@ -3,6 +3,36 @@ package fr.eni.encheres.bo;
 public class Utilisateur {
 	
 
+	/**
+	 * @param noUtilisateur
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param credit
+	 * @param administrateur
+	 */
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String credit, boolean administrateur) {
+		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.credit = credit;
+		this.administrateur = administrateur;
+	}
+
+
+
 	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
@@ -90,6 +120,8 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 	}
+
+
 
 
 
