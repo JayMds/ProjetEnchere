@@ -6,9 +6,6 @@
 <body>
 
 
-<% if( request.getAttribute("status") == "failed"){ %>
-	<p>Une erreur est survenue lors de la connexion</p>
-<%} %>
 
 
 			<div class="formConnexion">
@@ -17,6 +14,9 @@
         <img src="asset/logo/Logo_eni_encheres_bleuFonce.png">
     </a>
 
+<% if( request.getAttribute("erreurLogin") != null){ %>
+	<p style="color:red; text-align:center"><%= request.getAttribute("erreurLogin") %></p>
+<%} %>
 
     <form action="<%= request.getContextPath() %>/connexion" method="post" >
         <input type="email" name="email" class="form-control roundRadius" id="exampleDropdownFormEmail1" placeholder="email@example.com">
