@@ -113,7 +113,7 @@ public class ServletNouvelleVente extends HttpServlet {
 				}
 				//création d'une enchère vierge
 				enchereManager.addEnchere(new Enchere(a.getNoArticle(), a.getPrixInitial()));
-				Part part = request.getPart("photoProduit");
+			/*	Part part = request.getPart("photoProduit");
 			//Création Fichier Image "Articlex.jpeg"
 				String fileName = fichierUtils.getNomFichier(part);
 			//Vérification fichier Obtenu	
@@ -123,7 +123,7 @@ public class ServletNouvelleVente extends HttpServlet {
 					fileName = "Article"+a.getNoArticle();
 				//Ecriture fichier	
 					fichierUtils.ecrireFichier(part, fileName, imgMax);
-				
+				}*/
 				
 				String message = "Votre article est maintenant en vente";
 				
@@ -131,7 +131,7 @@ public class ServletNouvelleVente extends HttpServlet {
 				response.setCharacterEncoding("UTF-8" );				
 				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
 				response.sendRedirect(request.getContextPath());
-				}
+				
 			} catch (DALException e) {
 				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
