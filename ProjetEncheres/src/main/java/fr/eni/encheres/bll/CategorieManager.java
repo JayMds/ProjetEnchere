@@ -20,10 +20,9 @@ public class CategorieManager {
 	
 	public void addCategrorie(String nom) throws DALException {
 		if (nom != null) {
-			
-		}
-		Categorie c = new Categorie(nom);
-		categorieDAO.insert(c);
+			Categorie c = new Categorie(nom);
+			categorieDAO.insert(c);
+		} 
 	}
 	
 	public Categorie selectCategrorie(int id) throws DALException {
@@ -41,4 +40,7 @@ public class CategorieManager {
 		categorieDAO.delete(id);
 	}
 
+	public void updateCategorie(Categorie c) {
+		categorieDAO.update(c, false);
+	}
 }

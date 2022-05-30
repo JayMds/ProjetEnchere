@@ -62,22 +62,15 @@ public class ArticleManager extends  VerificationArticleManager {
 		List<Article> articles = new ArrayList<>();
 		articles = articleDAO.selectAllDiscret();
 		return this.articleDAO.selectAllDiscret();
-		
 	}
 	
 	public List<Article> selectArticleEnVente(){
 		List<Article> articles = new ArrayList<>();
 		articleDAO.selectDateEnCours();	
-		
 		return articles;
 	}
 	
 	public List<Article> selectUnsellArticle(){
-		/*List<Article> articles = new ArrayList<>();
-		//articleDAO.selectDateEnCours(date);
-		
-		articles = articleDAO.selectUnsellArticle();*/
-		
 		return this.articleDAO.selectUnsellArticle();
 		
 	}
@@ -86,10 +79,8 @@ public class ArticleManager extends  VerificationArticleManager {
 		articleDAO.delete(id);
 	}
 	
-	public void verifArticle(Article a) {
-		
-		
-		
+	public void updateArticle(Article a) {
+		articleDAO.update(a, false);
 	}
 
 }

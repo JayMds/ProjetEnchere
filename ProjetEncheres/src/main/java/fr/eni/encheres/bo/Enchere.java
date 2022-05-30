@@ -9,6 +9,7 @@ public class Enchere {
 	private int noArticle;
 	private LocalDateTime dateEnchere;
 	private int montant;
+	private Utilisateur encherisseur; 
 	
 	public final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -52,5 +53,10 @@ public class Enchere {
 		this.montant = montant;
 	}
 	
-	
+	public Utilisateur getEncherisseur() {
+		return encherisseur;
+	}
+	public void setEncherisseur(Utilisateur encherisseur) {
+		this.encherisseur = encherisseur;
+	}
 }

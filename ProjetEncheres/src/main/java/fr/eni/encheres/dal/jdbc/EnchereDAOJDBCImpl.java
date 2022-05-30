@@ -16,7 +16,7 @@ import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	private final String insertEnchere= "INSERT into 'ENCHERES' (no_utilisateur, no_article, date_enchere, montant_enchere) values(?, ?, ?, ?);";
-	private final String selectByIdEnchere = "SELECT* from 'ENCHERES' WHERE no_article = ?; ";
+	private final String selectByIdEnchere = "SELECT `no_utilisateur`, `no_article`, `date_enchere`, `montant_enchere` FROM `ENCHERES` WHERE`no_article` =?; ";
 	private final String selectAllEnchere= "SELECT * from 'ENCHERES'; ";
 	private final String deleteEnchere = "DELETE from 'ENCHERES' WHERE no_article = ?;";
 	private final String updateEnchere = "UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
