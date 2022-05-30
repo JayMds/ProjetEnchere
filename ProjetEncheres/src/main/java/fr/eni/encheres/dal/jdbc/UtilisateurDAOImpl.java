@@ -239,12 +239,12 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				String rue = rs.getString("rue");
 				String codePostal = rs.getString("code_Postal");
 				String ville = rs.getString("ville");
-				String motDePasse = rs.getString("mot_De_Passe");
+				//String motDePasse = rs.getString("mot_De_Passe");
 				String credit = rs.getString("credit");
 				Boolean administrateur = rs.getBoolean("administrateur");
 
 
-				 return new Utilisateur(noUser ,pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+				 return new Utilisateur(noUser ,pseudo, nom, prenom, email, telephone, rue, codePostal, ville, credit, administrateur);
 
 			}
 			else {

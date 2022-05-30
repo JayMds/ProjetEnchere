@@ -22,6 +22,7 @@ public class Enchere {
 		this.dateEnchere = dateEnchere;
 		this.montant = montant;
 	}
+	
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}

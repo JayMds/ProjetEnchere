@@ -78,6 +78,16 @@
 	<servlet-name>NouvelleVente</servlet-name>
 	<url-pattern>/nouvelle-vente</url-pattern>
 </servlet-mapping>
+
+<servlet>
+	<servlet-name>Encherir</servlet-name>
+	<servlet-class>fr.eni.encheres.ServletEncherir</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Encherir</servlet-name>
+	<url-pattern>/encherir</url-pattern>
+</servlet-mapping>
+  
   
   
   
