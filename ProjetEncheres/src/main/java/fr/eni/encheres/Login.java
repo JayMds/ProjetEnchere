@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -62,7 +64,8 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 
 		UtilisateurManager userManager = new UtilisateurManager();
-
+		List<Integer> listeCodesErreur=new ArrayList<>();
+		
 		String email = request.getParameter("email");
 		String mot_de_passe = request.getParameter("password");
 
@@ -78,6 +81,7 @@ public class Login extends HttpServlet {
 				response.addCookie(CookieUtils.SetCookie("message", message, 10));
 				response.sendRedirect(request.getContextPath());
 			} else {
+				request.setAttribute("erreurLogin","Identifiant ou mot de passe incorrect");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 				rd.forward(request, response);
 

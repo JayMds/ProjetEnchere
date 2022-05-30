@@ -24,9 +24,11 @@ import javax.servlet.http.Part;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 
@@ -69,70 +71,67 @@ public class ServletNouvelleVente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		Article a = null;
+		FichierUtils fichierUtils = new FichierUtils();
 		List<Integer> listeCodesErreur=new ArrayList<>();
 		
 		String nomArticle = request.getParameter("nomArticle");
 		String description = request.getParameter("description");
 		int categorie = Integer.parseInt(request.getParameter("categorie"));  
 		int prixInit = Integer.parseInt(request.getParameter("prix"));
-		//convertion de l'input date en localdate time
-		
+	//convertion de l'input date en localdate time
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		
 		String dateDebut = request.getParameter("debutEncheres");
 		String dateFin = request.getParameter("finEncheres");
-		
-		//System.out.println("heure sans replace :"+ dateDebut);
+	//System.out.println("heure sans replace :"+ dateDebut);
 		dateDebut = dateDebut.replace("T", " ");
 		dateFin = dateFin.replace("T", " ");
-		//System.out.println("heure avec  replace :"+ dateDebut );
-		
+	//System.out.println("heure avec  replace :"+ dateDebut );
 		LocalDateTime dateDebutEncheres = LocalDateTime.parse(dateDebut, formatter);
 		LocalDateTime dateFinEncheres = LocalDateTime.parse(dateFin, formatter);
 		
 		String rueRetrait = request.getParameter("rue");
 		String CPReatrait = request.getParameter("codePostal");
 		String villeRetrait = request.getParameter("ville");
-		
-	
+	//Création Managers
 		ArticleManager artManager = new ArticleManager(); 
-		RetraitManager retraitManager = new RetraitManager(); 
-		
+		RetraitManager retraitManager = new RetraitManager();
+		EnchereManager enchereManager = new EnchereManager();
+	//Récupuration User Courant
 		Utilisateur vendeur = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
-		
-		Article a = null;
-		FichierUtils fichierUtils = new FichierUtils();
 		
 		if(listeCodesErreur.size()>0) {
 			request.setAttribute("listeCodesErreur",listeCodesErreur);			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
 			rd.forward(request, response);	
 		}else {
-			
-			try {
+			try {//création d'un nouvel article
 				try {
 					a =	artManager.addArticle(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInit , vendeur.getNoUtilisateur(), categorie);
 				} catch (BusinessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		
+				//création d'une enchère vierge
+				enchereManager.addEnchere(new Enchere(a.getNoArticle(), a.getPrixInitial()));
 				Part part = request.getPart("photoProduit");
-				
+			//Création Fichier Image "Articlex.jpeg"
 				String fileName = fichierUtils.getNomFichier(part);
+			//Vérification fichier Obtenu	
 				if (fileName != null && !fileName.isEmpty()) {
 					System.out.println(fileName);
+				//Renommage fichier
 					fileName = "Article"+a.getNoArticle();
+				//Ecriture fichier	
 					fichierUtils.ecrireFichier(part, fileName, imgMax);
-				}
+				
 				
 				String message = "Votre article est maintenant en vente";
+				
+				// TODO création d'un point de retrait
 				response.setCharacterEncoding("UTF-8" );				
 				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
 				response.sendRedirect(request.getContextPath());
-			
+				}
 			} catch (DALException e) {
 				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
