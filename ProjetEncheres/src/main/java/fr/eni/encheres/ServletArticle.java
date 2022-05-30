@@ -75,8 +75,11 @@ public class ServletArticle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("connectedUser");
+		
+
+		System.out.println(user.toString());
 	}
 
 }

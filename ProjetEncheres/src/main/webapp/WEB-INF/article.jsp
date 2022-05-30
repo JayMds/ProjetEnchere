@@ -45,7 +45,7 @@
 		%>
 			<p>Vos crédit disponible : <%= user.getCredit() %></p>
 			<form action="<%=request.getContextPath()%>/nouvelle-vente" method="post">
-				<input type="number" name="offre" max="<%= user.getCredit()%>">
+				<input type="number" name="offre" max="<%= user.getCredit()%>" min="<%= article.getEnchere().getMontant() %>" value="<%= article.getEnchere().getMontant() %>">
 				<input type="submit" value="Enchérir" >
 			
 			</form>
