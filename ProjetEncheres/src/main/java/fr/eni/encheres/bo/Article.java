@@ -16,6 +16,11 @@ public class Article {
 	private int noAcheteur;
 	private String nomVendeur;
 	private Utilisateur Vendeur;
+	private Categorie catagorie; 
+	private Enchere enchere; 
+	private Retrait retrait; 
+
+
 
 	public final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -184,5 +189,32 @@ public class Article {
 	public void setVendeur(Utilisateur vendeur) {
 		Vendeur = vendeur;
 	}
+	
+	public Categorie getCatagorie() {
+		return catagorie;
+	}
+
+	public void setCatagorie(Categorie catagorie) {
+		this.catagorie = catagorie;
+	}
+
+	public Enchere getEnchere() {
+		return enchere;
+	}
+
+	public void setEnchere(Enchere enchere) {
+		this.enchere = enchere;
+	}
+
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
+	}
+	
+	
+	
 	
 }

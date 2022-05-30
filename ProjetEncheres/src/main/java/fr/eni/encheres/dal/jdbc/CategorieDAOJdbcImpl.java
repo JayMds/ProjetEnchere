@@ -16,7 +16,7 @@ import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	private final String insertCategorie = "insert into 'categories' (libelle) values(?);";
-	private final String selectByIdCategorie = "select * from 'categories' where no_article = ?; ";
+	private final String selectByIdCategorie = "SELECT `no_categorie`, `libelle` FROM `CATEGORIES` where no_categorie = ?; ";
 	private final String selectAllCategorie= "SELECT `no_categorie`, `libelle` FROM `CATEGORIES`; ";
 	private final String deleteCategorie = "delete from 'categories' where no_categorie = ?;";
 	private final String updateEnchere = "UPDATE 'RETRAITS' SET 'nom'=? WHERE 'no_categorie'=?";
