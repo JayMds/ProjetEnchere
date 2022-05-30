@@ -49,6 +49,8 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 			if (rs.next()) 
 			{
 				e = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getObject("date_enchere", LocalDateTime.class), rs.getInt("montant_enchere"));
+				
+			
 			}
 			else{
 				
