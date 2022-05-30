@@ -34,7 +34,7 @@ public class ServletEncherir extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 		
-		fd
+		
 	}
 
 }
