@@ -19,6 +19,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	private final String selectByIdCategorie = "select * from 'categories' where no_article = ?; ";
 	private final String selectAllCategorie= "SELECT `no_categorie`, `libelle` FROM `CATEGORIES`; ";
 	private final String deleteCategorie = "delete from 'categories' where no_categorie = ?;";
+	private final String updateEnchere = "UPDATE 'RETRAITS' SET 'nom'=? WHERE 'no_categorie'=?";
 
 	@Override
 	public void insert(Categorie c) throws DALException {
@@ -47,7 +48,6 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdCategorie);
 			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
-		//Si rs.next renvoie un resultat creer un nouvel Article
 			if (rs.next()) 
 			{
 				c = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
@@ -64,7 +64,6 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	
 	@Override
 	public List<Categorie> selectAllDiscret() throws DALException {
-		//Création Liste
 		List<Categorie> categories = new ArrayList<>();
 		Categorie c = null;
 		
@@ -98,6 +97,22 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		} catch (Exception e) {
 			e.printStackTrace();		
 			}
+	}
+	
+	@Override
+	public void update(Categorie c, boolean fullOrNot) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(updateEnchere);
+			pstmt.setString(1, c.getLibelle());
+			pstmt.setInt(2, c.getNoCategorie());
+			int rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected> 0) {
+				System.out.println(rowsAffected+ " Article inséré");
+			}
+			pstmt.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}		
 	}
 
 	@Override
@@ -136,11 +151,7 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		return null;
 	}
 
-	@Override
-	public void update(Categorie type, boolean fullOrNot) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 		
 

@@ -13,7 +13,7 @@ public class VerificationEnchereManager {
 	}
 	public void validerNoArticle(int noArticle, BusinessException businessException) {
 		if (noArticle <= 0) {
-			businessException.ajouterErreur(CodesResultatBLL.ERREUR_NOM);
+			businessException.ajouterErreur(CodesResultatBLL.ERREUR_N_ARTICLE);
 		}
 	}
 	

@@ -7,6 +7,16 @@ public class Retrait {
 	private String rue;
 	private String codePostal;
 	private String ville;
+	
+	
+	
+	public Retrait(int noArticle, String rue, String codePostal, String ville) {
+		super();
+		this.noArticle = noArticle;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
 	public int getNoArticle() {
 		return noArticle;
 	}

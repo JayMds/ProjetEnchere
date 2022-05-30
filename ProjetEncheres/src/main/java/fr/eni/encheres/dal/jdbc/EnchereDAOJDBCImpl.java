@@ -96,8 +96,6 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 			}		
 	}
 	
-	//	"UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
-
 	@Override
 	public void update(Enchere e, boolean fullOrNot) {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
