@@ -24,7 +24,7 @@ import fr.eni.encheres.dal.DALException;
 /**
  * Servlet implementation class ServletArticle
  */
-@WebServlet("/ServletArticle")
+
 public class ServletArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
