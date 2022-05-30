@@ -7,6 +7,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <%@include file="/WEB-INF/jspf/head.jspf" %>
+<link rel="stylesheet" href="css/nouvelleVente.css">
 </head>
 <body>
 <%@include file="/WEB-INF/jspf/header.jspf" %>
@@ -14,18 +15,26 @@
 
 
 
-<form class="formInscription" action="<%= request.getContextPath() %>/nouvelle-vente" method="post">
-   <div class="formInscription" > 
+<h2> Nouvelle vente</h2>
+
+
+
+<form class="form" action="<%= request.getContextPath() %>/nouvelle-vente" method="post">
+   <div class="formNouvelleVente" > 
+
+    <img id="output" width="200" />
+    <output id="list"></output>
 	<div class="container-form">
-	    <div class="input-icons">
-	        <i class="fa fa-user icon"></i>
-	        <input class="input-field roundRadius" type ="text" id="idNomArticle" name="nomArticle" required="required" placeholder="Nom de votre article" >
-	    </div>
-	    <div class="input-icons">
-	        <i class="fa fa-user icon"></i>
-	        <input class="input-field roundRadius" type ="text" id="idDescription" name="description" placeholder="Décrivez votre article en quelques mots" >
-	    </div>	
-	    
+        <div class="maxWidth">
+            <div class="input-icons">
+                <i class="fa fa-user icon"></i>
+                <input class="input-field roundRadius" type ="text" id="idNomArticle" name="nomArticle" required="required" placeholder="Nom de votre article" >
+            </div>
+            <div class="input-icons">
+                <i class="fa fa-user icon"></i>
+                <textarea class="input-field roundRadius" type ="text" id="idDescription" name="description" placeholder="Décrivez votre article en quelques mots" ></textarea>
+            </div>	
+         </div>
 	     <select class="H5 montserrat-normal custom-select roundRadius SB30 bg-blue" name="categorie" >
                 <option value="" disabled selected hidden>Selectionner une catégorie</option>
                 
@@ -42,7 +51,19 @@
                 %>
                 
          </select>
-         
+
+
+         <div class="input-icons">
+
+            <label tabindex="0" for="my-file" class="">Choisir une image</label>
+            <div class="input-file-container">  
+                <input class="input-file " id="photoProduit" type="file" onchange="loadFile(event)">
+               
+              </div>
+            
+              <p class="file-return"></p>
+         </div>
+        
          <div class="input-icons">
          	<label for="idPrix"> Mise à prix </label>
 	        <i class="fa fa-envelope icon"></i>  
@@ -53,30 +74,32 @@
 	     <div class="input-icons">
          	<label for="idDebutEncheres"> Début de l'enchère </label>
 	        <i class="fa fa-envelope icon"></i>  
-	         <input type="datetime-local" id="idDebutEncheres" name="debutEncheres" min="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm"))  %>" value="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))  %>">
-	     
+	        <input  class="roundRadius" type="datetime-local" id="idDebutEncheres" name="debutEncheres" min="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm"))  %>" value="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))  %>">
+	    
 	    </div>	
 	    
-	
-	    <input type="button"  onclick="ajouterJour(2)" value="2 jours d'enchères"> </input>
-	    <input type="button"  onclick="ajouterJour(5)" value="5 jours d'enchères"> </input>
-		<input type="button"  onclick="ajouterJour(10)" value="10 jours d'enchères"> </input>
+        <div>
+            <input class="montserrat600 bg-blue btn roundRadius SB15 H5" type="button"  onclick="ajouterJour(2)" value="2 jours d'enchères"> </input>
+	        <input class="montserrat600 bg-blue btn roundRadius SB15 H5" type="button"  onclick="ajouterJour(5)" value="5 jours d'enchères"> </input>
+		    <input class="montserrat600 bg-blue btn roundRadius SB15 H5" type="button"  onclick="ajouterJour(10)" value="10 jours d'enchères"> </input>
+
+        </div>
 	    <div class="input-icons">
          <label for="idFinEncheres"> Fin de l'enchère </label>
 	        <i class="fa fa-envelope icon"></i>  
-	          <input type="datetime-local" id="idFinEncheres" name="finEncheres" min="<%= LocalDateTime.now() %>" >
+	          <input class="roundRadius" type="datetime-local" id="idFinEncheres" name="finEncheres" min="<%= LocalDateTime.now() %>" >
 	     
 	    </div>	
 	    
 	    
 	    
 	   <p id="test"></p>
+	    <p>Retrait</p>
 		<c:set var="rue" value="<%= user.getRue() %>"/>
 		<c:set var="code" value="<%= user.getCodePostal() %>"/>
 		<c:set var="ville" value="<%= user.getVille() %>"/>
-		
-	    <p>Retrait</p>
-	    <div>
+	
+<div>
            <label for="idPrix"> Rue :</label>
 	        <i class="fa fa-map icon"> </i>	
 	        <c:choose>	
@@ -106,8 +129,9 @@
   				</c:when>
   
 			</c:choose>  	 
-	    </div>	
-	     <div>
+	    </div>
+        
+        <div>
            <label for="idPrix"> Ville :</label>
 	        <i class="fa fa-map icon"> </i>	
 	        <c:choose>	
@@ -124,6 +148,10 @@
 			</c:choose>  	 
 	    </div>	
 	    
+
+    
+	   
+        
 	     
 		<div class="groupeBtn">
 	        <a href="<%=request.getContextPath() %>" >Annuler</a>
@@ -154,6 +182,13 @@ function ajouterJour(days) {
 	  //document.getElementById("test").innerHTML = result.toISOString().substring(0,16); 
 	  dateFinEncheres.value = result.toISOString().substring(0,16);
 	}
+
+
+//bouton uploadfichier
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
 
 
 </script>

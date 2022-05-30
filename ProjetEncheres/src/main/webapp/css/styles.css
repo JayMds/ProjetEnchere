@@ -65,6 +65,13 @@ header a img{
 }
 
 
+h2{
+        font-family: 'Amatic SC', sans-serif !important ;
+        color: var(--blue);       
+        font-size: xxx-large;
+        text-align: center;   
+}
+
 /** Slogan**/
 
 .slogan{

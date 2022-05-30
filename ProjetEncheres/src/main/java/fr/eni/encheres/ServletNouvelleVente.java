@@ -74,18 +74,14 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		String dateDebut = request.getParameter("debutEncheres");
 		String dateFin = request.getParameter("finEncheres");
+		
 		//System.out.println("heure sans replace :"+ dateDebut);
 		dateDebut = dateDebut.replace("T", " ");
 		dateFin = dateFin.replace("T", " ");
 		//System.out.println("heure avec  replace :"+ dateDebut );
 		
-		
-		
 		LocalDateTime dateDebutEncheres = LocalDateTime.parse(dateDebut, formatter);
 		LocalDateTime dateFinEncheres = LocalDateTime.parse(dateFin, formatter);
-		
-			
-	
 		
 		String rueRetrait = request.getParameter("rue");
 		String CPReatrait = request.getParameter("codePostal");
