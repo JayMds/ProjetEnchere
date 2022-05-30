@@ -11,7 +11,6 @@ public class Enchere {
 	private int montant;
 	private Utilisateur encherisseur; 
 	
-	
 	public final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
 	
