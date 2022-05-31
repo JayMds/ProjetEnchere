@@ -15,7 +15,7 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
-	private final String insertEnchere= "INSERT into 'ENCHERES' (no_utilisateur, no_article, date_enchere, montant_enchere) values(?, ?, ?, ?);";
+	private final String insertEnchere= "INSERT INTO `ENCHERES`(`no_article`, `montant_enchere`) VALUES (?, ?);";
 	private final String selectByIdEnchere = "SELECT `no_utilisateur`, `no_article`, `date_enchere`, `montant_enchere` FROM `ENCHERES` WHERE`no_article` =?; ";
 	private final String selectAllEnchere= "SELECT * from 'ENCHERES'; ";
 	private final String deleteEnchere = "DELETE from 'ENCHERES' WHERE no_article = ?;";
@@ -24,10 +24,8 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	public Enchere insert(Enchere e) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(insertEnchere);
-			pstmt.setInt(1, e.getNoUtilisateur());
-			pstmt.setInt(2, e.getNoArticle());
-			pstmt.setObject(3, e.getDateEnchere());
-			pstmt.setInt(4, e.getMontant());
+			pstmt.setInt(1, e.getNoArticle());			
+			pstmt.setInt(2, e.getMontant());
 			
 			int rowsInserted = pstmt.executeUpdate();
 			if (rowsInserted > 0) {
