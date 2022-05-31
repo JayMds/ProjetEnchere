@@ -35,7 +35,7 @@ import fr.eni.encheres.dal.DALException;
 /**
  * Servlet implementation class NouvelleVente
  */
-@WebServlet("/NouvelleVente")
+
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int TAILLE_TAMPON = 10240;
@@ -87,9 +87,9 @@ public class ServletNouvelleVente extends HttpServlet {
 		String villeRetrait = request.getParameter("ville");
 	//Création Managers
 		ArticleManager artManager = new ArticleManager(); 
-		RetraitManager retraitManager = new RetraitManager();
 		EnchereManager enchereManager = new EnchereManager();
 	//Récupuration User Courant
+
 		Utilisateur vendeur = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
 		
 		if(listeCodesErreur.size()>0) {

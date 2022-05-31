@@ -32,7 +32,6 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 
 	@Override
 	public  Article insert(Article a) {
-		
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			//Todo avant insert article: insert Categorie et Utilisateur
 			PreparedStatement pstmt = cnx.prepareStatement(insertArticle, PreparedStatement.RETURN_GENERATED_KEYS);

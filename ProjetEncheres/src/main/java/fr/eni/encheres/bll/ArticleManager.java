@@ -32,17 +32,8 @@ public class ArticleManager extends  VerificationArticleManager {
 		this.validerVendeur(vendeur, exception);
 		this.validerCategorie(categorie, prixInit, exception);*/
 		
-	//	if (!exception.hasErreurs()) 
-		//{
 			a = new Article(nom, description, dateDebut, dateFin, prixInit, vendeur, categorie);
 			a = articleDAO.insert(a);
-		//}
-				
-		/*if (exception.hasErreurs()) 
-		{
-			throw exception;
-		}*/
-		
 		return a; 
 		
 	}

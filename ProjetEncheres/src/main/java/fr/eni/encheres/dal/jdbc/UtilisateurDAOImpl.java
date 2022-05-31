@@ -263,8 +263,6 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			
 
 			Utilisateur UtilisateurCourant = new Utilisateur();
-
-
 			
 			try (Connection cnx = ConnectionProvider.getConnection();) {
 
@@ -275,8 +273,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 
 				while (rs.next()) {
 
-					String pseudoTest = rs.getString("pseudo");
-			
+					String pseudoTest = rs.getString("pseudo");		
 
 					UtilisateurCourant = new Utilisateur(pseudoTest);
 
