@@ -25,10 +25,12 @@
 		
 		<p><%= article.getDescription() %></p>
 		
-		
+		<%if(article.getEnchere().getEncherisseur().getPseudo()!=null){ %>
 		<p>Meilleur offre : <%= article.getEnchere().getMontant() %> <span>par 	<a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getEnchere().getEncherisseur().getNoUtilisateur()%>"> <%=article.getEnchere().getEncherisseur().getPseudo() %> </a></span> </p>
 		
-	
+		
+		
+		<%} %>
 		<p> Mise à prix :<%= article.getPrixInitial() %></p>
 		
 	
