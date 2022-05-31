@@ -36,7 +36,7 @@
 	    	
 	  %>
 	    <div class="article roundRadiusNoBorder">
-            <img class="roundRadiusNoBorder" src="asset/img/téléchargement.png">
+            <img class="roundRadiusNoBorder" src="asset/img/ImgArticles/Article<%=article.getNoArticle()%>.jpg">
                 <div class="descriptionArticle">
                     <a href="<%= request.getContextPath()%>/article?idArticle=<%= article.getNoArticle() %>"><h3><%= article.getNomArticle() %></h3></a>
                     <p>vendu par <a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getNoVendeur()%>"><%= article.getNomVendeur() %></a> </p>
