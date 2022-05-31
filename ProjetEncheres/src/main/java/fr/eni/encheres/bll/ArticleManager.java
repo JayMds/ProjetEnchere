@@ -6,6 +6,7 @@ import java.util.List;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
@@ -60,6 +61,25 @@ public class ArticleManager extends  VerificationArticleManager {
 		}
 
 		return a;
+	}
+	
+	public void VerificationEtModificationFinEnchere(Article article, LocalDateTime date) throws DALException {
+		if(article.getDateFinEnchere().compareTo(date)<0) {
+			//System.out.println(article.getNomArticle() + " : l'enchère est terminé");
+			Enchere enchere = recuperationMeilleurEnchere(article.getNoArticle());
+			article.setNoAcheteur(enchere.getNoUtilisateur()); 
+			article.setPrixVente(enchere.getMontant());
+			updateArticle(article);
+		}else {
+			//System.out.println( article.getNomArticle() + " : l'enchère n'est pas terminé");
+			
+		}
+	}
+	
+	public Enchere recuperationMeilleurEnchere(int idArticle) throws DALException {
+		EnchereManager enchereManager = new EnchereManager(); 
+		
+		return enchereManager.selectEnchere(idArticle);
 	}
 	
 	public List<Article> selectAllArticles() throws DALException{

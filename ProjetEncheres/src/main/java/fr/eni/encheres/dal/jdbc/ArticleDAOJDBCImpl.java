@@ -26,7 +26,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	private final String insertArticle = "INSERT INTO `ARTICLES`(`nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`) VALUES(?, ?, ?, ?, ?, ?, ?,?);";
 	private final String deleteArticle = "DELETE from 'ARTICLES' where no_article = ?;";
 	//TODO
-	private final String updateArticle = "UPDATE 'ARTICLES' SET 'nom'=?, 'description'=?, WHERE 'no_article'=?";
+	private final String updateArticle = "UPDATE `ARTICLES` SET `nom_article`=?,`description`=?,`date_debut_encheres`=?,`date_fin_encheres`=?,`prix_initial`=?,`prix_vente`=?,`no_vendeur`=?,`no_categorie`=?,`no_acheteur`=? WHERE `no_article` = ?";
 
 	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
 
@@ -170,13 +170,21 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		return articles;
 	}
 	
+	
 	@Override
 	public void update(Article a, boolean fullOrNot) {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(updateArticle);
 			pstmt.setString(1, a.getNomArticle());
 			pstmt.setString(2, a.getDescription());
-			pstmt.setInt(8, a.getNoArticle());
+			pstmt.setObject(3, a.getDateDebutEnchere());
+			pstmt.setObject(4, a.getDateFinEnchere());
+			pstmt.setInt(5, a.getPrixInitial());
+			pstmt.setInt(6, a.getPrixVente());
+			pstmt.setInt(7, a.getNoVendeur());
+			pstmt.setInt(8, a.getNoCategorie());
+			pstmt.setInt(9, a.getNoAcheteur());
+			pstmt.setInt(10, a.getNoArticle());
 			
 			int rowsInserted = pstmt.executeUpdate();
 			if (rowsInserted > 0) {

@@ -40,8 +40,9 @@
                 <div class="descriptionArticle">
                     <a href="<%= request.getContextPath()%>/article?idArticle=<%= article.getNoArticle() %>"><h3><%= article.getNomArticle() %></h3></a>
                     <p>vendu par <a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getNoVendeur()%>"><%= article.getNomVendeur() %></a> </p>
-                    <p class="prix">prix : <span> <%= article.getPrixVente() %>  pts</span></p>
-                    <p class="finEnchère">fin de l'énchère: <span> <%=article.getDiffDate() %></span></p>
+
+                    <p class="prix">prix : <span> <%= article.getEnchere().getMontant() %>  pts</span></p>
+                    <p class="finEnchère">fin de l'énchère: <span> 3 jours et 15h</span></p>
                     <span>fin le <span><%= article.getSTRDateFinEnchere() %></span> </span>
                 </div>
             
