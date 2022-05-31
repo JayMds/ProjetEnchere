@@ -17,9 +17,9 @@ import fr.eni.encheres.dal.ObjetsEnchereDAO;
 public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	private final String insertEnchere= "INSERT INTO `ENCHERES`(`no_article`, `montant_enchere`) VALUES (?, ?);";
 	private final String selectByIdEnchere = "SELECT `no_utilisateur`, `no_article`, `date_enchere`, `montant_enchere` FROM `ENCHERES` WHERE`no_article` =?; ";
-	private final String selectAllEnchere= "SELECT * from 'ENCHERES'; ";
-	private final String deleteEnchere = "DELETE from 'ENCHERES' WHERE no_article = ?;";
-	private final String updateEnchere = "UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
+	private final String selectAllEnchere= "SELECT * from `ENCHERES`; ";
+	private final String deleteEnchere = "DELETE from `ENCHERES` WHERE no_article = ?;";
+	private final String updateEnchere = "UPDATE `ENCHERES` SET `no_utilsateur`=?, `date_enchere`=?, `montant_enchere`=? WHERE `no_article`=?";
 	@Override
 	public Enchere insert(Enchere e) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -35,7 +35,7 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return null;		
+		return e;		
 	}
 
 	@Override

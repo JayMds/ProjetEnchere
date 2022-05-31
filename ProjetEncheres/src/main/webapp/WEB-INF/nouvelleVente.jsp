@@ -19,7 +19,7 @@
 
 
 
-<form class="form" action="<%= request.getContextPath() %>/nouvelle-vente" method="post" >
+<form class="form" action="<%= request.getContextPath() %>/nouvelle-vente" method="post" enctype="multipart/form-data">
    <div class="formNouvelleVente" > 
 
     <img id="output" width="200" />
@@ -57,7 +57,7 @@
 
             <label tabindex="0" for="my-file" class="">Choisir une image</label>
             <div class="input-file-container">  
-                <input class="input-file " name="photoProduit" id="photoProduit" type="file" onchange="loadFile(event)">
+                <input class="input-file " name="photoProduit" id="photoProduit" accept="image/jpg, image/png" type="file" onchange="loadFile(event)">
                
               </div>
             

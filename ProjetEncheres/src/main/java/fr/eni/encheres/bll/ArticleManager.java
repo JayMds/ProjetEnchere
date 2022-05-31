@@ -24,14 +24,14 @@ public class ArticleManager extends  VerificationArticleManager {
 	public Article addArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, int vendeur, int categorie) throws DALException, BusinessException {
 		
 		Article a = null; 
-		/*BusinessException exception = new BusinessException();
+		BusinessException exception = new BusinessException();
 		this.validerNom(nom, exception);
 		this.validerDescription(description, exception);
 		this.validerDateDebut(dateDebut, exception);
 		this.validerDateFin(dateFin, exception);
 		this.validerPrixInitial(prixInit, exception);
 		this.validerVendeur(vendeur, exception);
-		this.validerCategorie(categorie, prixInit, exception);*/
+		this.validerCategorie(categorie, exception);
 		
 	//	if (!exception.hasErreurs()) 
 		//{
@@ -83,15 +83,11 @@ public class ArticleManager extends  VerificationArticleManager {
 	}
 	
 	public List<Article> selectAllArticles() throws DALException{
-		List<Article> articles = new ArrayList<>();
-		articles = articleDAO.selectAllDiscret();
 		return this.articleDAO.selectAllDiscret();
 	}
 	
 	public List<Article> selectArticleEnVente(){
-		List<Article> articles = new ArrayList<>();
-		articleDAO.selectDateEnCours();	
-		return articles;
+		return this.articleDAO.selectDateEnCours();
 	}
 	
 	public List<Article> selectUnsellArticle(){
