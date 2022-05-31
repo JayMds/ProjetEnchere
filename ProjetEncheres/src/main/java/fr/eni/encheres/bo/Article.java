@@ -1,7 +1,10 @@
 package fr.eni.encheres.bo;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 public class Article {
 	private int noArticle;
@@ -119,7 +122,7 @@ public class Article {
 	}
 	public String getSTRDateDebutEnchere() {
 		String date = this.dateDebutEnchere.format(FORMAT);
-		System.out.println(date);
+		//System.out.println(date);
 		return date;
 	}
 	public void setDateDebutEnchere(LocalDateTime dateDebutEnchere) {
@@ -130,13 +133,37 @@ public class Article {
 	}
 	public String getSTRDateFinEnchere() {
 		String date = this.dateFinEnchere.format(FORMAT);
-		System.out.println(date);
+		//System.out.println(date);
 		return date;
 	}
 	public void setDateFinEnchere(LocalDateTime dateFinEnchere) {
 		
 		this.dateFinEnchere = dateFinEnchere;
 	}
+	
+	
+	public String getDiffDate() {
+		Duration diff = Duration.between(LocalDateTime.now(),this.dateFinEnchere);
+		String hms = String.format("%d:%02d", 
+                diff.toHours(), 
+                diff.toMinutesPart());
+		
+		return format(diff);
+	}
+	
+	public static String format(Duration d) {
+	    long days = d.toDays();
+	    d = d.minusDays(days);
+	    long hours = d.toHours();
+	    d = d.minusHours(hours);
+	    long minutes = d.toMinutes();
+	    d = d.minusMinutes(minutes);
+	    long seconds = d.getSeconds() ;
+	    return 
+	            (days ==  0?"":days+" jours,")+ 
+	            (hours == 0?"":hours+" heures");
+	}
+	
 	public int getPrixInitial() {
 		return prixInitial;
 	}
