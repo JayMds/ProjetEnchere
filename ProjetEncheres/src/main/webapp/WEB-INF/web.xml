@@ -6,6 +6,9 @@
   <welcome-file-list>
  	  <welcome-file>PageAccueil</welcome-file>  
   </welcome-file-list>
+   <listener>
+        <listener-class>fr.eni.encheres.ListenerFinEnchere</listener-class>
+    </listener>
   
  
 <servlet>

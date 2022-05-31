@@ -52,7 +52,7 @@ public class ServletPageAccueil extends HttpServlet {
 			for(Article article : listeArticle) {
 				Utilisateur user = userManager.selectionnerInformationDiscret(article.getNoVendeur()); 
 				Enchere enchere = enchereManager.selectEnchere(article.getNoArticle()); 
-				System.out.println(user.getPseudo());
+				//System.out.println(user.getPseudo());
 				article.setNomVendeur(user.getPseudo()); 
 				article.setEnchere(enchere); 
 			}
