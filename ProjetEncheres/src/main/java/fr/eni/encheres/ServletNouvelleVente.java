@@ -46,7 +46,6 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		CategorieManager catManager = new CategorieManager(); 
 		List<Categorie> listeCategories;
 		try {
@@ -54,17 +53,10 @@ public class ServletNouvelleVente extends HttpServlet {
 			request.setAttribute("Categories", listeCategories); 
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
 			rd.forward(request, response);
-			
-			
-			
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 			
-	
-		
-		
-		
 	}
 
 	/**
@@ -113,18 +105,6 @@ public class ServletNouvelleVente extends HttpServlet {
 				}
 				//création d'une enchère vierge
 				enchereManager.addEnchere(new Enchere(a.getNoArticle(), a.getPrixInitial()));
-			/*	Part part = request.getPart("photoProduit");
-			//Création Fichier Image "Articlex.jpeg"
-				String fileName = fichierUtils.getNomFichier(part);
-			//Vérification fichier Obtenu	
-				if (fileName != null && !fileName.isEmpty()) {
-					System.out.println(fileName);
-				//Renommage fichier
-					fileName = "Article"+a.getNoArticle();
-				//Ecriture fichier	
-					fichierUtils.ecrireFichier(part, fileName, imgMax);
-				}*/
-				
 				String message = "Votre article est maintenant en vente";
 				
 				// TODO création d'un point de retrait
@@ -139,15 +119,9 @@ public class ServletNouvelleVente extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			
-			
-			
-			
 		}
 		
-		
 		//message de reussite
-		
 	}
 
 

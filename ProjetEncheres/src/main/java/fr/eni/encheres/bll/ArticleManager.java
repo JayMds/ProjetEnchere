@@ -23,25 +23,25 @@ public class ArticleManager extends  VerificationArticleManager {
 	public Article addArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, int vendeur, int categorie) throws DALException, BusinessException {
 		
 		Article a = null; 
-		BusinessException exception = new BusinessException();
+		/*BusinessException exception = new BusinessException();
 		this.validerNom(nom, exception);
 		this.validerDescription(description, exception);
 		this.validerDateDebut(dateDebut, exception);
 		this.validerDateFin(dateFin, exception);
 		this.validerPrixInitial(prixInit, exception);
 		this.validerVendeur(vendeur, exception);
-		this.validerCategorie(categorie, prixInit, exception);
+		this.validerCategorie(categorie, prixInit, exception);*/
 		
-		if (!exception.hasErreurs()) 
-		{
+	//	if (!exception.hasErreurs()) 
+		//{
 			a = new Article(nom, description, dateDebut, dateFin, prixInit, vendeur, categorie);
 			a = articleDAO.insert(a);
-		}
+		//}
 				
-		if (exception.hasErreurs()) 
+		/*if (exception.hasErreurs()) 
 		{
 			throw exception;
-		}
+		}*/
 		
 		return a; 
 		

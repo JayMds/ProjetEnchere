@@ -19,7 +19,7 @@
 
 
 
-<form class="form" action="<%= request.getContextPath() %>/nouvelle-vente" method="post" enctype="multipart/form-data" >
+<form class="form" action="<%= request.getContextPath() %>/nouvelle-vente" method="post" >
    <div class="formNouvelleVente" > 
 
     <img id="output" width="200" />
@@ -35,7 +35,7 @@
                 <textarea class="input-field roundRadius" type ="text" id="idDescription" name="description" placeholder="Décrivez votre article en quelques mots" ></textarea>
             </div>	
          </div>
-	     <select class="H5 montserrat-normal custom-select roundRadius SB30 bg-blue" name="categorie" >
+	     <select class="H5 montserrat-normal custom-select roundRadius SB30 bg-blue" name="categorie" id="categorie">
                 <option value="" disabled selected hidden>Selectionner une catégorie</option>
                 
                 <%
