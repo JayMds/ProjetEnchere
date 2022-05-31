@@ -17,7 +17,7 @@
 
 <div class="containerArticle">
 
-	<img src="asset/imageProduit/<%=article.getNoArticle()%>.jpeg">
+	<img src="asset/img/ImgArticles/Article<%=article.getNoArticle()%>.jpg">
 	
 	<div class="containerInfo">
 		<h2><%=article.getNomArticle() %></h2>
