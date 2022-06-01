@@ -35,7 +35,7 @@
                 
             </select>
 
-            <a href="" class="montserrat-normal">plus d'options</a>
+            <a  href="<%= request.getContextPath() %>/les-encheres" class="montserrat-normal">plus d'options</a>
             <button type="submit" class="montserrat600 bg-blue btn roundRadius SB30 H5"> Rechercher </button>
         </div>
         
@@ -46,7 +46,7 @@
 
 <%@include file="/WEB-INF/jspf/affichageArticles.jspf" %>
 
-
+<%@include file="/WEB-INF/jspf/footer.jspf" %>
 </body>
 
 <%@include file="/WEB-INF/jspf/script.jspf" %>

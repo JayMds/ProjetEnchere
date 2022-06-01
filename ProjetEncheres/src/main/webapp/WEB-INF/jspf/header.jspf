@@ -32,7 +32,7 @@ Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("connect
 if(user != null ){
 %>
 <nav id="connectedNav">
-    <a class="nav-link" href="#">Enchères</a>
+    <a class="nav-link" href="<%= request.getContextPath() %>/les-encheres">Enchères</a>
     <a class="nav-link" href="<%= request.getContextPath() %>/nouvelle-vente">Vendre un article</a>
     <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Deconnexion</a>   
     <a  class="nav-link btn-profil " href="<%= request.getContextPath() %>/utilisateur?id=<%= user.getNoUtilisateur() %>">Mon profil</a>  
