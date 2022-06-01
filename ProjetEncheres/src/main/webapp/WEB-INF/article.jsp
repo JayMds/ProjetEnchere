@@ -76,7 +76,7 @@
 		<%}else{ %>
 		
 		<p>Connectez vous pouvoir enchérir</p>
-		<%} %>
+		<%}} %>
 		
 		
 		<div class="divider"></div>
