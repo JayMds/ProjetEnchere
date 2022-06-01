@@ -36,7 +36,7 @@ import fr.eni.encheres.dal.DALException;
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 //Dossier d'enregistrment adapter a son emplacement (phase dev)
-	public final String imgArticlesPath = "D:\\projets-web\\Projets Java\\ProjetEnchere\\ProjetEncheres\\src\\main\\webapp\\asset\\img\\ImgArticles";
+	public final String imgArticlesPath = "/ProjetEncheres/asset/img/ImgArticles/";
  	 @Override
  	
  	 public void init() throws ServletException {
@@ -83,6 +83,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		String rueRetrait = null;
 		String CPReatrait = null;
 		String villeRetrait = null;
+		
+		
 	//Itération item de Multipart    
         for(FileItem item : multiparts){
     //Si item = champ de formulaire    	
