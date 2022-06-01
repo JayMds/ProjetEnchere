@@ -58,7 +58,6 @@ public class ServletInscription extends HttpServlet {
 		 * @author AlexG
 		 */
 		if(!motDePasse.equals(confirmation)) {			
-			System.out.println("mdp mauvais");
 			listeCodesErreur.add(CodeResultatServlet.CONFIRMATION_MDP);					
 		}
 		

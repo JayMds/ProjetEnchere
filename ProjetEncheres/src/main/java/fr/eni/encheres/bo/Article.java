@@ -119,7 +119,6 @@ public class Article {
 	}
 	public String getSTRDateDebutEnchere() {
 		String date = this.dateDebutEnchere.format(FORMAT);
-		System.out.println(date);
 		return date;
 	}
 	public void setDateDebutEnchere(LocalDateTime dateDebutEnchere) {
@@ -130,7 +129,6 @@ public class Article {
 	}
 	public String getSTRDateFinEnchere() {
 		String date = this.dateFinEnchere.format(FORMAT);
-		System.out.println(date);
 		return date;
 	}
 	public void setDateFinEnchere(LocalDateTime dateFinEnchere) {

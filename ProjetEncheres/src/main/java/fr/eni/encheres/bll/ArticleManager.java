@@ -87,4 +87,6 @@ public class ArticleManager extends  VerificationArticleManager {
 		articleDAO.update(a, false);
 	}
 
+	
+	
 }

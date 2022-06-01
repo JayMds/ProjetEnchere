@@ -34,6 +34,10 @@ public class EnchereManager extends VerificationEnchereManager {
 		}
 	 }
 	
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere,int creditVerifierBDD)  throws BusinessException {
+			enchereDAO.VerifCreditSuperieurEncheres(montantDeniereEnchere, creditVerifierBDD);
+	}
+	
 	public Enchere selectEnchere(int id) throws DALException {
 		return this.enchereDAO.selectByIdFull(id);
 	}
@@ -55,4 +59,18 @@ public class EnchereManager extends VerificationEnchereManager {
 		this.enchereDAO.insert(e); 
 		
 	}
+	
+	public int VerifMontantDerniereEncheres(int idArticle) throws DALException {
+		return enchereDAO.VerifMontantEnchere(idArticle);
+		
+	}
+
+
+	public void VerifMontantMini(int test2, int montantDeniereEnchere) throws BusinessException {
+		enchereDAO.VerifMontantMinimum(test2,montantDeniereEnchere);
+		
+	}
+
+
+	
 }

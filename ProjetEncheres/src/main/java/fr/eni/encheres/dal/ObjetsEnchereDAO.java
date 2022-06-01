@@ -7,24 +7,35 @@ import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Utilisateur;
 
 public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
-	
-	
+
 	public T insert(T objet) throws DALException;
-	
-	
-	
+
 	public T selectByIdFull(int id) throws DALException;
+
 	public T selectByIdDiscret(int id) throws DALException;
+
 	public List<T> selectAllFull() throws DALException;
+
 	public List<T> selectAllDiscret() throws DALException;
+
 	public void delete(int id) throws DALException;
+
 	public T verificationLogin(String a, String b) throws DALException;
+
 	public T verificationPseudo(String login) throws BusinessException, DALException;
+
 	public void update(T type, boolean fullOrNot);
+
+	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException;
+
+	public int VerifMontantEnchere(int idArticle) throws DALException;
+
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD) throws BusinessException;
+
+
+	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException;
+
+
+	
+	
 }
-	
-	
-
-
-	
-
