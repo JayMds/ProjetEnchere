@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.ConnectionProvider;
@@ -147,6 +148,38 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	}
 	@Override
 	public Retrait verificationPseudo(String login) throws BusinessException, DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Article> selectAchatEnCour(int no_utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAchatTermines(int no_utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
 		// TODO Auto-generated method stub
 		return null;
 	}

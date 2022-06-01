@@ -25,6 +25,12 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	private final String selectByIdArticles = "SELECT `no_article`, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` WHERE `no_article` = ?; ";
 	private final String insertArticle = "INSERT INTO `ARTICLES`(`nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`) VALUES(?, ?, ?, ?, ?, ?, ?,?);";
 	private final String deleteArticle = "DELETE from 'ARTICLES' where no_article = ?;";
+	private final String selectUnsellByUser = "SELECT ARTICLES.no_article, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` LEFT JOIN `LISTENCHERES` ON ARTICLES.no_article = LISTENCHERES.no_article WHERE LISTENCHERES.no_utilisateur = ? AND no_acheteur is NULL;" ;
+	private final String selectSellByUser = "SELECT ARTICLES.no_article, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` LEFT JOIN `LISTENCHERES` ON ARTICLES.no_article = LISTENCHERES.no_article WHERE LISTENCHERES.no_utilisateur = ? AND no_acheteur is  NOT NULL;" ;
+	
+	private final String selectVenteUtilisateurEncour = "SELECT * FROM `ARTICLES` WHERE  no_vendeur = ? AND no_acheteur is NULL;";
+	private final String selectVenteUtilisateurNondebute = "SELECT * FROM `ARTICLES` WHERE no_vendeur = ? AND date_debut_encheres > ? ;";
+	private final String selectVenteUtilisateurTermine = "SELECT * FROM `ARTICLES` WHERE  no_vendeur = ? AND no_acheteur is  NOT NULL;";
 	//TODO
 	private final String updateArticle = "UPDATE `ARTICLES` SET `nom_article`=?,`description`=?,`date_debut_encheres`=?,`date_fin_encheres`=?,`prix_initial`=?,`prix_vente`=?,`no_vendeur`=?,`no_categorie`=?,`no_acheteur`=? WHERE `no_article` = ?";
 
@@ -221,6 +227,121 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	public Article verificationPseudo(String login) throws BusinessException, DALException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public List<Article> selectAchatEnCour(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectUnsellByUser);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+		
+	}
+
+
+	@Override
+	public List<Article> selectAchatTermines(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectSellByUser);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+	}
+
+
+	@Override
+	public List<Article> selectVenteUtilisateurEncour(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectVenteUtilisateurEncour);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+	}
+
+
+	@Override
+	public List<Article> selectVenteUtilisateurNonDebute(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+		
+		LocalDateTime dateDuJour =  LocalDateTime.now(); 
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectVenteUtilisateurNondebute);
+				pstmt.setInt(1, id);
+				pstmt.setObject(2, dateDuJour);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+	}
+
+
+	@Override
+	public List<Article> selectVenteUtilisateurTermine(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectVenteUtilisateurTermine);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
 	}
 
 }

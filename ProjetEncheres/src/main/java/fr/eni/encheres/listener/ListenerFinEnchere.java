@@ -1,4 +1,4 @@
-package fi.eni.encheres.listener;
+package fr.eni.encheres.listener;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,6 +38,8 @@ public class ListenerFinEnchere implements ServletRequestListener {
      * @see ServletRequestListener#requestInitialized(ServletRequestEvent)
      */
     public void requestInitialized(ServletRequestEvent arg0)  { 
+    	
+    	
         ArticleManager artManager = new ArticleManager(); 
         List<Article> listeArticle = artManager.selectUnsellArticle();	
         
