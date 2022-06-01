@@ -6,6 +6,9 @@
   <welcome-file-list>
  	  <welcome-file>PageAccueil</welcome-file>  
   </welcome-file-list>
+   <listener>
+        <listener-class>fr.eni.encheres.ListenerFinEnchere</listener-class>
+    </listener>
   
  
 <servlet>
@@ -92,6 +95,16 @@
 <servlet-mapping>
 	<servlet-name>Encherir</servlet-name>
 	<url-pattern>/encherir</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+	<servlet-name>Encheres</servlet-name>
+	<servlet-class>fr.eni.encheres.ServletPageEncheres</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Encheres</servlet-name>
+	<url-pattern>/les-encheres</url-pattern>
 </servlet-mapping>
   
   

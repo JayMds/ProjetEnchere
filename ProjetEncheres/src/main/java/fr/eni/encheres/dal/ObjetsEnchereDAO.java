@@ -28,6 +28,32 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 
 
 
+
+
+	public List<Article> selectAchatEnCour(int no_utilisateur);
+
+
+
+	public List<Article> selectAchatTermines(int no_utilisateur);
+
+
+
+	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur);
+
+
+
+	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur);
+
+
+
+	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur);
+}
+	
+	
+
+
+
+
 	public List<Article> selectAchatEnCour(int no_utilisateur);
 
 

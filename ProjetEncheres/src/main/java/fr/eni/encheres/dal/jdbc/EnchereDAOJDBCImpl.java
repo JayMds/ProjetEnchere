@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
+
 import fr.eni.encheres.bll.CodesResultatBLL;
 import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.VerificationEnchereManager;
+import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
@@ -40,7 +42,8 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return null;
+
+		return e;	
 	}
 
 	@Override
@@ -158,13 +161,20 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		return null;
 	}
 
+
 	@Override
 	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
+
+
+	@Override
+	public List<Article> selectAchatEnCour(int no_utilisateur) {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+
 	public int VerifMontantEnchere(int idArticle) throws DALException {
 
 		int montant = 0;
@@ -210,4 +220,26 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		
 	}
 	
+	public List<Article> selectAchatTermines(int no_utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

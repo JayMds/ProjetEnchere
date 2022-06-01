@@ -230,34 +230,143 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	}
 
 
+
 	@Override
 	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
+
+
+	@Override
+	public List<Article> selectAchatEnCour(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectUnsellByUser);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+		
+
 	}
 
 
 	@Override
+
 	public int VerifMontantEnchere(int idArticle) throws DALException {
 		
-		
-		
 		return 0;
+
+	public List<Article> selectAchatTermines(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectSellByUser);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+
 	}
 
 
 	@Override
+
 	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD)
 			throws BusinessException {
 		// TODO Auto-generated method stub
 		
+
+	public List<Article> selectVenteUtilisateurEncour(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectVenteUtilisateurEncour);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+
 	}
 
 
 	@Override
+
 	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException {
 		// TODO Auto-generated method stub
+
+	public List<Article> selectVenteUtilisateurNonDebute(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
 		
+		LocalDateTime dateDuJour =  LocalDateTime.now(); 
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectVenteUtilisateurNondebute);
+				pstmt.setInt(1, id);
+				pstmt.setObject(2, dateDuJour);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+	}
+
+
+	@Override
+	public List<Article> selectVenteUtilisateurTermine(int id) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectVenteUtilisateurTermine);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+
 	}
 
 }

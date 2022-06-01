@@ -124,5 +124,5 @@ public class ArticleManager extends  VerificationArticleManager {
 	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
 		return this.articleDAO.selectVenteUtilisateurTermine(noUtilisateur);
 	}
-	
+
 }

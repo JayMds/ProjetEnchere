@@ -1,17 +1,5 @@
 package fr.eni.encheres;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -20,7 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.CategorieManager;
@@ -32,16 +24,17 @@ import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 
+
 /**
  * Servlet implementation class NouvelleVente
  */
 @WebServlet("/NouvelleVente")
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final int TAILLE_TAMPON = 10240;
-	public final String imgMax = "/ProjetEncheres/src/main/webapp/asset/img/imgArticleMax";  
-	public final String imgMini = "/ProjetEncheres/src/main/webapp/asset/img/imgArticleMini";
- 	/**
+//Dossier d'enregistrment adapter a son emplacement (phase dev)
+	public final String imgArticlesPath = "D:\\projets-web\\Projets Java\\ProjetEnchere\\ProjetEncheres\\src\\main\\webapp\\asset\\img\\ImgArticles";
+	
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -63,53 +56,32 @@ public class ServletNouvelleVente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Article a = null;
-		FichierUtils fichierUtils = new FichierUtils();
-		List<Integer> listeCodesErreur=new ArrayList<>();
-		
-		String nomArticle = request.getParameter("nomArticle");
-		String description = request.getParameter("description");
-		int categorie = Integer.parseInt(request.getParameter("categorie"));  
-		int prixInit = Integer.parseInt(request.getParameter("prix"));
-	//convertion de l'input date en localdate time
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		String dateDebut = request.getParameter("debutEncheres");
-		String dateFin = request.getParameter("finEncheres");
-	//System.out.println("heure sans replace :"+ dateDebut);
-		dateDebut = dateDebut.replace("T", " ");
-		dateFin = dateFin.replace("T", " ");
-	//System.out.println("heure avec  replace :"+ dateDebut );
-		LocalDateTime dateDebutEncheres = LocalDateTime.parse(dateDebut, formatter);
-		LocalDateTime dateFinEncheres = LocalDateTime.parse(dateFin, formatter);
-		
-		String rueRetrait = request.getParameter("rue");
-		String CPReatrait = request.getParameter("codePostal");
-		String villeRetrait = request.getParameter("ville");
-	//Création Managers
+	//Récuperation User Courant
+		Utilisateur vendeur = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
+	//Conversion request ---> Multipart TODO RESTE A REGLER LIMTE TAILLE FICHIER ET FORMAT OU CONVERSION EN JPG (PAS TROP COMPLIQUé) reorga exception
+		List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(new ServletRequestContext(request));
+	//Création des Managers
 		ArticleManager artManager = new ArticleManager(); 
 		RetraitManager retraitManager = new RetraitManager();
 		EnchereManager enchereManager = new EnchereManager();
-	//Récupuration User Courant
-		Utilisateur vendeur = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
-		
-		if(listeCodesErreur.size()>0) {
-			request.setAttribute("listeCodesErreur",listeCodesErreur);			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
-			rd.forward(request, response);	
-		}else {
-			try {//création d'un nouvel article
-				try {
-					a =	artManager.addArticle(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInit , vendeur.getNoUtilisateur(), categorie);
-				} catch (BusinessException e) {
-					e.printStackTrace();
-				}
-				//création d'une enchère vierge
-				enchereManager.addEnchere(new Enchere(a.getNoArticle(), a.getPrixInitial()));
-				String message = "Votre article est maintenant en vente";
+	//Inits Outils et variables
+		FichiersUtils lecteur = new FichiersUtils();
+	//lecture du formulaire, et valeurs stcockés par FichierUtils ---> récupération via getters	
+		lecteur.lecteurFormulaire(multiparts);
+		//création + insert d'un nouvel article
+			try {
+				Article a = artManager.addArticle(lecteur.getNomArticle(), lecteur.getDescription(), lecteur.dateDebutEncheres, lecteur.dateFinEncheres, lecteur.getPrixInit() , vendeur.getNoUtilisateur(), lecteur.getCategorie());
+				//création d'une enchère vierge + insert
+				Enchere e = enchereManager.addEnchere(a.getNoArticle(), a.getPrixInitial());
+				a.setEnchere(e);
+				//création d'un point de retrait + insert
+				//Retrait r = retraitManager.addRetrait(lecteur.getPrixInit(), lecteur.getRueRetrait(), lecteur.getCPReatrait(), lecteur.getVilleRetrait());
+				//a.setRetrait(r);
 				
-				// TODO création d'un point de retrait
+				lecteur.createurImgArticle(a);
+	            String message = "Votre article est maintenant en vente";
 				response.setCharacterEncoding("UTF-8" );				
-				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
+				response.addCookie(CookieUtils.SetCookie("message", message, 10));				
 				response.sendRedirect(request.getContextPath());
 				
 			} catch (DALException e) {
@@ -117,13 +89,15 @@ public class ServletNouvelleVente extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
 				rd.forward(request, response);	
 				e.printStackTrace();
+				
+			} catch (BusinessException e1) {
+				request.setAttribute("listeCodesErreur", e1.getListeCodesErreur());
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
+				rd.forward(request, response);	
+				e1.printStackTrace();
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
 			
 		}
-		
-		//message de reussite
-	}
-
-
-  
 }

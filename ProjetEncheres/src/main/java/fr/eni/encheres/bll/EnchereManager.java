@@ -58,6 +58,7 @@ public class EnchereManager extends VerificationEnchereManager {
 	public Enchere addEnchere(int idArticle, int montant) throws DALException {
 		Enchere e = new Enchere(idArticle, montant);
 		return this.enchereDAO.insert(e); 
+
 		
 	}
 	
@@ -78,6 +79,7 @@ public class EnchereManager extends VerificationEnchereManager {
 	public Enchere addEnchere(int idArticle, int montant) throws DALException {
 		Enchere e = new Enchere(idArticle, montant);
 		return this.enchereDAO.insert(e); 
+
 		
 	}
 
