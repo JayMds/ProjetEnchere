@@ -6,11 +6,16 @@ import java.util.List;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.DALException;
+import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class RetraitManager {
 	
 	private ObjetsEnchereDAO<Retrait> retraitDAO;
+	
+	public RetraitManager() {
+		this.retraitDAO = DAOFactory.getRetraitDAO();
+	}
 
 	public Retrait addRetrait(int noArticle, String rue, String codePostal, String ville)  throws DALException, BusinessException {
 			Retrait r = new Retrait(noArticle, rue, codePostal, ville);

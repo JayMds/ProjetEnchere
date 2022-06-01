@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
@@ -21,6 +22,7 @@ import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 
@@ -59,7 +61,10 @@ public class ServletNouvelleVente extends HttpServlet {
 	//Récuperation User Courant
 		Utilisateur vendeur = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
 	//Conversion request ---> Multipart TODO RESTE A REGLER LIMTE TAILLE FICHIER ET FORMAT OU CONVERSION EN JPG (PAS TROP COMPLIQUé) reorga exception
-		List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(new ServletRequestContext(request));
+		FileItemFactory factory = new DiskFileItemFactory();
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		upload.setHeaderEncoding("UTF-8");
+		List<FileItem> multiparts = upload.parseRequest(new ServletRequestContext(request));
 	//Création des Managers
 		ArticleManager artManager = new ArticleManager(); 
 		RetraitManager retraitManager = new RetraitManager();
@@ -75,8 +80,8 @@ public class ServletNouvelleVente extends HttpServlet {
 				Enchere e = enchereManager.addEnchere(a.getNoArticle(), a.getPrixInitial());
 				a.setEnchere(e);
 				//création d'un point de retrait + insert
-				//Retrait r = retraitManager.addRetrait(lecteur.getPrixInit(), lecteur.getRueRetrait(), lecteur.getCPReatrait(), lecteur.getVilleRetrait());
-				//a.setRetrait(r);
+				Retrait r = retraitManager.addRetrait(a.getNoArticle(), lecteur.getRueRetrait(), lecteur.getCPReatrait(), lecteur.getVilleRetrait());
+				a.setRetrait(r);
 				
 				lecteur.createurImgArticle(a);
 	            String message = "Votre article est maintenant en vente";

@@ -1,6 +1,7 @@
 package fr.eni.encheres;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -27,7 +28,7 @@ public class FichiersUtils {
 	String villeRetrait;
 	FileItem imgArticle;
 	
-	public void lecteurFormulaire(List<FileItem> multiparts) {
+	public void lecteurFormulaire(List<FileItem> multiparts) throws IOException {
 		//Itération item de Multipart    
 	    for(FileItem item : multiparts){
 	//Si item = champ de formulaire    	
@@ -36,8 +37,8 @@ public class FichiersUtils {
 	//Test item pour determiner contenu et mettre dans la bonne variable   		
 	    	switch (item.getFieldName()) 
 	        	{
-				case "nomArticle": this.nomArticle = item.getString(); break;
-				case "description": this.description = item.getString(); break;
+				case "nomArticle": this.nomArticle = item.getString("UTF-8") ; break;
+				case "description": this.description = item.getString("UTF-8"); break;
 				case "categorie": this.categorie = Integer.parseInt(item.getString());break;
 				case "prix": this.prixInit = Integer.parseInt(item.getString()); break;
 				case "debutEncheres": this.dateDebut = item.getString(); break;
