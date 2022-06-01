@@ -90,6 +90,12 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 		this.utilisateurDAO.update(utilisateur, true);
 	}
 	
+	public String VerifCreditUtilisateur (int creditUtilisateur) throws DALException{
+		return this.utilisateurDAO.VerifCreditUtilisateur(creditUtilisateur);
+	}
+	
+	
+	
 	
 	
 	

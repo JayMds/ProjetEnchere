@@ -154,6 +154,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 
 
 
+
 	@Override
 	public List<Article> selectAchatEnCour(int no_utilisateur) {
 		// TODO Auto-generated method stub
@@ -162,11 +163,25 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 
 	@Override
 	public List<Article> selectAchatTermines(int no_utilisateur) {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+
+	public int VerifMontantEnchere(int idArticle) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD)
+			throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
 		// TODO Auto-generated method stub
 		return null;
@@ -182,6 +197,19 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
 		// TODO Auto-generated method stub
 		return null;
+
+	}
+
+	@Override
+	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

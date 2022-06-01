@@ -176,7 +176,6 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		return articles;
 	}
 	
-	
 	@Override
 	public void update(Article a, boolean fullOrNot) {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -202,35 +201,6 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		}
 	}
 
-	
-	@Override
-	public Article selectByIdDiscret(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Article> selectAllFull() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Article verificationLogin(String a, String b) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Article verificationPseudo(String login) throws BusinessException, DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
 	@Override
 	public List<Article> selectAchatEnCour(int id) {
 		List<Article> articles = new ArrayList<>();
@@ -251,10 +221,9 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			}
 		return articles;
 		
+
 	}
 
-
-	@Override
 	public List<Article> selectAchatTermines(int id) {
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
@@ -273,10 +242,13 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				e.printStackTrace();
 			}
 		return articles;
+
 	}
 
 
-	@Override
+
+		
+
 	public List<Article> selectVenteUtilisateurEncour(int id) {
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
@@ -295,10 +267,9 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				e.printStackTrace();
 			}
 		return articles;
+
 	}
-
-
-	@Override
+	
 	public List<Article> selectVenteUtilisateurNonDebute(int id) {
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
@@ -342,6 +313,61 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				e.printStackTrace();
 			}
 		return articles;
+
 	}
 
+
+	@Override
+	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int VerifMontantEnchere(int idArticle) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD)
+			throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
+	@Override
+	public Article selectByIdDiscret(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAllFull() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Article verificationLogin(String a, String b) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Article verificationPseudo(String login) throws BusinessException, DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
