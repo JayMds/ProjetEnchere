@@ -232,6 +232,12 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 
 
 	@Override
+	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+
+
+	@Override
 	public List<Article> selectAchatEnCour(int id) {
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
@@ -251,10 +257,16 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			}
 		return articles;
 		
+
 	}
 
 
 	@Override
+
+	public int VerifMontantEnchere(int idArticle) throws DALException {
+		
+		return 0;
+
 	public List<Article> selectAchatTermines(int id) {
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
@@ -273,10 +285,17 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				e.printStackTrace();
 			}
 		return articles;
+
 	}
 
 
 	@Override
+
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD)
+			throws BusinessException {
+		// TODO Auto-generated method stub
+		
+
 	public List<Article> selectVenteUtilisateurEncour(int id) {
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
@@ -295,10 +314,15 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				e.printStackTrace();
 			}
 		return articles;
+
 	}
 
 
 	@Override
+
+	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException {
+		// TODO Auto-generated method stub
+
 	public List<Article> selectVenteUtilisateurNonDebute(int id) {
 		List<Article> articles = new ArrayList<>();
 		Article a = null;
@@ -342,6 +366,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 				e.printStackTrace();
 			}
 		return articles;
+
 	}
 
 }

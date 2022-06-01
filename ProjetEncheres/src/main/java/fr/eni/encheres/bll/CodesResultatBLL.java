@@ -30,5 +30,7 @@ public class CodesResultatBLL {
 	public static final int ERREUR_ACHETEUR = 20021;
 	public static final int ERREUR_N_ARTICLE = 20022;
 	public static final int ERREUR_DATE_ENCHERE = 20023;
+	public static final int SOLDE_INSUFISSANT = 20024;
+	public static final int ENCHERE_INSUFISSANTE = 20025;
 	
 }

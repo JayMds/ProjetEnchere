@@ -9,7 +9,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import fr.eni.encheres.BusinessException;
+
 import fr.eni.encheres.bo.Article;
+
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
@@ -19,14 +23,15 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String insert = "INSERT INTO `UTILISATEURS`(`pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	String delete = "DELETE from UTILISATEURS where no_Utilisateur = ?;";
 	String selectByIdFull = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur =?";
+	String selectByIdCredit = "SELECT credit FROM UTILISATEURS WHERE no_utilisateur =?";
 	String selectByIdDiscret = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville,  FROM UTILISATEURS WHERE no_utilisateur =?";
 	String selectAllDiscret = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
 	String selectAllFull = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
 	String SELECT_BY_LOG = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `email` = ? And `mot_de_passe`=?";
 	String VERIF_PSEUDO = "SELECT PSEUDO FROM UTILISATEURS WHERE PSEUDO=?";
 	String updateUtilisateur = "UPDATE 'UTILISATEURS' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
-    String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
-	
+	String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
+
 	@Override
 	public Utilisateur insert(Utilisateur utilisateurCourant) throws DALException {
 		int rowsInserted = -1;
@@ -44,7 +49,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			pstmt.setString(index++, utilisateurCourant.getCodePostal());
 			pstmt.setString(index++, utilisateurCourant.getVille());
 			pstmt.setString(index++, utilisateurCourant.getMotDePasse());
-		
+
 			rs = pstmt.getGeneratedKeys();
 
 			rowsInserted = pstmt.executeUpdate();
@@ -53,7 +58,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			}
 			pstmt.close();
 		} catch (SQLException e) {
-			//throw new DALException("");
+			// throw new DALException("");
 			e.printStackTrace();
 		}
 
@@ -216,11 +221,11 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		}
 
 	}
-	
+
 	public Utilisateur verificationLogin(String login, String motdepasse) throws DALException {
-		
-		//motdepasse= HashClass.sha1(motdepasse);
-		
+
+		// motdepasse= HashClass.sha1(motdepasse);
+
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_LOG);
@@ -239,104 +244,132 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				String rue = rs.getString("rue");
 				String codePostal = rs.getString("code_Postal");
 				String ville = rs.getString("ville");
-				//String motDePasse = rs.getString("mot_De_Passe");
+				// String motDePasse = rs.getString("mot_De_Passe");
 				String credit = rs.getString("credit");
 				Boolean administrateur = rs.getBoolean("administrateur");
 
+				return new Utilisateur(noUser, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, credit,
+						administrateur);
 
-				 return new Utilisateur(noUser ,pseudo, nom, prenom, email, telephone, rue, codePostal, ville, credit, administrateur);
-
-			}
-			else {
+			} else {
 				return null;
 			}
-			
-			
+
 		} catch (SQLException e) {
 			throw new DALException(e);
 
 		}
 	}
-	
-		public Utilisateur verificationPseudo(String pseudo) throws DALException {
-			
 
-			Utilisateur UtilisateurCourant = new Utilisateur();
+	public Utilisateur verificationPseudo(String pseudo) throws DALException {
 
+		Utilisateur UtilisateurCourant = new Utilisateur();
 
-			
-			try (Connection cnx = ConnectionProvider.getConnection();) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
 
-				PreparedStatement pstmt = cnx.prepareStatement(VERIF_PSEUDO);
-				pstmt.setString(1, pseudo);
+			PreparedStatement pstmt = cnx.prepareStatement(VERIF_PSEUDO);
+			pstmt.setString(1, pseudo);
 
-				ResultSet rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
-				while (rs.next()) {
+			while (rs.next()) {
 
-					String pseudoTest = rs.getString("pseudo");
-			
+				String pseudoTest = rs.getString("pseudo");
 
-					UtilisateurCourant = new Utilisateur(pseudoTest);
-
-				}
-				pstmt.close();
-			} catch (SQLException e) {
-				throw new DALException(e);
+				UtilisateurCourant = new Utilisateur(pseudoTest);
 
 			}
+			pstmt.close();
+		} catch (SQLException e) {
+			throw new DALException(e);
 
-			return UtilisateurCourant;
+		}
 
-		
+		return UtilisateurCourant;
+
 	}
 
-	
-		@Override
-        public void update(Utilisateur utilisateurCourant, boolean infosOrMdp) {
-            int index= 1;
-            try (Connection cnx = ConnectionProvider.getConnection();){
+	@Override
+	public void update(Utilisateur utilisateurCourant, boolean infosOrMdp) {
+		int index = 1;
+		try (Connection cnx = ConnectionProvider.getConnection();) {
 
-                if (!infosOrMdp) {
+			if (!infosOrMdp) {
 
-                    PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateur);
-                    pstmt.setString(index++, utilisateurCourant.getPseudo());
-                    pstmt.setString(index++, utilisateurCourant.getNom());
-                    pstmt.setString(index++, utilisateurCourant.getPrenom());
-                    pstmt.setString(index++, utilisateurCourant.getEmail());
-                    pstmt.setString(index++, utilisateurCourant.getTelephone());
-                    pstmt.setString(index++, utilisateurCourant.getRue());
-                    pstmt.setString(index++, utilisateurCourant.getCodePostal());
-                    pstmt.setString(index++, utilisateurCourant.getVille());
-                    pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
-                    int rowsAffected = pstmt.executeUpdate();
-                    System.out.println(rowsAffected+" utilisateur modifié");
-                    pstmt.close();
-                }else {
-                    PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateurmdp);
-                    pstmt.setString(index++, utilisateurCourant.getMotDePasse());
-                    pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
-                    int rowsAffected = pstmt.executeUpdate();
-                    System.out.println(rowsAffected+" utilisateur modifié");
-                    pstmt.close();
-                }
-            } catch (Exception e) {
-            e.printStackTrace();
-            }
+				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateur);
+				pstmt.setString(index++, utilisateurCourant.getPseudo());
+				pstmt.setString(index++, utilisateurCourant.getNom());
+				pstmt.setString(index++, utilisateurCourant.getPrenom());
+				pstmt.setString(index++, utilisateurCourant.getEmail());
+				pstmt.setString(index++, utilisateurCourant.getTelephone());
+				pstmt.setString(index++, utilisateurCourant.getRue());
+				pstmt.setString(index++, utilisateurCourant.getCodePostal());
+				pstmt.setString(index++, utilisateurCourant.getVille());
+				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
+				int rowsAffected = pstmt.executeUpdate();
+				System.out.println(rowsAffected + " utilisateur modifié");
+				pstmt.close();
+			} else {
+				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateurmdp);
+				pstmt.setString(index++, utilisateurCourant.getMotDePasse());
+				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
+				int rowsAffected = pstmt.executeUpdate();
+				System.out.println(rowsAffected + " utilisateur modifié");
+				pstmt.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
 
-		@Override
-		public List<Utilisateur> selectDateEnCours() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	@Override
+	public List<Utilisateur> selectDateEnCours() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-		@Override
+	@Override
 		public List<Utilisateur> selectUnsellArticle() {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
+
+	@Override
+		public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
+			
+			
+
+				String credit = null;
+
+				try (Connection cnx = ConnectionProvider.getConnection();) {
+					PreparedStatement pstmt = cnx.prepareStatement(selectByIdCredit);
+					pstmt.setInt(1, creditUtilisateur);
+
+					ResultSet rs = pstmt.executeQuery();
+
+					while (rs.next()) {
+
+						 credit = rs.getString("credit");
+				
+					} 
+					
+					pstmt.close();
+				
+					
+				} catch (SQLException e) {
+					throw new DALException(e);
+
+				}
+
+				return credit;
+
+				}
+
+	@Override
+	public int VerifMontantEnchere(int idArticle) throws DALException {
+		return idArticle;
+		// TODO Auto-generated method stub
 	
 		@Override
 		public List<Article> selectAchatEnCour(int no_utilisateur) {
@@ -368,6 +401,20 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			return null;
 		}
 		
-		
+	}
 
-}
+	
+	@Override
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD) {
+	
+	}
+
+
+	@Override
+	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	}
+
