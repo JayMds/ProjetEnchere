@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
@@ -148,6 +149,38 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 
 	@Override
 	public Categorie verificationPseudo(String login) throws BusinessException, DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Article> selectAchatEnCour(int no_utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAchatTermines(int no_utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
 		// TODO Auto-generated method stub
 		return null;
 	}
