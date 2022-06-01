@@ -1,5 +1,6 @@
 package fr.eni.encheres.bo;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -135,6 +136,30 @@ public class Article {
 		
 		this.dateFinEnchere = dateFinEnchere;
 	}
+	
+	
+	public String getDiffDate() {
+		Duration diff = Duration.between(LocalDateTime.now(),this.dateFinEnchere);
+		String hms = String.format("%d:%02d", 
+                diff.toHours(), 
+                diff.toMinutesPart());
+		
+		return format(diff);
+	}
+	
+	public static String format(Duration d) {
+	    long days = d.toDays();
+	    d = d.minusDays(days);
+	    long hours = d.toHours();
+	    d = d.minusHours(hours);
+	    long minutes = d.toMinutes();
+	    d = d.minusMinutes(minutes);
+	    long seconds = d.getSeconds() ;
+	    return 
+	            (days ==  0?"":days+" jours,")+ 
+	            (hours == 0?"":hours+" heures");
+	}
+	
 	public int getPrixInitial() {
 		return prixInitial;
 	}

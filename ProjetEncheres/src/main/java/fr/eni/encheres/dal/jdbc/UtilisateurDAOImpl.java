@@ -61,7 +61,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		if (rowsInserted == -1) {
 			throw new DALException("erreur lors de l'insert");
 		}
-		return null;
+		return utilisateurCourant;
 	}
 
 	@Override

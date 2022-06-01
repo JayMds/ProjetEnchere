@@ -57,7 +57,7 @@ public class VerificationArticleManager {
 	}
 	
 	//Verif BDD? non si création simultanée
-	public void validerCategorie(int categorie, int prixInitial ,BusinessException businessException) {
+	public void validerCategorie(int categorie ,BusinessException businessException) {
 		if (categorie == 0) {
 			businessException.ajouterErreur(CodesResultatBLL.ERREUR_CATEGORIE);
 		}

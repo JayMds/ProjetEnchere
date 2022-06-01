@@ -12,9 +12,9 @@ public class RetraitManager {
 	
 	private ObjetsEnchereDAO<Retrait> retraitDAO;
 
-	public void addRetrait(int noArticle, String rue, String codePostal, String ville)  throws DALException, BusinessException {
+	public Retrait addRetrait(int noArticle, String rue, String codePostal, String ville)  throws DALException, BusinessException {
 			Retrait r = new Retrait(noArticle, rue, codePostal, ville);
-			retraitDAO.insert(r);
+			return retraitDAO.insert(r);
 	 }
 	
 	public Retrait selectRetrait(int id) throws DALException, BusinessException {

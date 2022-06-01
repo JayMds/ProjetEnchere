@@ -17,7 +17,7 @@
 
 <div class="containerArticle">
 
-	<img src="asset/imageProduit/<%=article.getNoArticle()%>.jpeg">
+	<img src="asset/img/ImgArticles/Article<%=article.getNoArticle()%>.jpg">
 	
 	<div class="containerInfo">
 		<h2><%=article.getNomArticle() %></h2>
@@ -25,10 +25,12 @@
 		
 		<p><%= article.getDescription() %></p>
 		
-		
+		<%if(article.getEnchere().getEncherisseur().getPseudo()!=null){ %>
 		<p>Meilleur offre : <%= article.getEnchere().getMontant() %> <span>par 	<a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getEnchere().getEncherisseur().getNoUtilisateur()%>"> <%=article.getEnchere().getEncherisseur().getPseudo() %> </a></span> </p>
 		
-	
+		
+		
+		<%} %>
 		<p> Mise à prix :<%= article.getPrixInitial() %></p>
 		
 	
@@ -45,7 +47,7 @@
 		%>
 			<p>Vos crédit disponible : <%= user.getCredit() %></p>
 			<form action="<%=request.getContextPath()%>/article?idArticle=<%=article.getNoArticle() %>" method="post">
-				<input type="number" name="offre" max="<%= user.getCredit()%>" value="<%= article.getEnchere().getMontant() %>">
+				<input type="number" name="offre" max="<%= user.getCredit()%>" min="<%= article.getEnchere().getMontant() %>"value="<%= article.getEnchere().getMontant() %>">
 				<input type="submit" value="Enchérir" >
 			
 			</form>

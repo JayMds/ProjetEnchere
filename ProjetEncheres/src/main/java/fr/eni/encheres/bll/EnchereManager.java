@@ -55,8 +55,9 @@ public class EnchereManager extends VerificationEnchereManager {
 	}
 
 
-	public void addEnchere(Enchere e) throws DALException {
-		this.enchereDAO.insert(e); 
+	public Enchere addEnchere(int idArticle, int montant) throws DALException {
+		Enchere e = new Enchere(idArticle, montant);
+		return this.enchereDAO.insert(e); 
 		
 	}
 	
@@ -68,6 +69,15 @@ public class EnchereManager extends VerificationEnchereManager {
 
 	public void VerifMontantMini(int test2, int montantDeniereEnchere) throws BusinessException {
 		enchereDAO.VerifMontantMinimum(test2,montantDeniereEnchere);
+	public Enchere addEnchere(int idArticle, int montant) throws DALException {
+		Enchere e = new Enchere(idArticle, montant);
+		return this.enchereDAO.insert(e); 
+	public Enchere addEnchere(int idArticle, int montant) throws DALException {
+		Enchere e = new Enchere(idArticle, montant);
+		return this.enchereDAO.insert(e); 
+	public Enchere addEnchere(int idArticle, int montant) throws DALException {
+		Enchere e = new Enchere(idArticle, montant);
+		return this.enchereDAO.insert(e); 
 		
 	}
 
