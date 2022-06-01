@@ -162,8 +162,6 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	}
 
 
-	@Override
-	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
 
 
 	@Override
@@ -239,6 +237,12 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 
 	@Override
 	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

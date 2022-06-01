@@ -178,8 +178,6 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 		
 	}
 
-
-
 	@Override
 	public List<Article> selectAchatEnCour(int no_utilisateur) {
 		// TODO Auto-generated method stub
@@ -212,40 +210,11 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 
 
 
-	@Override
-	public List<Article> selectAchatEnCour(int no_utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Article> selectAchatTermines(int no_utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-		
 
 
 
 }
+
+
+	
+

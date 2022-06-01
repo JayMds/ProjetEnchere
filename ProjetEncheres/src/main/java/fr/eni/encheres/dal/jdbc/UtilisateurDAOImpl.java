@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import fr.eni.encheres.BusinessException;
 
 import fr.eni.encheres.bo.Article;
@@ -329,92 +328,85 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	}
 
 	@Override
-		public List<Utilisateur> selectUnsellArticle() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-
-	@Override
-		public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
-			
-			
-
-				String credit = null;
-
-				try (Connection cnx = ConnectionProvider.getConnection();) {
-					PreparedStatement pstmt = cnx.prepareStatement(selectByIdCredit);
-					pstmt.setInt(1, creditUtilisateur);
-
-					ResultSet rs = pstmt.executeQuery();
-
-					while (rs.next()) {
-
-						 credit = rs.getString("credit");
-				
-					} 
-					
-					pstmt.close();
-				
-					
-				} catch (SQLException e) {
-					throw new DALException(e);
-
-				}
-
-				return credit;
-
-				}
-
-	@Override
-	public int VerifMontantEnchere(int idArticle) throws DALException {
-		return idArticle;
+	public List<Utilisateur> selectUnsellArticle() {
 		// TODO Auto-generated method stub
-	
-		@Override
-		public List<Article> selectAchatEnCour(int no_utilisateur) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public List<Article> selectAchatTermines(int no_utilisateur) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
+		return null;
 	}
 
-	
 	@Override
-	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD) {
-	
+	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
+
+		String credit = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(selectByIdCredit);
+			pstmt.setInt(1, creditUtilisateur);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				credit = rs.getString("credit");
+
+			}
+
+			pstmt.close();
+
+		} catch (SQLException e) {
+			throw new DALException(e);
+
+		}
+
+		return credit;
+
 	}
 
+	@Override
+	public List<Article> selectAchatEnCour(int no_utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAchatTermines(int no_utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD)
+			throws BusinessException {
+		// TODO Auto-generated method stub
+
+	}
 
 	@Override
 	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException {
 		// TODO Auto-generated method stub
-		
-	}
-	
+
 	}
 
+	@Override
+	public int VerifMontantEnchere(int idArticle) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

@@ -107,11 +107,6 @@ public class ServletArticle extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/test.jsp");
 			rd.forward(request, response);	
 		}
-		
-	
-		
-		
-		
 
 	}
 

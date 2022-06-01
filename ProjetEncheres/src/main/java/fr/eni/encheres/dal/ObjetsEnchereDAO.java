@@ -26,49 +26,13 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 
 	public void update(T type, boolean fullOrNot);
 
-
-
-
-
 	public List<Article> selectAchatEnCour(int no_utilisateur);
-
-
 
 	public List<Article> selectAchatTermines(int no_utilisateur);
 
-
-
 	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur);
 
-
-
 	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur);
-
-
-
-	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur);
-}
-	
-	
-
-
-
-
-	public List<Article> selectAchatEnCour(int no_utilisateur);
-
-
-
-	public List<Article> selectAchatTermines(int no_utilisateur);
-
-
-
-	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur);
-
-
-
-	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur);
-
-
 
 	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur);
 
@@ -78,10 +42,6 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 
 	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD) throws BusinessException;
 
-
 	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException;
 
-
-	
-	
 }
