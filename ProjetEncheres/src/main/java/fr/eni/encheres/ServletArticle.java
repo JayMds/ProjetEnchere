@@ -85,12 +85,14 @@ public class ServletArticle extends HttpServlet {
 		Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
 		//BusinessException be = new BusinessException();
 		int test2 = Integer.parseInt(request.getParameter("offre"));
-		int idArticle = Integer.parseInt(request.getParameter("idArticle"));
+		int idArticle = Integer.parseInt(request.getParameter("idarticle"));
+	
 
 		// TODO GESTION EXCEPTION
 
 		try {
 			String creditVerifierBDD = userManager.VerifCreditUtilisateur(user.getNoUtilisateur());
+			System.out.println(idArticle);
 			int montantDeniereEnchere = encheresManager.VerifMontantDerniereEncheres(idArticle);
 			int creditVerifierBDDint = Integer.parseInt(creditVerifierBDD);
 			encheresManager.VerifCreditSuperieurEncheres(montantDeniereEnchere,creditVerifierBDDint);
