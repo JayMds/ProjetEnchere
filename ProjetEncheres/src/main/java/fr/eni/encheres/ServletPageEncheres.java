@@ -186,12 +186,11 @@ public class ServletPageEncheres extends HttpServlet {
 		       
 		   }
 			 
-					
+		//recupération des information complémentaire des articles à afficher			
 		 if(listArticles != null) {
 			 for(Article article : listArticles) {
 					Utilisateur userSell = userManager.selectionnerInformationDiscret(article.getNoVendeur()); 
 					Enchere enchere = enchereManager.selectEnchere(article.getNoArticle()); 
-					//System.out.println(user.getPseudo());
 					article.setNomVendeur(userSell.getPseudo()); 
 					article.setEnchere(enchere); 
 				}

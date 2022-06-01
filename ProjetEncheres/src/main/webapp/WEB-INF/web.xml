@@ -106,6 +106,15 @@
 	<servlet-name>Encheres</servlet-name>
 	<url-pattern>/les-encheres</url-pattern>
 </servlet-mapping>
+
+<servlet>
+	<servlet-name>ModificationEnchere</servlet-name>
+	<servlet-class>fr.eni.encheres.ServletModificationEnchere</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>ModificationEnchere</servlet-name>
+	<url-pattern>/modification-enchere</url-pattern>
+</servlet-mapping>
   
   
   
