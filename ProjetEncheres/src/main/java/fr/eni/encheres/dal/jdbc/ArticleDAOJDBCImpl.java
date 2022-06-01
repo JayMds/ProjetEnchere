@@ -24,7 +24,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	private final String selectAllArticles = "SELECT * from 'ARTICLES'; ";
 	private final String selectByIdArticles = "SELECT `no_article`, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` WHERE `no_article` = ?; ";
 	private final String insertArticle = "INSERT INTO `ARTICLES`(`nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`) VALUES(?, ?, ?, ?, ?, ?, ?,?);";
-	private final String deleteArticle = "DELETE from 'ARTICLES' where no_article = ?;";
+	private final String deleteArticle = "DELETE FROM `ARTICLES` WHERE `no_article` = ?;";
 	private final String selectUnsellByUser = "SELECT ARTICLES.no_article, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` LEFT JOIN `LISTENCHERES` ON ARTICLES.no_article = LISTENCHERES.no_article WHERE LISTENCHERES.no_utilisateur = ? AND no_acheteur is NULL;" ;
 	private final String selectSellByUser = "SELECT ARTICLES.no_article, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` LEFT JOIN `LISTENCHERES` ON ARTICLES.no_article = LISTENCHERES.no_article WHERE LISTENCHERES.no_utilisateur = ? AND no_acheteur is  NOT NULL;" ;
 	

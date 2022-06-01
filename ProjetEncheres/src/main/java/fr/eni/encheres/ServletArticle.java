@@ -53,6 +53,7 @@ public class ServletArticle extends HttpServlet {
 
 			// récupération du meilleur encherisseur
 			Enchere enchere = encheresManager.selectEnchere(idArticle);
+
 			Utilisateur meilleureEncherisseur = userManager.selectionnerInformationDiscret(enchere.getNoUtilisateur());
 			enchere.setEncherisseur(meilleureEncherisseur);
 			article.setEnchere(enchere);
@@ -61,6 +62,7 @@ public class ServletArticle extends HttpServlet {
 
 			// Récupération du vendeur
 			Utilisateur Vendeur = userManager.selectionnerInformationDiscret(article.getNoVendeur());
+
 			article.setVendeur(Vendeur);
 
 			request.setAttribute("article", article);
