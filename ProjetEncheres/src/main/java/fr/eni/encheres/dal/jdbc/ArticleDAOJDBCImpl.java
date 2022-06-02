@@ -34,6 +34,9 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	private final String selectVenteUtilisateurEncour = "SELECT * FROM `ARTICLES` WHERE  no_vendeur = ? AND no_acheteur is NULL;";
 	private final String selectVenteUtilisateurNondebute = "SELECT * FROM `ARTICLES` WHERE no_vendeur = ? AND date_debut_encheres > ? ;";
 	private final String selectVenteUtilisateurTermine = "SELECT * FROM `ARTICLES` WHERE  no_vendeur = ? AND no_acheteur is  NOT NULL;";
+	private final String selectRechercheUser = "SELECT * FROM `ARTICLES` WHERE no_categorie = ? AND MATCH (nom_article, description) AGAINST (? IN NATURAL LANGUAGE MODE)";
+	private final String selectAllRechercheUser = "SELECT * FROM `ARTICLES` WHERE  MATCH (nom_article, description) AGAINST (? IN NATURAL LANGUAGE MODE)";
+
 	//TODO
 	private final String updateArticle = "UPDATE `ARTICLES` SET `nom_article`=?,`description`=?,`date_debut_encheres`=?,`date_fin_encheres`=?,`prix_initial`=?,`prix_vente`=?,`no_vendeur`=?,`no_categorie`=?,`no_acheteur`=? WHERE `no_article` = ?";
 
@@ -296,7 +299,47 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		return articles;
 
 	}
-
+	
+	@Override
+	public List<Article> selectRechercheUser(String recherche, int noCategorie) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectRechercheUser);
+				pstmt.setInt(1, noCategorie);
+				pstmt.setString(2, recherche);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+	}
+	
+	@Override
+	public List<Article> selectAllRechercheUser(String recherche) {
+		List<Article> articles = new ArrayList<>();
+		Article a = null;
+			try(Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pstmt = cnx.prepareStatement(selectAllRechercheUser);
+				pstmt.setString(1, recherche);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					a = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),  rs.getObject("date_debut_encheres", LocalDateTime.class), rs.getObject("date_fin_encheres", LocalDateTime.class), rs.getInt("prix_initial"), rs.getInt("prix_vente") , rs.getInt("no_vendeur"), rs.getInt("no_categorie"), rs.getInt("no_acheteur"));
+					articles.add(a);
+				}
+				pstmt.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return articles;
+	}
 
 	@Override
 	public void verifFinEncheres(Article article) throws BusinessException {
@@ -416,7 +459,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 		
 	}
 		
-	}
+}
 
 
 

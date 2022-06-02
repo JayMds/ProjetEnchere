@@ -13,7 +13,7 @@ import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 //todo manage du DELETE
 
-public class ArticleManager extends  VerificationArticleManager {
+public class ArticleManager extends VerificationArticleManager {
 	
 	private ObjetsEnchereDAO<Article> articleDAO;
 
@@ -33,16 +33,16 @@ public class ArticleManager extends  VerificationArticleManager {
 		this.validerVendeur(vendeur, exception);
 		this.validerCategorie(categorie, exception);
 		
-	//	if (!exception.hasErreurs()) 
-		//{
+		if (!exception.hasErreurs()) 
+		{
 			a = new Article(nom, description, dateDebut, dateFin, prixInit, vendeur, categorie);
 			a = articleDAO.insert(a);
-		//}
+		}
 				
-		/*if (exception.hasErreurs()) 
+		if (exception.hasErreurs()) 
 		{
 			throw exception;
-		}*/
+		}
 		
 		return a; 
 		
@@ -75,14 +75,23 @@ public class ArticleManager extends  VerificationArticleManager {
 			
 		}
 	}
-	
-	
+		
 	public void VerificationSiFinEnchereSuperieurSysDate(Article article) throws DALException, BusinessException {
 		 this.articleDAO.verifFinEncheres(article);
 	}
 		
 		
-		
+
+	
+	
+	public  void deleteArticle(int id) throws DALException {
+		articleDAO.delete(id);
+	}
+	
+	public void updateArticle(Article a) throws DALException {
+		articleDAO.update(a, false);
+	}
+	
 
 	public Enchere recuperationMeilleurEnchere(int idArticle) throws DALException {
 		EnchereManager enchereManager = new EnchereManager(); 
@@ -90,14 +99,18 @@ public class ArticleManager extends  VerificationArticleManager {
 		return enchereManager.selectEnchere(idArticle);
 	}
 	
+	public List<Article> selectRechercheUser(String recherche, int noCategorie) {
+		return this.articleDAO.selectRechercheUser(recherche, noCategorie);
+	}
+	public List<Article> selectAllRechercheUser(String recherche) {
+		return this.articleDAO.selectAllRechercheUser(recherche);
+	}
+	
 	public List<Article> selectAllArticles() throws DALException{
 		return this.articleDAO.selectAllDiscret();
 	}
 	
-	public List<Article> selectArticleEnVente(){
-		return this.articleDAO.selectDateEnCours();
-	}
-	
+
 	public List<Article> selectUnsellArticle(){
 		return this.articleDAO.selectUnsellArticle();
 		
@@ -111,16 +124,6 @@ public class ArticleManager extends  VerificationArticleManager {
 		return this.articleDAO.selectAchatTermines(no_utilisateur);
 	}
 	
-	
-	
-	public  void deleteArticle(int id) throws DALException {
-		articleDAO.delete(id);
-	}
-	
-	public void updateArticle(Article a) throws DALException {
-		articleDAO.update(a, false);
-	}
-
 	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
 		return this.articleDAO.selectVenteUtilisateurEncour(noUtilisateur);
 	}

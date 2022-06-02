@@ -184,10 +184,24 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 	}
 
 	@Override
+
 	public int VerifCreditUtilisateur(int noUtilisateur) throws DALException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public List<Article> selectRechercheUser(String recherche, int noCategorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAllRechercheUser(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 	@Override
 	public int VerifMontantEnchere(int idArticle) throws DALException {

@@ -89,8 +89,7 @@ public class ServletPageEncheres extends HttpServlet {
 		List<Article> listeArticles = new ArrayList<Article>(); 
 		
 		//scenartio pour la selection des achats Utilisateurs
-		if("achat".equals(achatVenteRadio)) {
-			
+		if("achat".equals(achatVenteRadio)) {	
 		
 			
 			String[] enchereCheckBox = request.getParameterValues("enchere");			
@@ -129,13 +128,13 @@ public class ServletPageEncheres extends HttpServlet {
 		
 		CategorieManager catManager = new CategorieManager(); 
 		List<Categorie> listeCategories;
-		try {
-			listeCategories = catManager.selectAllCategrorie();
-			request.setAttribute("Categories", listeCategories); 
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 			
+			try {
+				listeCategories = catManager.selectAllCategrorie();
+				request.setAttribute("Categories", listeCategories); 
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 			
 		
 		
 			request.setAttribute("listeArticle", listeArticles); 

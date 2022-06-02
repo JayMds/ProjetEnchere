@@ -9,6 +9,7 @@
 "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
 
 </head>
+<% Utilisateur newUser = (Utilisateur) request.getAttribute("NewUser"); %>
 <body>
 <%@include file="/WEB-INF/jspf/header.jspf" %>
 <%@include file="/WEB-INF/jspf/affichageErreur.jspf" %>
@@ -18,23 +19,23 @@
 	<div class="container-form">
 	    <div class="input-icons">
 	        <i class="fa fa-user icon"></i>
-	        <input class="input-field roundRadius" type ="text" id="idPseudo" name="pseudo" required="required" placeholder="votre speudo" >
+	        <input class="input-field roundRadius" value="<%= newUser.getPseudo() %>" type ="text" id="idPseudo" name="pseudo" required="required" placeholder="votre pseudo" >
 	    </div>
 	    <div class="input-icons">
 	        <i class="fa fa-user icon"></i>
-	        <input class="input-field roundRadius" type ="text" id="idNom" name="nom" required="required" placeholder="votre nom" >
+	        <input class="input-field roundRadius" value="<%= newUser.getNom() %>" type ="text" id="idNom" name="nom" required="required" placeholder="votre nom" >
 	    </div>	
 	    <div class="input-icons">
 	        <i class="fa fa-user icon"></i>
-	        <input class="input-field roundRadius" type ="text" id="idPrenom" name="prenom" required="required" placeholder="votre prénom" >
+	        <input class="input-field roundRadius"  value="<%= newUser.getPrenom() %>" type ="text" id="idPrenom" name="prenom" required="required" placeholder="votre prénom" >
 	    </div>	
 	    <div class="input-icons">
 	        <i class="fa fa-at icon"></i>
-	        <input class="input-field roundRadius" type ="email" id="idEmail" name="email" required="required" placeholder="votre email" >
+	        <input class="input-field roundRadius"  value="<%= newUser.getEmail() %>" type ="email" id="idEmail" name="email" required="required" placeholder="votre email" >
 	    </div>	
 	    <div class="input-icons">
 	        <i class="fa fa-phone icon"></i> 
-	        <input class="input-field roundRadius" type ="tel" id="idTelephone" name="telephone" required="required" placeholder="votre téléphone" inputmode="tel" pattern="^\+?\d{0,13}" >
+	        <input class="input-field roundRadius" value="<%= newUser.getTelephone() %>" type ="tel" id="idTelephone" name="telephone" required="required" placeholder="votre téléphone" inputmode="tel" pattern="^\+?\d{0,13}" >
 	    </div>	
 	
 	</div>
@@ -42,15 +43,15 @@
 	<div class="container-form">
 	    <div class="input-icons">
 	        <i class="fa fa-map icon"></i> 
-	        <input class="input-field roundRadius" type ="text" id="idRue" name="rue" required="required" placeholder="votre adresse">
+	        <input class="input-field roundRadius" value="<%= newUser.getRue() %>" type ="text" id="idRue" name="rue" required="required" placeholder="votre adresse">
 	    </div>	
 	    <div class="input-icons">
 	        <i class="fa fa-envelope icon"></i>     
-	        <input class="input-field roundRadius" type ="number" id="idCodePostal" name="codePostal" required="required" placeholder="votre code postal" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">
+	        <input class="input-field roundRadius" value="<%= newUser.getCodePostal() %>" type ="number" id="idCodePostal" name="codePostal" required="required" placeholder="votre code postal" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">
 	    </div>	
 	    <div class="input-icons">
 	        <i class="fa fa-map icon"></i>   
-	        <input class="input-field roundRadius" type ="text" id="idVille" name="ville" required="required" placeholder="votre ville" >
+	        <input class="input-field roundRadius" value="<%= newUser.getVille()%>" type ="text" id="idVille" name="ville" required="required" placeholder="votre ville" >
 	    </div>	
 	    <div class="input-icons">
 	        <i class="fa fa-lock icon"></i>   
@@ -79,21 +80,11 @@
 
 </body>
 
-
 <script>
-document.getElementById("idPseudo").setAttribute("value","MonSpeudo");
-document.getElementById("idEmail").setAttribute("value","mail@gmail.com");
-document.getElementById("idNom").setAttribute("value","MonNom");
-document.getElementById("idPrenom").setAttribute("value","MonPrenom");
-document.getElementById("idTelephone").setAttribute("value","0698657485");
-document.getElementById("idRue").setAttribute("value","9 rue du clos");
-document.getElementById("idCodePostal").setAttribute("value","95000");
-document.getElementById("idVille").setAttribute("value","Paris");
-document.getElementById("idMotdePasse").setAttribute("value","123");
-document.getElementById("idConfirmation").setAttribute("value","123");
 
 
 </script>
+
 
 <%@include file="/WEB-INF/jspf/script.jspf" %>
 </html>

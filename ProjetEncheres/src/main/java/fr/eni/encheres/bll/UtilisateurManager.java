@@ -157,7 +157,18 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 		}
 		return utilisateur;
 
+		
+	
 	}
+	
+
+
+	
+	public void deleteUser(int no_utilisateur) throws DALException {
+		this.utilisateurDAO.delete(no_utilisateur);
+	}
+	
+	
 
 	public int VerifCreditUtilisateur(int noUtilisateur) throws DALException {
 		return this.utilisateurDAO.VerifCreditUtilisateur(noUtilisateur);

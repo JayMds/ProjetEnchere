@@ -56,12 +56,26 @@ public class ServletArticle extends HttpServlet {
 			// récupération du meilleur encherisseur
 			Enchere enchere = encheresManager.selectEnchere(idArticle);
 
+			
+			//recuperation du point de retrait
+			
+			Retrait retrait = retraitManager.selectRetrait(idArticle); 
+			
+			if(retrait == null) {
+				retrait.setNoArticle(0);
+				retrait.setRue(" ");
+				retrait.setVille(" ");
+				retrait.setCodePostal(null);
+			}
+			
+			article.setRetrait(retrait); 
+			
+			//récupération des information de l'encherisseur
 			Utilisateur meilleureEncherisseur = userManager.selectionnerInformationDiscret(enchere.getNoUtilisateur());
 			enchere.setEncherisseur(meilleureEncherisseur);
 			article.setEnchere(enchere);
 
-			// recupération du retrait
-
+			
 			// Récupération du vendeur
 			Utilisateur Vendeur = userManager.selectionnerInformationDiscret(article.getNoVendeur());
 

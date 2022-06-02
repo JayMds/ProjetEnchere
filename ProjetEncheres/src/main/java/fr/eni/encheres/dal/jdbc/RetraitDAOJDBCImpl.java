@@ -16,9 +16,11 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
-	private final String insertRetrait = "INSERT INTO `RETRAITS` (`no_article`, `rue`, `code_postal`, `ville`) VALUES(?, ?, ?, ?);";
-	private final String selectByIdRetrait = "SELECT * FROM `retraits` WHERE `no_article` = ?; ";
-	private final String selectAllRetrait = "SELECT * FROM `RETRAITS`; ";
+
+
+	private final String insertRetrait= "INSERT INTO `RETRAITS` (`no_article`, `rue`, `code_postal`, `ville`) VALUES(?, ?, ?, ?);";
+	private final String selectByIdRetrait= "SELECT * FROM `RETRAITS` WHERE `no_article` = ?; ";
+	private final String selectAllRetrait= "SELECT * FROM `RETRAITS`; ";
 	private final String deleteRetrait = "DELETE FROM `RETRAITS` WHERE `no_article` = ?;";
 	private final String updateEnchere = "UPDATE `RETRAITS` SET `no_utilisateur`=?, `date_enchere`=?, `montant_enchere`=? WHERE `no_article`=?";
 
@@ -49,14 +51,16 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(selectByIdRetrait);
 			pstmt.setInt(1, id);
-			pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();
-			if (rs.next()) {
-				e = new Retrait(rs.getInt("no_utilisateur"), rs.getString("rue"), rs.getString("code_postal"),
-						rs.getString("ville"));
-			} else {
+			ResultSet rs = pstmt.executeQuery();;
+			
+			if (rs.next()) 
+			{
+				e = new Retrait(rs.getInt("no_article"), rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
+			}
+			else{
+				
+				throw new DALException("Aucun Article ne correspond à l'id "+ id);
 
-				throw new DALException("Aucun Article ne correspond à l'id " + id);
 			}
 			pstmt.close();
 		} catch (Exception ex) {
@@ -205,6 +209,7 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	}
 
 	@Override
+
 	public void VerifMontantMinimum(int offreUtilisateur, int montantDeniereEnchere) throws BusinessException {
 		// TODO Auto-generated method stub
 		
@@ -234,4 +239,16 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		
 	}
 
+	public List<Article> selectRechercheUser(String recherche, int noCategorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAllRechercheUser(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

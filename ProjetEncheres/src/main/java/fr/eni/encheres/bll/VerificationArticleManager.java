@@ -25,7 +25,7 @@ public class VerificationArticleManager {
 	}
 
 	public void validerDateDebut(LocalDateTime dateDebut, BusinessException businessException) {
-		if (dateDebut.compareTo(LocalDateTime.now()) < 0) {
+		if (dateDebut.getDayOfMonth() != LocalDateTime.now().getDayOfMonth()) {
 			businessException.ajouterErreur(CodesResultatBLL.ERREUR_DATE_JOUR_DEBUT);
 		}
 	}

@@ -11,6 +11,8 @@
     </listener>
   
  
+
+
 <servlet>
 	<servlet-name>PageAccueil</servlet-name>
 	<servlet-class>fr.eni.encheres.ServletPageAccueil</servlet-class>
@@ -105,6 +107,16 @@
 <servlet-mapping>
 	<servlet-name>Encheres</servlet-name>
 	<url-pattern>/les-encheres</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+	<servlet-name>ForgotPassword</servlet-name>
+	<servlet-class>fr.eni.encheres.ForgotPassword</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>ForgotPassword</servlet-name>
+	<url-pattern>/forgotpassword</url-pattern>
 </servlet-mapping>
 
 <servlet>
