@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="fr.eni.encheres.bo.Utilisateur"%>
 <%@page import="fr.eni.encheres.bo.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -42,7 +43,25 @@
                     <p>vendu par <a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getNoVendeur()%>"><%= article.getNomVendeur() %></a> </p>
 
                     <p class="prix">prix : <span> <%= article.getEnchere().getMontant() %>  pts</span></p>
-                    <p class="finEnchère">fin de l'énchère: <span> <%= article.getDiffDate() %></span></p>
+                    
+                    
+                    
+                   
+                    
+                    <% LocalDateTime dateToday = LocalDateTime.now();
+                    	if(dateToday.compareTo(article.getDateDebutEnchere())>0){    %>
+                    	
+                    	 <p class="finEnchère">fin de l'énchère: <span> <%= article.getDiffDate() %></span></p>
+                    	
+                    	<%}else{%>           
+                    	 <p class="finEnchère">Début enchère : <span> <%= article.getSTRDateDebutEnchere()%></span></p>
+                    	
+                    	<% } %>
+                    
+                    
+                    
+                    
+                    
                     <span>fin le <span><%= article.getSTRDateFinEnchere() %></span> </span>
                 </div>
             

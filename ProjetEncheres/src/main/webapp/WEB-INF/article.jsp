@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.LocalTime"%>
 <%@page import="fr.eni.encheres.bo.Retrait"%>
 <%@page import="fr.eni.encheres.bo.Enchere"%>
 <%@page import="fr.eni.encheres.bo.Categorie"%>
@@ -92,24 +94,41 @@
 		<% if(article.getNoAcheteur() == user.getNoUtilisateur()){ %> <p>Téléphone : <%= article.getVendeur().getTelephone() %></p><%} %>
 		<div class="divider"></div>
 		
-		<%if(user != null){	%>
 		
+		
+		<%if(user != null ){%>
+		
+			
 			<% if(user.getNoUtilisateur() != article.getNoVendeur() && article.getNoAcheteur() == 0){ %>
-				<p>Vos crédit disponible : <%= user.getCredit() %></p>
-	
-				<form action="<%=request.getContextPath()%>/article?idarticle=<%=article.getNoArticle() %>" method="post">
-					<input type="number" name="offre" max="<%= user.getCredit()%>" min="<%= article.getEnchere().getMontant() %>" value="<%= article.getEnchere().getMontant() %>">
-					<input class="montserrat600 bg-blue btn roundRadius SB20 H5" type="submit" value="Enchérir" >
-				
-				</form>
-		
+			
+					<% LocalDateTime dateToday = LocalDateTime.now();
+					if(dateToday.compareTo(article.getDateDebutEnchere())>0){%>
+					
+						<p>Vos crédit disponible : <%= user.getCredit() %></p>
+						<form action="<%=request.getContextPath()%>/article?idarticle=<%=article.getNoArticle() %>" method="post">
+							<input type="number" name="offre" max="<%= user.getCredit()%>" min="<%= article.getEnchere().getMontant() %>" value="<%= article.getEnchere().getMontant() %>">
+							<input class="montserrat600 bg-blue btn roundRadius SB20 H5" type="submit" value="Enchérir" >
+					
+						</form>
+					
+					<%}else{ %>
+						<p>l'enchère n'a pas commencé</p>
+						 <p>Début de l'enchère le :<%= article.getSTRDateDebutEnchere() %></p> 
+					<%} %>
+					
+			
 			<%} %>
 		
-		<%}else { %>
 		
-			<p>Connectez vous pouvoir enchérir</p> 
-			
-		<% } %>
+		<%}else{ %>
+		
+			<p>Connectez vous pouvoir enchérir</p>
+		
+		<%} %>
+		
+		
+		
+		
 		
 		
 		<div class="divider"></div>
