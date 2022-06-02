@@ -27,11 +27,11 @@
 	<div class="container-form">
         <div class="maxWidth">
             <div class="input-icons">
-                <i class="fa fa-user icon"></i>
+                
                 <input class="input-field roundRadius" type ="text" id="idNomArticle" name="nomArticle" required="required" placeholder="Nom de votre article" >
             </div>
             <div class="input-icons">
-                <i class="fa fa-user icon"></i>
+                
                 <textarea class="input-field roundRadius" type ="text" id="idDescription" name="description" placeholder="Décrivez votre article en quelques mots" ></textarea>
             </div>	
          </div>
@@ -66,14 +66,14 @@
         
          <div class="input-icons">
          	<label for="idPrix"> Mise à prix </label>
-	        <i class="fa fa-envelope icon"></i>  
+	          
 	        <input class="input-field roundRadius" type ="number" id="idPrix" name="prix" required="required" inputmode="numeric" min="1" value="1">
 	    </div>	
 	    
 	    
 	     <div class="input-icons">
          	<label for="idDebutEncheres"> Début de l'enchère </label>
-	        <i class="fa fa-envelope icon"></i>  
+	         
 	        <input  class="roundRadius" type="datetime-local" id="idDebutEncheres" name="debutEncheres" min="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm"))  %>" value="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))  %>">
 	    
 	    </div>	
@@ -86,7 +86,7 @@
         </div>
 	    <div class="input-icons">
          <label for="idFinEncheres"> Fin de l'enchère </label>
-	        <i class="fa fa-envelope icon"></i>  
+	     
 	          <input class="roundRadius" type="datetime-local" id="idFinEncheres" name="finEncheres" min="<%= LocalDateTime.now() %>" >
 	     
 	    </div>	
@@ -101,7 +101,7 @@
 	
 <div>
            <label for="idPrix"> Rue :</label>
-	        <i class="fa fa-map icon"> </i>	
+	        
 	        <c:choose>	
 	        	<c:when test="${(rue != null)}">		        
 	        <input class="input-field roundRadius" type ="text" id="idRue" name="rue" required="required" value="<c:out value="${rue}"/>">
@@ -116,7 +116,7 @@
 	    </div>	
 	    <div>
            <label for="idPrix"> Code postal :</label>
-	        <i class="fa fa-map icon"> </i>	
+	       
 	        <c:choose>	
 	        	<c:when test="${(code != null)}">
 	        	<input class="input-field roundRadius" value="<c:out value="${code}"/>" type ="number" id="idCodePostal" name="codePostal" required="required" placeholder="votre code postal" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">		        
@@ -133,7 +133,7 @@
         
         <div>
            <label for="idPrix"> Ville :</label>
-	        <i class="fa fa-map icon"> </i>	
+	       	
 	        <c:choose>	
 	        	<c:when test="${(ville != null)}">
 	        	<input class="input-field roundRadius" value="<c:out value="${ville}"/>" type ="text" id="idVille" name="ville" required="required" placeholder="votre code postal">		        

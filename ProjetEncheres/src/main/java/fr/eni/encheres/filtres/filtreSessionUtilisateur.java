@@ -29,6 +29,7 @@ import fr.eni.encheres.bo.Utilisateur;
 								DispatcherType.FORWARD,
 								DispatcherType.ERROR
 							   }
+			
           )
 public class filtreSessionUtilisateur extends HttpFilter implements Filter {
        
@@ -63,18 +64,22 @@ public class filtreSessionUtilisateur extends HttpFilter implements Filter {
 				
 		if(user==null) {
 		
-			System.out.println("user null");
+			//System.out.println("user null");
 			
 			
 			
-			if(checkPage("article", httpRequest) || 
+			if(checkPage("ServletArticle", httpRequest) || 
 					checkPage("vente", httpRequest ) || 
-					checkPage("vente", httpRequest )  ||
+					checkPage("ServletEncherir", httpRequest )  ||
 					checkPage("enchere", httpRequest ) ||
-					checkPage("utilisateur", httpRequest )
+					checkPage("utilisateur", httpRequest )||
+					checkPage("suppression", httpRequest )
+					||
+					checkPage("ServletModificationEnchere", httpRequest )
 					
 					) {
-				response.setCharacterEncoding("UTF-8" );				
+				response.setCharacterEncoding("UTF-8" );	
+				System.out.println("blocage");
 				String message="Vous devez être connecté pour accéder à cette page"; 
 				httpResponse.addCookie( CookieUtils.SetCookie("message", message, 10)  );
 				httpResponse.sendRedirect(httpRequest.getContextPath()+"/connexion"); 
@@ -89,7 +94,7 @@ public class filtreSessionUtilisateur extends HttpFilter implements Filter {
 			
 			
 		}else {
-			System.out.println("utilisateur connecté");
+			//System.out.println("utilisateur connecté");
 			chain.doFilter(request, response);
 		}
 		

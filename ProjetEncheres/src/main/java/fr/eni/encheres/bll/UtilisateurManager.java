@@ -170,6 +170,10 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 	}
 	
 	
+	public void deleteUser(int no_utilisateur) throws DALException {
+		this.utilisateurDAO.delete(no_utilisateur);
+	}
+	
 	
 	
 	

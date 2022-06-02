@@ -21,6 +21,8 @@ public class ServletLogout extends HttpServlet {
 	         newsession.invalidate();
 	    }
 
+	    
+	    
 	   response.sendRedirect(request.getContextPath());
 		
 	}
