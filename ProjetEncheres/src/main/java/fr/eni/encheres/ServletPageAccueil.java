@@ -23,7 +23,7 @@ import fr.eni.encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletPageAccueil
  */
-
+test à supprimer pour commit
 public class ServletPageAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
