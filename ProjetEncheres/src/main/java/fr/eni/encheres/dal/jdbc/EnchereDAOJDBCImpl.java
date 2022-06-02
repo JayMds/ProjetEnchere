@@ -246,4 +246,16 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Article> selectRechercheUser(String recherche, int noCategorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAllRechercheUser(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

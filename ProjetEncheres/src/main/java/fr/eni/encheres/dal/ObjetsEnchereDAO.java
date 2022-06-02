@@ -35,7 +35,11 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur);
 
 	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur);
-
+	
+	public List<Article> selectRechercheUser(String recherche, int noCategorie);
+	
+	public List<Article> selectAllRechercheUser(String recherche);
+	
 	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException;
 
 	public int VerifMontantEnchere(int idArticle) throws DALException;

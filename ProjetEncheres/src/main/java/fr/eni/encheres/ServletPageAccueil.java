@@ -46,9 +46,6 @@ public class ServletPageAccueil extends HttpServlet {
 			
 			List<Article> listeArticle = artManager.selectUnsellArticle();	
 					
-			request.setAttribute("listeArticle", listeArticle); 
-		
-			
 			for(Article article : listeArticle) {
 				Utilisateur user = userManager.selectionnerInformationDiscret(article.getNoVendeur()); 
 				Enchere enchere = enchereManager.selectEnchere(article.getNoArticle()); 
@@ -56,7 +53,7 @@ public class ServletPageAccueil extends HttpServlet {
 				article.setNomVendeur(user.getPseudo()); 
 				article.setEnchere(enchere); 
 			}
-			
+			request.setAttribute("listeArticle", listeArticle);
 			//récupération de l'ensemble des catégorie sur la bdd
 			
 			CategorieManager catManager = new CategorieManager(); 
@@ -71,7 +68,7 @@ public class ServletPageAccueil extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//
+		
 		
 		
 		
@@ -81,8 +78,18 @@ public class ServletPageAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		ArticleManager artManager = new ArticleManager();
+		UtilisateurManager userManager = new UtilisateurManager(); 
+		EnchereManager enchereManager = new EnchereManager(); 
+		String recherche = request.getParameter("recherche");
+		int choixCategorie = Integer.valueOf("choixCategorie");
+		
+		List<Article> listeArticle = artManager.selectRechercheUser(recherche, choixCategorie);	
+		request.setAttribute("listeArticle", listeArticle); 
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+		rd.forward(request, response);
+		
 	}
 
 }
