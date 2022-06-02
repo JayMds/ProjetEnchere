@@ -14,11 +14,11 @@
  	<div class="slogan">
         <h1>Donnez <span>une</span>  seconde vie </br> <span>à vos</span> objets</h1>
     </div>
-    <form>
-        <input  class="roundRadius form-control form-control-lg inputResearch" type="text" name="research" placeholder="Trouvez l'objet de vos envies...">
+    <form name="research" method="post" action="<%=request.getContextPath()%>/ServletRechercheUser">
+        <input  class="roundRadius form-control form-control-lg inputResearch" type="text" name="recherche" placeholder="Trouvez l'objet de vos envies...">
 		<!-- Faire itération à partir des catagorie recupérer sur serveur -->
         <div class="flex-spaceb centered montserrat-normal'">
-            <select class="H5 montserrat-normal custom-select roundRadius SB30 bg-blue">
+            <select class="H5 montserrat-normal custom-select roundRadius SB30 bg-blue" name="choixCategorie">
                 <option selected value="all" > Toutes les Catégories</option>
                 
                 <%
@@ -31,6 +31,7 @@
                 
                 <%
                 }
+               
                 %>
                 
             </select>

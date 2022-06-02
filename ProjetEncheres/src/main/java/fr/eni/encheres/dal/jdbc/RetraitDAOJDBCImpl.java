@@ -209,6 +209,18 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 		
 	}
 
+	@Override
+	public List<Article> selectRechercheUser(String recherche, int noCategorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAllRechercheUser(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }
