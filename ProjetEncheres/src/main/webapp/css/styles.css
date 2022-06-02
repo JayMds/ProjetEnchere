@@ -220,6 +220,12 @@ h2{
       
     }
     
+    .container-btn{
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    }
+    
      .containerArticles{  
 	    max-width: 100vw;
 	    display: flex;
@@ -276,6 +282,12 @@ h2{
         .logo-footer{
                 height: 15vh;
         }
+        
+    .info-utilisateur{
+    
+    margin: auto;
+    width: 200px;
+    }    
 
     .container{
             margin-left: 25px;

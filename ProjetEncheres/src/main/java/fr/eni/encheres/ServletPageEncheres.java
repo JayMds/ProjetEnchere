@@ -84,7 +84,7 @@ public class ServletPageEncheres extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String achatVenteRadio = request.getParameter("achatVente");
-		Utilisateur user=  (Utilisateur) request.getSession(false).getAttribute("connectedUser");; 
+		Utilisateur user=  (Utilisateur) request.getSession(false).getAttribute("connectedUser"); 
 		
 		List<Article> listeArticles = new ArrayList<Article>(); 
 		

@@ -28,8 +28,8 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String selectAllFull = "SELECT pseudo,nom, prenom, email,telephone,rue,codePostal,ville from UTILISATEURS";
 	String SELECT_BY_LOG = "SELECT `no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur` FROM `UTILISATEURS` WHERE `email` = ? And `mot_de_passe`=?";
 	String VERIF_PSEUDO = "SELECT PSEUDO FROM UTILISATEURS WHERE PSEUDO=?";
-	String updateUtilisateur = "UPDATE 'UTILISATEURS' SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=? WHERE no_utilisateur=?";
-	String updateUtilisateurmdp = "UPDATE 'UTILISATEURS' SET mot_de_passe=? WHERE no_utilisateur=?";
+	String updateUtilisateur = "UPDATE `UTILISATEURS` SET `pseudo`=?,`nom`=?,`prenom`=?,`email`=?,`telephone`=?,`rue`=?,`code_postal`=?,`ville`=? WHERE no_utilisateur=?";
+	String updateUtilisateurmdp = "UPDATE `UTILISATEURS` SET `mot_de_passe`=? WHERE no_utilisateur=?";
 
 	@Override
 	public Utilisateur insert(Utilisateur utilisateurCourant) throws DALException {
@@ -289,14 +289,15 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	}
 
 	@Override
-	public void update(Utilisateur utilisateurCourant, boolean infosOrMdp) {
+	public void update(Utilisateur utilisateurCourant, boolean infosOrMdp) throws DALException {
 		int index = 1;
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 
-			if (!infosOrMdp) {
-
+			
+				System.out.println(utilisateurCourant.toString());
 				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateur);
 				pstmt.setString(index++, utilisateurCourant.getPseudo());
+				
 				pstmt.setString(index++, utilisateurCourant.getNom());
 				pstmt.setString(index++, utilisateurCourant.getPrenom());
 				pstmt.setString(index++, utilisateurCourant.getEmail());
@@ -308,16 +309,17 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				int rowsAffected = pstmt.executeUpdate();
 				System.out.println(rowsAffected + " utilisateur modifié");
 				pstmt.close();
-			} else {
-				PreparedStatement pstmt = cnx.prepareStatement(updateUtilisateurmdp);
-				pstmt.setString(index++, utilisateurCourant.getMotDePasse());
-				pstmt.setInt(index++, utilisateurCourant.getNoUtilisateur());
-				int rowsAffected = pstmt.executeUpdate();
-				System.out.println(rowsAffected + " utilisateur modifié");
-				pstmt.close();
+				if (infosOrMdp) {
+					PreparedStatement pstmt1 = cnx.prepareStatement(updateUtilisateurmdp);
+					pstmt1.setString(1, utilisateurCourant.getMotDePasse());
+					pstmt1.setInt(2, utilisateurCourant.getNoUtilisateur());
+					int rowsAffected1 = pstmt1.executeUpdate();
+					System.out.println(rowsAffected1 + " mdp modifié");
+					pstmt1.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 	}
 
