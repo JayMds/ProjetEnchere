@@ -37,7 +37,7 @@ public class ValidateOtp extends HttpServlet {
 			
 				request.setAttribute("email", request.getParameter("email"));
 				request.setAttribute("status", "success");
-			  dispatcher=request.getRequestDispatcher("newPassword.jsp");
+			  dispatcher=request.getRequestDispatcher("/WEB-INF/newPassword.jsp");
 			dispatcher.forward(request, response);
 			
 		}
@@ -45,7 +45,7 @@ public class ValidateOtp extends HttpServlet {
 		{
 			request.setAttribute("message","wrong otp");
 			
-		   dispatcher=request.getRequestDispatcher("EnterOtp.jsp");
+		   dispatcher=request.getRequestDispatcher("/WEB-INF/EnterOtp.jsp");
 			dispatcher.forward(request, response);
 		
 		}

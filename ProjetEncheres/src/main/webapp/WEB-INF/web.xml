@@ -109,7 +109,7 @@
 </servlet>
 <servlet-mapping>
 	<servlet-name>ForgotPassword</servlet-name>
-	<url-pattern>/forgotPassword</url-pattern>
+	<url-pattern>/forgotpassword</url-pattern>
 </servlet-mapping>
 
 <servlet>

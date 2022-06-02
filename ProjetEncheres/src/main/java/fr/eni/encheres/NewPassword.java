@@ -33,17 +33,17 @@ public class NewPassword extends HttpServlet {
 
 			try (Connection cnx = ConnectionProvider.getConnection()){
 				
-				PreparedStatement pst = cnx.prepareStatement("update `utilisateurs` set `mot_de_passe` = ? where `email` = ? ");
+				PreparedStatement pst = cnx.prepareStatement("UPDATE `UTILISATEURS` SET `mot_de_passe` = ? WHERE `email` = ? ");
 				pst.setString(1, newPassword);
 				pst.setString(2, (String) session.getAttribute("email"));
 
 				int rowCount = pst.executeUpdate();
 				if (rowCount > 0) {
 					request.setAttribute("status", "resetSuccess");
-					dispatcher = request.getRequestDispatcher("login.jsp");
+					dispatcher = request.getRequestDispatcher("/connexion");
 				} else {
 					request.setAttribute("status", "resetFailed");
-					dispatcher = request.getRequestDispatcher("login.jsp");
+					dispatcher = request.getRequestDispatcher("/connexion");
 				}
 				dispatcher.forward(request, response);
 			} catch (Exception e) {

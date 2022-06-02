@@ -23,7 +23,23 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class ForgotPassword
  */
 
+
+
 public class ForgotPassword extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	@Override
+		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			
+		RequestDispatcher rd =  req.getRequestDispatcher("/WEB-INF/forgotPassword.jsp");
+		rd.forward(req, resp);
+	}
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String email = request.getParameter("email");
@@ -66,7 +82,7 @@ public class ForgotPassword extends HttpServlet {
 			catch (MessagingException e) {
 				throw new RuntimeException(e);
 			}
-			dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/EnterOtp.jsp");
 			request.setAttribute("message","OTP is sent to your email id");
 			//request.setAttribute("connection", con);
 			mySession.setAttribute("otp",otpvalue); 
