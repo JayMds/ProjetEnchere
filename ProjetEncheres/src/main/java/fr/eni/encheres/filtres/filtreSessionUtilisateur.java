@@ -61,21 +61,24 @@ public class filtreSessionUtilisateur extends HttpFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response; 
 		Utilisateur user = (Utilisateur) httpRequest.getSession().getAttribute("connectedUser");
 		
-				
+	 // System.out.println(httpRequest.getServletPath());
 		if(user==null) {
 		
 			//System.out.println("user null");
+			if (httpRequest.getRequestURI().endsWith(".png")) {
+			    chain.doFilter(request, response);
+			}
+			if (httpRequest.getRequestURI().endsWith(".jpg")) {
+			    chain.doFilter(request, response);
+			}
 			
-			
-			
-			if(checkPage("ServletArticle", httpRequest) || 
+			if(checkPage("servletarticle", httpRequest) || 
 					checkPage("vente", httpRequest ) || 
-					checkPage("ServletEncherir", httpRequest )  ||
-					checkPage("ServletPageEncheres", httpRequest ) ||
+					checkPage("encherir", httpRequest )  ||
+					checkPage("encheres", httpRequest ) ||
 					checkPage("utilisateur", httpRequest )||
-					checkPage("suppression", httpRequest )
-					||
-					checkPage("ServletModificationEnchere", httpRequest )
+					checkPage("suppression", httpRequest )	||
+					checkPage("servletModificationEnchere", httpRequest )
 					
 					) {
 				response.setCharacterEncoding("UTF-8" );	
