@@ -24,7 +24,7 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 
 	public T verificationPseudo(String login) throws BusinessException, DALException;
 
-	public void update(T type, boolean fullOrNot);
+	public void update(T type, boolean fullOrNot) throws DALException;
 
 	public List<Article> selectAchatEnCour(int no_utilisateur);
 

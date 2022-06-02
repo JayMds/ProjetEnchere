@@ -80,7 +80,7 @@
 		
 		
 		<div class="divider"></div>
-		<!-- AFFICHAGE BOUTON DE MOFICIATION D'ARTICLE -->
+		<!-- AFFICHAGE BOUTON DE MODIFICIATION D'ARTICLE -->
 		<% 
 		if(user != null && user.getNoUtilisateur() == article.getNoVendeur()){
 		%>

@@ -51,7 +51,7 @@ public class EnchereManager extends VerificationEnchereManager {
 		this.enchereDAO.delete(id);
 	}
 
-	public void updateEnchere(Enchere e) {
+	public void updateEnchere(Enchere e) throws DALException {
 		this.enchereDAO.update(e, false);
 	}
 

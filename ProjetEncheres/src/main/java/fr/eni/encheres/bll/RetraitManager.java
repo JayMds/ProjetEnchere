@@ -38,7 +38,7 @@ public class RetraitManager {
 		retraitDAO.delete(id);
 	}
 	
-	public void updateRetrait(Retrait r) {
+	public void updateRetrait(Retrait r) throws DALException {
 		retraitDAO.update(r, false);
 	}
 

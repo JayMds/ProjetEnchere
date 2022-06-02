@@ -108,7 +108,7 @@ public class ArticleManager extends  VerificationArticleManager {
 		articleDAO.delete(id);
 	}
 	
-	public void updateArticle(Article a) {
+	public void updateArticle(Article a) throws DALException {
 		articleDAO.update(a, false);
 	}
 
