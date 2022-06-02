@@ -67,7 +67,7 @@
 			<% if(user.getNoUtilisateur() != article.getNoVendeur()){ %>
 			<p>Vos crédit disponible : <%= user.getCredit() %></p>
 
-			<form action="<%=request.getContextPath()%>/article?idarticle=<%=article.getNoArticle() %>" method="post">
+			<form action="<%=request.getContextPath()%>/article?idArticle=<%=article.getNoArticle() %>" method="post">
 				<input type="number" name="offre" max="<%= user.getCredit()%>" min="<%= article.getEnchere().getMontant() %>" value="<%= article.getEnchere().getMontant() %>">
 				<input class="montserrat600 bg-blue btn roundRadius SB20 H5" type="submit" value="Enchérir" >
 			

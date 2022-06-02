@@ -86,9 +86,21 @@ public class Article {
 		
 	}
 	
-	
-
-	
+	public Article(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, int prixInitial, int prixVente, int noVendeur, int noCategorie,
+			int noAcheteur, Categorie catagorie) {
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.noVendeur = noVendeur;
+		this.noCategorie = noCategorie;
+		this.noAcheteur = noAcheteur;
+		this.catagorie = catagorie;
+	}
 
 	public Article(String nomArticle) {
 		super();

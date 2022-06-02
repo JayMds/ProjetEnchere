@@ -6,11 +6,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.bll.CodesResultatBLL;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 import fr.eni.encheres.dal.SelectByDateInterface;
 import fr.eni.encheres.dal.ConnectionProvider;
@@ -35,6 +38,8 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	private final String updateArticle = "UPDATE `ARTICLES` SET `nom_article`=?,`description`=?,`date_debut_encheres`=?,`date_fin_encheres`=?,`prix_initial`=?,`prix_vente`=?,`no_vendeur`=?,`no_categorie`=?,`no_acheteur`=? WHERE `no_article` = ?";
 
 	public final SimpleDateFormat formatDateFR = new SimpleDateFormat("DD/MM/YY");
+	public final LocalTime localTime = LocalTime.now();
+	
 
 	@Override
 	public  Article insert(Article a) {
@@ -175,31 +180,7 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 			}
 		return articles;
 	}
-	
-	@Override
-	public void update(Article a, boolean fullOrNot) {
-		try (Connection cnx = ConnectionProvider.getConnection();) {
-			PreparedStatement pstmt = cnx.prepareStatement(updateArticle);
-			pstmt.setString(1, a.getNomArticle());
-			pstmt.setString(2, a.getDescription());
-			pstmt.setObject(3, a.getDateDebutEnchere());
-			pstmt.setObject(4, a.getDateFinEnchere());
-			pstmt.setInt(5, a.getPrixInitial());
-			pstmt.setInt(6, a.getPrixVente());
-			pstmt.setInt(7, a.getNoVendeur());
-			pstmt.setInt(8, a.getNoCategorie());
-			pstmt.setInt(9, a.getNoAcheteur());
-			pstmt.setInt(10, a.getNoArticle());
-			
-			int rowsInserted = pstmt.executeUpdate();
-			if (rowsInserted > 0) {
-				System.out.println(rowsInserted + " Article mis à jour");
-			}
-			pstmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	@Override
 	public List<Article> selectAchatEnCour(int id) {
@@ -318,9 +299,78 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 
 
 	@Override
-	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
+	public void verifFinEncheres(Article article) throws BusinessException {
+		
+		if(article.getDateFinEnchere().isAfter(LocalDateTime.now())) {
+			
+		}
+		
+		else {
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesResultatBLL.ENCHERE_DEJA_FINI);
+			throw be; 
+		}
+	}
+	
+	
+	@Override
+	public void update(Article a, boolean fullOrNot) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(updateArticle);
+			pstmt.setString(1, a.getNomArticle());
+			pstmt.setString(2, a.getDescription());
+			pstmt.setObject(3, a.getDateDebutEnchere());
+			pstmt.setObject(4, a.getDateFinEnchere());
+			pstmt.setInt(5, a.getPrixInitial());
+			pstmt.setInt(6, a.getPrixVente());
+			pstmt.setInt(7, a.getNoVendeur());
+			pstmt.setInt(8, a.getNoCategorie());
+			pstmt.setInt(9, a.getNoAcheteur());
+			pstmt.setInt(10, a.getNoArticle());
+			
+			int rowsInserted = pstmt.executeUpdate();
+			if (rowsInserted > 0) {
+				System.out.println(rowsInserted + " Article mis à jour");
+			}
+			pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	@Override
+	public Article selectByIdDiscret(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public List<Article> selectAllFull() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Article verificationLogin(String a, String b) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Article verificationPseudo(String login) throws BusinessException, DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int VerifCreditUtilisateur(int noUtilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
@@ -340,34 +390,33 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 
 
 	@Override
-	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException {
+	public void VerifMontantMinimum(int offreUtilisateur, int montantDeniereEnchere) throws BusinessException {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	
 	@Override
-	public Article selectByIdDiscret(int id) throws DALException {
+	public void crediterAncienEncherisseur(int noUtilisateur, int montant) throws DALException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	@Override
-	public List<Article> selectAllFull() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public Article verificationLogin(String a, String b) throws DALException {
+	public void debiterEncherisseur(int noUtilisateur, int credit, int offreUtilisateur) throws DALException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
+
 	@Override
-	public Article verificationPseudo(String login) throws BusinessException, DALException {
+	public void updateLorsDeEncheres(Enchere e) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
-}
+		
+	}
+
+
+

@@ -1,5 +1,6 @@
 package fr.eni.encheres.bll;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -75,6 +76,14 @@ public class ArticleManager extends  VerificationArticleManager {
 		}
 	}
 	
+	
+	public void VerificationSiFinEnchereSuperieurSysDate(Article article) throws DALException, BusinessException {
+		 this.articleDAO.verifFinEncheres(article);
+	}
+		
+		
+		
+
 	public Enchere recuperationMeilleurEnchere(int idArticle) throws DALException {
 		EnchereManager enchereManager = new EnchereManager(); 
 		
@@ -122,6 +131,11 @@ public class ArticleManager extends  VerificationArticleManager {
 
 	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
 		return this.articleDAO.selectVenteUtilisateurTermine(noUtilisateur);
+	}
+
+	public void VerificationFinEnchere(Article a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

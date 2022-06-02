@@ -32,5 +32,6 @@ public class CodesResultatBLL {
 	public static final int ERREUR_DATE_ENCHERE = 20023;
 	public static final int SOLDE_INSUFISSANT = 20024;
 	public static final int ENCHERE_INSUFISSANTE = 20025;
+	public static final int ENCHERE_DEJA_FINI = 20026;
 	
 }

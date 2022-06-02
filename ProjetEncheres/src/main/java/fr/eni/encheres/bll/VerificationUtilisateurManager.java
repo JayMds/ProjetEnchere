@@ -7,7 +7,7 @@ import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 
-public class VerificationUtilisateurManager  {
+public class VerificationUtilisateurManager {
 
 	private static int TAILLE_MINI = 3;
 	private static int TAILLE_MAXI = 30;
@@ -16,36 +16,24 @@ public class VerificationUtilisateurManager  {
 	private static String REGEX_TELEPHONE = "^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$";
 	private static String REGEX_VILLE = "^\\s*[a-zA-Z]{1}[0-9a-zA-Z][0-9a-zA-Z '-.=#/]*$";
 	private static String REGEX_MOT_DE_PASSE = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-	boolean PseudoOK=true;
+	boolean PseudoOK = true;
 
-	
+	protected void validerPseudo(String pseudo, BusinessException businessException)
+			throws BusinessException, DALException {
 
-	protected void validerPseudo(String pseudo, BusinessException businessException) throws BusinessException, DALException {
-		
-		
-		UtilisateurManager userManager = new UtilisateurManager(); 
-		
+		UtilisateurManager userManager = new UtilisateurManager();
+
 		Utilisateur u = new Utilisateur();
-		
+
 		u = userManager.VerificationSiPseudoExistant(pseudo);
-		
-		if(u.getPseudo() == null) {
-			
+
+		if (u.getPseudo() == null) {
+
 		}
-		
+
 		else {
 			businessException.ajouterErreur(CodesResultatBLL.PSEUDO_DEJA_PRIS);
 		}
-		
-	
-		
-		
-			
-			
-		
-		
-		
-		
 
 		if (pseudo.isBlank() ^ pseudo.isEmpty()) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
@@ -144,16 +132,12 @@ public class VerificationUtilisateurManager  {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_VIDE_OU_BLANC);
 		}
 		/**
-		if (!motdepasse.matches(REGEX_MOT_DE_PASSE)) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_MDP);
-		}
-		
-		
-		**/
-		
-		
+		 * if (!motdepasse.matches(REGEX_MOT_DE_PASSE)) {
+		 * businessException.ajouterErreur(CodesResultatBLL.REGLE_MDP); }
+		 * 
+		 * 
+		 **/
+
 	}
-
-
 
 }

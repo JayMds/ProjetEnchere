@@ -1,6 +1,8 @@
 package fr.eni.encheres;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,31 +87,51 @@ public class ServletArticle extends HttpServlet {
 		UtilisateurManager userManager = new UtilisateurManager();
 		EnchereManager encheresManager = new EnchereManager();
 		Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
-		//BusinessException be = new BusinessException();
-		int test2 = Integer.parseInt(request.getParameter("offre"));
-		int idArticle = Integer.parseInt(request.getParameter("idarticle"));
-	
+		ArticleManager artManager = new ArticleManager();
+
+		// BusinessException be = new BusinessException();
+		int offreUtilisateur = Integer.parseInt(request.getParameter("offre"));
+		String idArticleString = request.getParameter("idArticle");
+		int idArticle = Integer.parseInt(idArticleString);
 
 		// TODO GESTION EXCEPTION
 
 		try {
-			String creditVerifierBDD = userManager.VerifCreditUtilisateur(user.getNoUtilisateur());
-			System.out.println(idArticle);
-			int montantDeniereEnchere = encheresManager.VerifMontantDerniereEncheres(idArticle);
-			int creditVerifierBDDint = Integer.parseInt(creditVerifierBDD);
-			encheresManager.VerifCreditSuperieurEncheres(montantDeniereEnchere,creditVerifierBDDint);
-			encheresManager.VerifMontantMini(test2,montantDeniereEnchere);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/test.jsp");
-			rd.forward(request, response);	
 
+			int creditVerifierBDD = userManager.VerifCreditUtilisateur(user.getNoUtilisateur());
+			int montantDeniereEnchere = encheresManager.VerifMontantDerniereEncheres(idArticle);
+			System.out.println(creditVerifierBDD);
+			encheresManager.VerifCreditSuperieurEncheres(montantDeniereEnchere, creditVerifierBDD);
+			encheresManager.VerifMontantMini(offreUtilisateur, montantDeniereEnchere);
+
+			// VERIF ENCHERE EN COURS
+			Article a = artManager.selectArticle(idArticle);
+			artManager.VerificationSiFinEnchereSuperieurSysDate(a);
+
+			// CREDITER L'AVANT DERNIER ENCHERISSEUR
+
+			Enchere e = encheresManager.selectEnchere(idArticle);
+			userManager.crediterAncienEncherisseur(e.getNoUtilisateur(), e.getMontant());
+
+			// DEBITER L'ENCHERISSEUR
+
+			userManager.debiterEncherisseur(user.getNoUtilisateur(), creditVerifierBDD, offreUtilisateur);
+		
+			// METTRE A JOUR TABLE ENCHERE
+
+			Enchere enchereUpdate = new Enchere(user.getNoUtilisateur(), idArticle, LocalDateTime.now(),
+					offreUtilisateur);
+			encheresManager.updateEnchereAchat(enchereUpdate);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/test.jsp");
+			rd.forward(request, response);
 
 		} catch (DALException e) {
 			e.printStackTrace();
 		} catch (BusinessException e) {
-			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/test.jsp");
-			rd.forward(request, response);	
+			rd.forward(request, response);
 		}
 
 	}
