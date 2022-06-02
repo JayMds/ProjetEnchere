@@ -71,7 +71,7 @@ public class filtreSessionUtilisateur extends HttpFilter implements Filter {
 			if(checkPage("ServletArticle", httpRequest) || 
 					checkPage("vente", httpRequest ) || 
 					checkPage("ServletEncherir", httpRequest )  ||
-					checkPage("enchere", httpRequest ) ||
+					checkPage("ServletPageEncheres", httpRequest ) ||
 					checkPage("utilisateur", httpRequest )||
 					checkPage("suppression", httpRequest )
 					||

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.UtilisateurManager;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 
 
@@ -26,8 +27,20 @@ public class ServletInscription extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
-		rd.forward(request, response);
+		
+		String pseudo = "";
+		String nom = "";
+		String prenom = "";
+		String email = "";
+		String motDePasse = "";
+		String confirmation = "";
+		String telephone = "";;
+		String rue = "";
+		String codePostal = "";
+		String ville = "";
+		Utilisateur newUser = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, ville, false);
+		System.out.println(newUser.toString());
+		setUtilisateurAndForward(request, response, newUser);
 	}
 
 	/**
@@ -48,7 +61,7 @@ public class ServletInscription extends HttpServlet {
 		String ville = request.getParameter("ville");
 		
 	
-		
+		Utilisateur newUser = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, ville, false); 
 		UtilisateurManager userManager = new UtilisateurManager(); 
 		List<Integer> listeCodesErreur=new ArrayList<>();
 		
@@ -64,9 +77,7 @@ public class ServletInscription extends HttpServlet {
 		//traitement
 		if(listeCodesErreur.size()>0) {
 			request.setAttribute("listeCodesErreur",listeCodesErreur);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
-			rd.forward(request, response);		
+			setUtilisateurAndForward(request, response, newUser);		
 		}else {
 			
 			try {
@@ -82,14 +93,11 @@ public class ServletInscription extends HttpServlet {
 				
 			} catch (BusinessException e) {
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
-				rd.forward(request, response);	
+				setUtilisateurAndForward(request, response, newUser);	
 				e.printStackTrace();
 				
 			} catch (DALException e) {
-				//request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
-				rd.forward(request, response);	
+				setUtilisateurAndForward(request, response, newUser);	
 				e.printStackTrace();
 			} 
 		}
@@ -97,5 +105,12 @@ public class ServletInscription extends HttpServlet {
 		
 		
 }
+
+	private void setUtilisateurAndForward(HttpServletRequest request, HttpServletResponse response, Utilisateur newUser)
+			throws ServletException, IOException {
+		request.setAttribute("NewUser", newUser); 
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+		rd.forward(request, response);
+	}
 	
 }
