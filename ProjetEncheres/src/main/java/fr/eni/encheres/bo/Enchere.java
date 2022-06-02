@@ -42,7 +42,6 @@ public class Enchere {
 	}
 	public String getSTRDateEnchere() {
 		String date = this.dateEnchere.format(FORMAT);
-		System.out.println(date);
 		return date;
 	}
 	public LocalDateTime getDateEnchere() {

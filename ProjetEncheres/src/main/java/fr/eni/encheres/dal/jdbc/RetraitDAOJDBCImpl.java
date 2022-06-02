@@ -4,24 +4,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
-import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
-	private final String insertRetrait= "insert into 'retraits' (no_article, rue, code_postal, ville) values(?, ?, ?, ?);";
-	private final String selectByIdRetrait= "select * from 'retraits' where no_article = ?; ";
-	private final String selectAllRetrait= "select * from 'retraits'; ";
-	private final String deleteRetrait = "delete from 'retraits' where 'no_article' = ?;";
-	private final String updateEnchere = "UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
+	private final String insertRetrait= "INSERT INTO `RETRAITS` (`no_article`, `rue`, `code_postal`, `ville`) VALUES(?, ?, ?, ?);";
+	private final String selectByIdRetrait= "SELECT * FROM `retraits` WHERE `no_article` = ?; ";
+	private final String selectAllRetrait= "SELECT * FROM `RETRAITS`; ";
+	private final String deleteRetrait = "DELETE FROM `RETRAITS` WHERE `no_article` = ?;";
+	private final String updateEnchere = "UPDATE `RETRAITS` SET `no_utilisateur`=?, `date_enchere`=?, `montant_enchere`=? WHERE `no_article`=?";
 
 	@Override
 	public Retrait insert(Retrait r) throws DALException {
@@ -149,6 +147,66 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	public Retrait verificationPseudo(String login) throws BusinessException, DALException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+
+	@Override
+	public List<Article> selectAchatEnCour(int no_utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAchatTermines(int no_utilisateur) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+
+	public int VerifMontantEnchere(int idArticle) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD)
+			throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+
+	}
+
+	@Override
+	public String VerifCreditUtilisateur(int creditUtilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

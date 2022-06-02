@@ -1,7 +1,6 @@
 package fr.eni.encheres.bll;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.BusinessException;
@@ -95,12 +94,34 @@ public class ArticleManager extends  VerificationArticleManager {
 		
 	}
 	
+	public List<Article> selectAchatEnCour(int no_utilisateur){
+		return this.articleDAO.selectAchatEnCour(no_utilisateur);
+	}
+	
+	public List<Article> selectAchatTermines(int no_utilisateur){
+		return this.articleDAO.selectAchatTermines(no_utilisateur);
+	}
+	
+	
+	
 	public  void deleteArticle(int id) throws DALException {
 		articleDAO.delete(id);
 	}
 	
-	public void updateArticle(Article a) {
+	public void updateArticle(Article a) throws DALException {
 		articleDAO.update(a, false);
+	}
+
+	public List<Article> selectVenteUtilisateurEncour(int noUtilisateur) {
+		return this.articleDAO.selectVenteUtilisateurEncour(noUtilisateur);
+	}
+
+	public List<Article> selectVenteUtilisateurNonDebute(int noUtilisateur) {
+		return this.articleDAO.selectVenteUtilisateurNonDebute(noUtilisateur);
+	}
+
+	public List<Article> selectVenteUtilisateurTermine(int noUtilisateur) {
+		return this.articleDAO.selectVenteUtilisateurTermine(noUtilisateur);
 	}
 
 }

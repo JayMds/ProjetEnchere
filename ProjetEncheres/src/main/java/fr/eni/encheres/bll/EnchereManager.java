@@ -17,9 +17,9 @@ public class EnchereManager extends VerificationEnchereManager {
 	public EnchereManager() {
 		this.enchereDAO = DAOFactory.getEnchereDAO();
 	}
-	
-	
-	public void addEnchere(int idUser, int idArticle, LocalDateTime dateEnchere, int montant) throws DALException, BusinessException {
+
+	public void addEnchere(int idUser, int idArticle, LocalDateTime dateEnchere, int montant)
+			throws DALException, BusinessException {
 		BusinessException exception = new BusinessException();
 		this.validerNoUtilisateur(montant, exception);
 		this.validerNoArticle(idArticle, exception);
@@ -32,28 +32,42 @@ public class EnchereManager extends VerificationEnchereManager {
 		if (exception.hasErreurs()) {
 			throw exception;
 		}
-	 }
-	
+	}
+
+	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD)
+			throws BusinessException {
+		enchereDAO.VerifCreditSuperieurEncheres(montantDeniereEnchere, creditVerifierBDD);
+	}
+
 	public Enchere selectEnchere(int id) throws DALException {
 		return this.enchereDAO.selectByIdFull(id);
 	}
-	
-	public List<Enchere> selectAllEnchere() throws DALException{
+
+	public List<Enchere> selectAllEnchere() throws DALException {
 		return this.enchereDAO.selectAllDiscret();
 	}
-	
+
 	public void deleteEnchere(int id) throws DALException {
 		this.enchereDAO.delete(id);
 	}
-	
-	public void updateEnchere(Enchere e) {
+
+	public void updateEnchere(Enchere e) throws DALException {
 		this.enchereDAO.update(e, false);
 	}
 
-
 	public Enchere addEnchere(int idArticle, int montant) throws DALException {
 		Enchere e = new Enchere(idArticle, montant);
-		return this.enchereDAO.insert(e); 
-		
+		return this.enchereDAO.insert(e);
+
 	}
+
+	public int VerifMontantDerniereEncheres(int idArticle) throws DALException {
+		return enchereDAO.VerifMontantEnchere(idArticle);
+
+	}
+
+	public void VerifMontantMini(int test2, int montantDeniereEnchere) throws BusinessException {
+		enchereDAO.VerifMontantMinimum(test2, montantDeniereEnchere);
+	}
+
 }

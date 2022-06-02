@@ -83,12 +83,93 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 		return this.utilisateurDAO.verificationPseudo(pseudo); 
 	}
 	
-	public void UdpateUtilisateurComplet(Utilisateur utilisateur) throws BusinessException, DALException{
-		this.utilisateurDAO.update(utilisateur, false);
+	public Utilisateur UdpateUtilisateurComplet( int noUtilisateur,String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville) throws BusinessException, DALException{
+		
+		BusinessException businessException = new BusinessException();
+		
+		/**
+		this.validerPseudo(pseudo, businessException);
+		this.validerNom(nom, businessException);
+		this.validerPrenom(prenom, businessException);
+		this.validerEmail(email, businessException);
+		this.validerTelephone(telephone, businessException);
+		this.validerRue(rue, businessException);
+		this.validercodePostal(codePostal, businessException);
+		this.validerVille(ville, businessException);
+		**/
+
+		Utilisateur utilisateur = null;
+
+		if (!businessException.hasErreurs()) {
+			utilisateur = new Utilisateur();
+			utilisateur.setNoUtilisateur(noUtilisateur);
+			utilisateur.setPseudo(pseudo);
+			utilisateur.setNom(nom);
+			utilisateur.setPrenom(prenom);
+			utilisateur.setEmail(email);
+			utilisateur.setTelephone(telephone);
+			utilisateur.setRue(rue);
+			utilisateur.setCodePostal(codePostal);
+			utilisateur.setVille(ville);			
+			System.out.println(utilisateur);
+			this.utilisateurDAO.update(utilisateur, false);
+
+		} else {
+			throw businessException;
+
+		}
+		return utilisateur;
+		
+		
+		
 	}
-	public void UdpateUtilisateurMdp(Utilisateur utilisateur) throws BusinessException, DALException{
-		this.utilisateurDAO.update(utilisateur, true);
+	public Utilisateur UdpateUtilisateurMdp(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse) throws BusinessException, DALException{
+		BusinessException businessException = new BusinessException();
+		
+		/**
+		this.validerPseudo(pseudo, businessException);
+		this.validerNom(nom, businessException);
+		this.validerPrenom(prenom, businessException);
+		this.validerEmail(email, businessException);
+		this.validerTelephone(telephone, businessException);
+		this.validerRue(rue, businessException);
+		this.validercodePostal(codePostal, businessException);
+		this.validerVille(ville, businessException);
+		this.validermotDePasse(motDePasse, businessException);
+**/
+		Utilisateur utilisateur = null;
+
+		if (!businessException.hasErreurs()) {
+			utilisateur = new Utilisateur();
+			utilisateur.setNoUtilisateur(noUtilisateur);
+			utilisateur.setPseudo(pseudo);
+			utilisateur.setNom(nom);
+			utilisateur.setPrenom(prenom);
+			utilisateur.setEmail(email);
+			utilisateur.setTelephone(telephone);
+			utilisateur.setRue(rue);
+			utilisateur.setCodePostal(codePostal);
+			utilisateur.setVille(ville);
+			utilisateur.setMotDePasse(motDePasse);
+
+			this.utilisateurDAO.update(utilisateur, true);
+
+		} else {
+			throw businessException;
+
+		}
+		return utilisateur;
+		
+	
 	}
+	
+	public String VerifCreditUtilisateur (int creditUtilisateur) throws DALException{
+		return this.utilisateurDAO.VerifCreditUtilisateur(creditUtilisateur);
+	}
+	
+	
 	
 	
 	

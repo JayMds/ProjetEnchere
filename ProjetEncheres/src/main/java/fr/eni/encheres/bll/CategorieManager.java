@@ -40,7 +40,7 @@ public class CategorieManager {
 		categorieDAO.delete(id);
 	}
 
-	public void updateCategorie(Categorie c) {
+	public void updateCategorie(Categorie c) throws DALException {
 		categorieDAO.update(c, false);
 	}
 }

@@ -6,15 +6,20 @@ import java.util.List;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.DALException;
+import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class RetraitManager {
 	
 	private ObjetsEnchereDAO<Retrait> retraitDAO;
+	
+	public RetraitManager() {
+		this.retraitDAO = DAOFactory.getRetraitDAO();
+	}
 
-	public void addRetrait(int noArticle, String rue, String codePostal, String ville)  throws DALException, BusinessException {
+	public Retrait addRetrait(int noArticle, String rue, String codePostal, String ville)  throws DALException, BusinessException {
 			Retrait r = new Retrait(noArticle, rue, codePostal, ville);
-			retraitDAO.insert(r);
+			return retraitDAO.insert(r);
 	 }
 	
 	public Retrait selectRetrait(int id) throws DALException, BusinessException {
@@ -33,7 +38,7 @@ public class RetraitManager {
 		retraitDAO.delete(id);
 	}
 	
-	public void updateRetrait(Retrait r) {
+	public void updateRetrait(Retrait r) throws DALException {
 		retraitDAO.update(r, false);
 	}
 
