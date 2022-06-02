@@ -11,12 +11,12 @@
 			if(listeCodesErreur!=null)
 			{
 		%>
-				<p style="color:red;">Une erreur s'est produite :</p>
+				<p class="messageErreur" style="color:red;">Une erreur s'est produite :</p>
 		<%
 				for(int codeErreur:listeCodesErreur)
 				{
 		%>
-					<p><%=LecteurMessage.getMessageErreur(codeErreur)%></p>
+					<p class="messageErreur"><%=LecteurMessage.getMessageErreur(codeErreur)%></p>
 		<%	
 				}
 			}
