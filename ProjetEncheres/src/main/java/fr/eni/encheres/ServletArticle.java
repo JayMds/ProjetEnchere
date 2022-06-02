@@ -38,7 +38,7 @@ public class ServletArticle extends HttpServlet {
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("connectedUser");
 		
 		if(user==null) {
-			String message = "Vous devez tre connecté^pour accéder à cette page ";
+			String message = "Vous devez être connectépour accéder à cette page ";
 			response.setCharacterEncoding("UTF-8" );				
 			response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
 			response.sendRedirect(request.getContextPath()+"/connexion");			

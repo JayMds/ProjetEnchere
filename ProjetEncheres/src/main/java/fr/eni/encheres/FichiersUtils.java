@@ -12,7 +12,10 @@ import fr.eni.encheres.bo.Article;
 
 
 public class FichiersUtils {
-	private final String DOSSIERIMAGE = "D:\\projets-web\\Projets Java\\ProjetEnchere\\ProjetEncheres\\src\\main\\webapp\\asset\\img\\ImgArticles";
+	//private final String DOSSIERIMAGE = "D:\\projets-web\\Projets Java\\ProjetEnchere\\ProjetEncheres\\src\\main\\webapp\\asset\\img\\ImgArticles";
+	private final String DOSSIERIMAGE = "C:\\Users\\aCreativDesign\\git\\ProjetEnchere\\ProjetEncheres\\src\\main\\webapp\\asset\\img\\ImgArticles";
+	
+	
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 	String nomArticle;
@@ -64,7 +67,7 @@ public class FichiersUtils {
 		//Création fichier image "ArticleX.ext"
         String  fileName = new File(imgArticle.getName()).getName();			 //recuperation nom.ext
         String [] split = fileName.split("\\.");						 //séparation
-        System.out.println(split[0]);System.out.println(split[1]);		 //test
+        //System.out.println(split[0]);System.out.println(split[1]);		 //test
        // fileName = "Article"+a.getNoAcheteur()+split[split.length - 1];
         fileName= "Article".concat(String.valueOf(a.getNoArticle())).concat(".").concat(split[split.length - 1]);
         System.out.println(fileName);

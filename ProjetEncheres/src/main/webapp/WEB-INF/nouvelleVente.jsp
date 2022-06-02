@@ -74,7 +74,7 @@
 	     <div class="input-icons">
          	<label for="idDebutEncheres"> Début de l'enchère </label>
 	         
-	        <input  class="roundRadius" type="datetime-local" id="idDebutEncheres" name="debutEncheres" min="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm"))  %>" value="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))  %>">
+	        <input  class="roundRadius" type="datetime-local" id="idDebutEncheres" name="debutEncheres" min="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))  %>" value="<%=  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))  %>">
 	    
 	    </div>	
 	    
