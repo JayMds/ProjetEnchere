@@ -11,6 +11,8 @@
     </listener>
   
  
+
+
 <servlet>
 	<servlet-name>PageAccueil</servlet-name>
 	<servlet-class>fr.eni.encheres.ServletPageAccueil</servlet-class>
