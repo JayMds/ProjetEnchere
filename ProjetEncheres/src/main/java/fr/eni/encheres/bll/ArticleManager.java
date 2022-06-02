@@ -36,12 +36,11 @@ public class ArticleManager extends VerificationArticleManager {
 		{
 			a = new Article(nom, description, dateDebut, dateFin, prixInit, vendeur, categorie);
 			a = articleDAO.insert(a);
-		}
-				
-		if (exception.hasErreurs()) 
-		{
+		}else {
 			throw exception;
 		}
+				
+		
 		
 		return a; 
 		

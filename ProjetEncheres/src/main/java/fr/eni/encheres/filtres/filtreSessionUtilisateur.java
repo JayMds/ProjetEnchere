@@ -83,6 +83,7 @@ public class filtreSessionUtilisateur extends HttpFilter implements Filter {
 					) {
 				response.setCharacterEncoding("UTF-8" );	
 				System.out.println("blocage");
+				response.setCharacterEncoding("UTF-8" );
 				String message="Vous devez être connecté pour accéder à cette page"; 
 				httpResponse.addCookie( CookieUtils.SetCookie("message", message, 10)  );
 				httpResponse.sendRedirect(httpRequest.getContextPath()+"/connexion"); 

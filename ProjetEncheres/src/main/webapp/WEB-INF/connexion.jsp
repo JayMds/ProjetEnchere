@@ -18,7 +18,7 @@ if (CookieUtils.readCookie("message", cookies) != null) {
 			<div style="margin-top: 50px;" class="formConnexion">
 
 	<a class="logo" href="<%= request.getContextPath() %>">
-        <img src="asset/logo/Logo_eni_encheres_bleuFonce.png">
+        <img src="asset/logo/Logo_eni_bleuFonce.png">
     </a>
 
 

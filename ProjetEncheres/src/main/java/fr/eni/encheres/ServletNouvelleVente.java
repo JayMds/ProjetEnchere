@@ -1,5 +1,6 @@
 package fr.eni.encheres;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -68,8 +69,19 @@ public class ServletNouvelleVente extends HttpServlet {
 	//Création des Managers
 		ArticleManager artManager = new ArticleManager(); 
 		RetraitManager retraitManager = new RetraitManager();
-		EnchereManager enchereManager = new EnchereManager();
-	//Inits Outils et variables
+		EnchereManager enchereManager = new EnchereManager();		
+		CategorieManager catManager = new CategorieManager();
+		
+		List<Categorie> listeCategories = null;
+		try {
+			listeCategories = catManager.selectAllCategrorie();
+		} catch (DALException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		request.setAttribute("Categories", listeCategories);
+		
+		//Inits Outils et variables
 		FichiersUtils lecteur = new FichiersUtils();
 	//lecture du formulaire, et valeurs stcockés par FichierUtils ---> récupération via getters	
 		lecteur.lecteurFormulaire(multiparts);
@@ -87,18 +99,24 @@ public class ServletNouvelleVente extends HttpServlet {
 	            String message = "Votre article est maintenant en vente";
 				response.setCharacterEncoding("UTF-8" );				
 				response.addCookie(CookieUtils.SetCookie("message", message, 10));				
-				response.sendRedirect(request.getContextPath());
+				response.sendRedirect(request.getContextPath()+"/article?idArticle="+a.getNoArticle());
 				
 			} catch (DALException e) {
 				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
-				rd.forward(request, response);	
+				System.out.println("soucis sur la dal");
+			    String message = "Une erreur est survenue sur la dal";
+						response.setCharacterEncoding("UTF-8" );				
+							response.addCookie(CookieUtils.SetCookie("message", message, 10));				
+							response.sendRedirect(request.getContextPath());	
 				e.printStackTrace();
 				
 			} catch (BusinessException e1) {
 				request.setAttribute("listeCodesErreur", e1.getListeCodesErreur());
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
-				rd.forward(request, response);	
+				System.out.println("soucis sur la bll");
+				 String message = "Une erreur est survenue sur la bll";
+					response.setCharacterEncoding("UTF-8" );				
+						response.addCookie(CookieUtils.SetCookie("message", message, 10));				
+						response.sendRedirect(request.getContextPath());	
 				e1.printStackTrace();
 			} catch (Exception e1) {
 				e1.printStackTrace();
