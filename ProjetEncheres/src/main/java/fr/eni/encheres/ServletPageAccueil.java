@@ -83,7 +83,7 @@ public class ServletPageAccueil extends HttpServlet {
 		EnchereManager enchereManager = new EnchereManager(); 
 		String recherche = request.getParameter("recherche");
 		int choixCategorie = Integer.valueOf("choixCategorie");
-		
+		System.out.println(choixCategorie);
 		List<Article> listeArticle = artManager.selectRechercheUser(recherche, choixCategorie);	
 		request.setAttribute("listeArticle", listeArticle); 
 		

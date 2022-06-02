@@ -37,6 +37,18 @@ public class ServletArticle extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("connectedUser");
+		
+		if(user==null) {
+			String message = "Vous devez tre connecté^pour accéder à cette page ";
+			response.setCharacterEncoding("UTF-8" );				
+			response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
+			response.sendRedirect(request.getContextPath()+"/connexion");			
+		}
+		
+		
+		
 		ArticleManager artManager = new ArticleManager();
 		CategorieManager catManager = new CategorieManager();
 		EnchereManager encheresManager = new EnchereManager();
@@ -109,13 +121,18 @@ public class ServletArticle extends HttpServlet {
 		try {
 			String creditVerifierBDD = userManager.VerifCreditUtilisateur(user.getNoUtilisateur());
 			System.out.println(idArticle);
+			System.out.println(creditVerifierBDD);
 			int montantDeniereEnchere = encheresManager.VerifMontantDerniereEncheres(idArticle);
+			System.out.println(montantDeniereEnchere);
 			int creditVerifierBDDint = Integer.parseInt(creditVerifierBDD);
 			encheresManager.VerifCreditSuperieurEncheres(montantDeniereEnchere,creditVerifierBDDint);
 			encheresManager.VerifMontantMini(test2,montantDeniereEnchere);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/test.jsp");
-			rd.forward(request, response);	
+			
+			String message = "Votre enchere est sauvegardé";
+			response.setCharacterEncoding("UTF-8" );				
+			response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
+			response.sendRedirect(request.getContextPath()+"/article?idArticle="+idArticle);
 
 
 		} catch (DALException e) {
