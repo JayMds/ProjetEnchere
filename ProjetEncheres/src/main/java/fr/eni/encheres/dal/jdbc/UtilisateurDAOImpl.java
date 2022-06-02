@@ -20,7 +20,7 @@ import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String insert = "INSERT INTO `UTILISATEURS`(`pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	String delete = "DELETE from UTILISATEURS where no_Utilisateur = ?;";
+	String delete = "DELETE FROM `UTILISATEURS` WHERE no_Utilisateur = ?;";
 	String selectByIdFull = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur =?";
 	String selectByIdCredit = "SELECT credit FROM UTILISATEURS WHERE no_utilisateur =?";
 	String selectByIdDiscret = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville,  FROM UTILISATEURS WHERE no_utilisateur =?";
@@ -208,17 +208,19 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			pstmt.executeUpdate();
 			rowsAffected = pstmt.executeUpdate();
 			if (rowsAffected > 0) {
-				System.out.println(rowsAffected + " Article suprimmé");
+				System.out.println(rowsAffected + " Utilisateur suprimmé");
 			}
 			pstmt.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new DALException(e);
 		}
-
+/**
 		if (rowsAffected == 0) {
+			
 			throw new DALException("Erreur lors de la suppression");
 		}
-
+**/
 	}
 
 	public Utilisateur verificationLogin(String login, String motdepasse) throws DALException {

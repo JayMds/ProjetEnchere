@@ -87,8 +87,24 @@ if(user != null && noPageProfil  == user.getNoUtilisateur()){ %>
         <a href="<%=request.getContextPath() %>/utilisateur?id=<%=user.getNoUtilisateur() %>" >Annuler</a>
         <input class="montserrat600 bg-blue btn roundRadius SB30 H5" type="submit" value="Enregistrer les modifications">
     </div>   
+    
+    
+    <div class="groupeBtn" > 
+    	<a id="btnSuppression" href="#"  >Supprimer mon compte</a>
+    <div style="display: none;" id="confirmation">
+    
+    	<div>
+    	<p>Voulez-vous supprimer votre compte?</p>
+    	  <a href="<%=request.getContextPath() %>/suppression-de-compte?id=<%=user.getNoUtilisateur() %>" >oui</a>
+	    	<a id="annulationSuppression" href="#"  >Annuler</a>
+    	
+    	</div>
+	  
+    </div>
+    
+    </div>
         
-        
+     
     
 </form>
     
@@ -97,7 +113,15 @@ if(user != null && noPageProfil  == user.getNoUtilisateur()){ %>
 
 
 <script>
+document.getElementById("btnSuppression").addEventListener("click", affichageSuppression ,false);
+document.getElementById("annulationSuppression").addEventListener("click", annulationSuppression ,false);
+function affichageSuppression(){
+	document.getElementById("confirmation").style.display = "block"; 
+}
 
+function annulationSuppression(){
+	document.getElementById("confirmation").style.display = "none"; 
+}
 
 function affichageFormulaire(){
 	document.getElementById("infoUser").style.display = "none"; 
