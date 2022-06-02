@@ -18,7 +18,7 @@
 	<div class="container-form">
 	    <div class="input-icons">
 	        <i class="fa fa-user icon"></i>
-	        <input class="input-field roundRadius" type ="text" id="idPseudo" name="pseudo" required="required" placeholder="votre speudo" >
+	        <input class="input-field roundRadius" type ="text" id="idPseudo" name="pseudo" required="required" placeholder="votre pseudo" >
 	    </div>
 	    <div class="input-icons">
 	        <i class="fa fa-user icon"></i>
@@ -80,20 +80,6 @@
 </body>
 
 
-<script>
-document.getElementById("idPseudo").setAttribute("value","MonSpeudo");
-document.getElementById("idEmail").setAttribute("value","mail@gmail.com");
-document.getElementById("idNom").setAttribute("value","MonNom");
-document.getElementById("idPrenom").setAttribute("value","MonPrenom");
-document.getElementById("idTelephone").setAttribute("value","0698657485");
-document.getElementById("idRue").setAttribute("value","9 rue du clos");
-document.getElementById("idCodePostal").setAttribute("value","95000");
-document.getElementById("idVille").setAttribute("value","Paris");
-document.getElementById("idMotdePasse").setAttribute("value","123");
-document.getElementById("idConfirmation").setAttribute("value","123");
-
-
-</script>
 
 <%@include file="/WEB-INF/jspf/script.jspf" %>
 </html>

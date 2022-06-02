@@ -60,10 +60,7 @@ public class filtreSessionUtilisateur extends HttpFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response; 
 		Utilisateur user = (Utilisateur) httpRequest.getSession().getAttribute("connectedUser");
 		
-		System.out.println("path :"+httpRequest.getServletPath());
-		
-		System.out.println("URI :" +httpRequest.getRequestURI());
-		
+				
 		if(user==null) {
 		
 			System.out.println("user null");

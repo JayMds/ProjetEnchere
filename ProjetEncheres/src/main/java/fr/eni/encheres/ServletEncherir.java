@@ -16,7 +16,7 @@ import fr.eni.encheres.bo.Utilisateur;
 @WebServlet("/ServletEncherir")
 public class ServletEncherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+     
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

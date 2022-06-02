@@ -4,7 +4,9 @@
     
 <%@page import="fr.eni.encheres.gestionerreurs.LecteurMessage"%>
 <%@page import="java.util.List"%>
-<%
+       
+   
+       <%
 			List<Integer> listeCodesErreur = (List<Integer>) request.getAttribute("listeCodesErreur");
 			if(listeCodesErreur!=null)
 			{
