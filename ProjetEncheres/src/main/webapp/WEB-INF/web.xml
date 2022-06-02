@@ -102,9 +102,14 @@
 	<servlet-name>Encheres</servlet-name>
 	<servlet-class>fr.eni.encheres.ServletPageEncheres</servlet-class>
 </servlet>
+
+<servlet>
+	<servlet-name>ForgotPassword</servlet-name>
+	<servlet-class>fr.eni.encheres.ForgotPassword</servlet-class>
+</servlet>
 <servlet-mapping>
-	<servlet-name>Encheres</servlet-name>
-	<url-pattern>/les-encheres</url-pattern>
+	<servlet-name>ForgotPassword</servlet-name>
+	<url-pattern>/forgotpassword</url-pattern>
 </servlet-mapping>
 
 <servlet>

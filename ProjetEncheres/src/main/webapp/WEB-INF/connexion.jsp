@@ -34,7 +34,7 @@
 
       <div class="divider"></div>
       <a class="link-item" href="<%= request.getContextPath()%>/inscription">Nouveau ici? inscris-toi ici</a>
-      <a  class="link-item" href="#">Mot de passe oublié?</a>
+      <a  class="link-item" href="<%= request.getContextPath()%>/forgotpassword">Mot de passe oublié?</a>
 
 </div>
 
