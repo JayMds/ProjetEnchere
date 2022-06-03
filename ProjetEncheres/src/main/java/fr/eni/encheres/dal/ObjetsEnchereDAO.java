@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
 public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
@@ -47,5 +48,11 @@ public interface ObjetsEnchereDAO<T> extends SelectByDateInterface<T> {
 	public void VerifCreditSuperieurEncheres(int montantDeniereEnchere, int creditVerifierBDD) throws BusinessException;
 
 	public void VerifMontantMinimum(int test2, int montantDeniereEnchere) throws BusinessException;
+
+	public void insertIntoList(Enchere newEnchere);
+
+	public Utilisateur nouveauSolde(Utilisateur encherisseur, int montant) throws DALException;
+
+	
 
 }

@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="org.apache.tomcat.jni.Local"%>
 <%@page import="fr.eni.encheres.bo.Retrait"%>
 <%@page import="fr.eni.encheres.bo.Enchere"%>
 <%@page import="fr.eni.encheres.bo.Categorie"%>
@@ -63,7 +65,7 @@
 			<%}else{ %>
 			
 			<% if(article.getEnchere().getNoUtilisateur() != 0) { %>
-				<span>par <a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getEnchere().getEncherisseur().getNoUtilisateur()%>"> <%=article.getEnchere().getEncherisseur().getPseudo() %> </a></span>
+				<span>par <a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getEnchere().getNoUtilisateur() %>"> <%=article.getEnchere().getEncherisseur().getPseudo() %> </a></span>
 			<%}else{ %>
 		
 				<span>Il n'y a aucune enchère sur cette vente</span>
@@ -92,25 +94,33 @@
 		<% if(article.getNoAcheteur() == user.getNoUtilisateur()){ %> <p>Téléphone : <%= article.getVendeur().getTelephone() %></p><%} %>
 		<div class="divider"></div>
 		
-		<%if(user != null){	%>
-		
+			<%if(user != null ){%>
+
+
 			<% if(user.getNoUtilisateur() != article.getNoVendeur() && article.getNoAcheteur() == 0){ %>
-				<p>Vos crédit disponible : <%= user.getCredit() %></p>
-	
-				<form action="<%=request.getContextPath()%>/article?idarticle=<%=article.getNoArticle() %>" method="post">
-					<input type="number" name="offre" max="<%= user.getCredit()%>" min="<%= article.getEnchere().getMontant() %>" value="<%= article.getEnchere().getMontant() %>">
-					<input class="montserrat600 bg-blue btn roundRadius SB20 H5" type="submit" value="Enchérir" >
+
+					<% LocalDateTime dateToday = LocalDateTime.now();
+					if(dateToday.compareTo(article.getDateDebutEnchere())>0){%>
+
+						<p>Vos crédit disponible : <%= user.getCredit() %></p>
+						<form action="<%=request.getContextPath()%>/article?idarticle=<%=article.getNoArticle() %>" method="post">
+							<input type="number" name="offre" max="<%= user.getCredit()%>" min="<%= article.getEnchere().getMontant() %>" value="<%= article.getEnchere().getMontant() %>">
+							<input class="montserrat600 bg-blue btn roundRadius SB20 H5" type="submit" value="Enchérir" >
+
+						</form>
+
+					<%}else{ %>
+						<p>l'enchère n'a pas commencé</p>
+						 <p>Début de l'enchère le :<%= article.getSTRDateDebutEnchere() %></p> 
+					<%} %>
+					
+				<%} %>
 				
-				</form>
-		
-			<%} %>
-		
-		<%}else { %>
-		
-			<p>Connectez vous pouvoir enchérir</p> 
-			
-		<% } %>
-		
+				<%}else{ %>
+
+			<p>Connectez vous pouvoir enchérir</p>
+
+		<%} %>
 		
 		<div class="divider"></div>
 		<!-- AFFICHAGE BOUTON DE MODIFICIATION D'ARTICLE -->

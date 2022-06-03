@@ -173,6 +173,17 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 	public void deleteUser(int no_utilisateur) throws DALException {
 		this.utilisateurDAO.delete(no_utilisateur);
 	}
+
+	public Utilisateur debiter(Utilisateur encherisseur, int montant) throws DALException {
+		int soldeFinal =Integer.parseInt(encherisseur.getCredit()) - montant ; 
+		return this.utilisateurDAO.nouveauSolde(encherisseur, soldeFinal );
+	}
+
+	public void crediter(Utilisateur utilisateur, int montant) throws DALException {
+		int soldeFinal =Integer.parseInt(utilisateur.getCredit()) + montant ; 
+		this.utilisateurDAO.nouveauSolde(utilisateur, soldeFinal );
+	}
+	
 	
 	
 	

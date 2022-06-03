@@ -10,6 +10,8 @@ import java.util.List;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
@@ -215,6 +217,18 @@ public class CategorieDAOJdbcImpl implements ObjetsEnchereDAO<Categorie> {
 
 	@Override
 	public List<Article> selectAllRechercheUser(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertIntoList(Enchere newEnchere) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Utilisateur nouveauSolde(Utilisateur encherisseur, int montant) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

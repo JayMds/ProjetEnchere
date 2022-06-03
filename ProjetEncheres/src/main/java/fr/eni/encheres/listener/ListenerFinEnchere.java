@@ -45,7 +45,10 @@ public class ListenerFinEnchere implements ServletRequestListener {
         
         for(Article article : listeArticle) {
 			try {
+				
 				artManager.VerificationEtModificationFinEnchere(article, dateDuJour);
+				
+				//TODO crediter vendeur
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

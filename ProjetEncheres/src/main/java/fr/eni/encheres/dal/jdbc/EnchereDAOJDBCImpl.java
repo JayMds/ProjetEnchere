@@ -3,6 +3,7 @@ package fr.eni.encheres.dal.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,17 +16,19 @@ import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.VerificationEnchereManager;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 
 public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	private final String insertEnchere = "INSERT INTO `ENCHERES`(`no_article`, `montant_enchere`) VALUES (?, ?);";
+	private final String insertlistEnchere  = "INSERT INTO `LISTENCHERES`(`no_article`, `montant_enchere`, `no_utilisateur`) VALUES (?,?,?)";
 	private final String selectByIdEnchere = "SELECT `no_utilisateur`, `no_article`, `date_enchere`, `montant_enchere` FROM `ENCHERES` WHERE`no_article` =?; ";
 	private final String selectByIdMontant = "SELECT `montant_enchere` FROM `ENCHERES` WHERE`no_article` =?; ";
 	private final String selectAllEnchere = "SELECT * from 'ENCHERES'; ";
 	private final String deleteEnchere = "DELETE from 'ENCHERES' WHERE no_article = ?;";
-	private final String updateEnchere = "UPDATE 'ENCHERES' SET 'no_utilsateur'=?, 'date_enchere'=?, 'montant_enchere'=? WHERE 'no_article'=?";
+	private final String updateEnchere = "UPDATE `ENCHERES` SET `no_utilisateur`=?,`date_enchere`=?,`montant_enchere`=? WHERE `no_article` = ?; ";
 
 	@Override
 	public Enchere insert(Enchere e) throws DALException {
@@ -108,15 +111,17 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pstmt = cnx.prepareStatement(updateEnchere);
 			pstmt.setInt(1, e.getNoUtilisateur());
+			
 			pstmt.setObject(2, e.getDateEnchere());
 			pstmt.setInt(3, e.getMontant());
 			pstmt.setInt(4, e.getNoArticle());
 			int rowsAffected = pstmt.executeUpdate();
 			if (rowsAffected > 0) {
-				System.out.println(rowsAffected + " Article inséré");
+				System.out.println(rowsAffected + " Enchere effectué");
 			}
 			pstmt.close();
-		} catch (Exception ex) {
+		} catch (SQLException ex) {
+			
 			ex.printStackTrace();
 		}
 	}
@@ -255,6 +260,33 @@ public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 
 	@Override
 	public List<Article> selectAllRechercheUser(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertIntoList(Enchere e) {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			PreparedStatement pstmt = cnx.prepareStatement(insertlistEnchere);
+			pstmt.setInt(1, e.getNoArticle());
+			pstmt.setInt(2, e.getMontant());
+			pstmt.setInt(3, e.getNoUtilisateur());
+
+			int rowsInserted = pstmt.executeUpdate();
+			if (rowsInserted > 0) {
+				System.out.println(rowsInserted + " Article inséré à  la liste");
+			}
+			pstmt.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		
+		
+	}
+
+	@Override
+	public Utilisateur nouveauSolde(Utilisateur encherisseur, int montant) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

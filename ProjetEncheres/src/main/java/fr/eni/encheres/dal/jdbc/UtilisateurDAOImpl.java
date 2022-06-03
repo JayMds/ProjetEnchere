@@ -12,7 +12,7 @@ import java.util.List;
 import fr.eni.encheres.BusinessException;
 
 import fr.eni.encheres.bo.Article;
-
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
@@ -30,7 +30,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 	String VERIF_PSEUDO = "SELECT PSEUDO FROM UTILISATEURS WHERE PSEUDO=?";
 	String updateUtilisateur = "UPDATE `UTILISATEURS` SET `pseudo`=?,`nom`=?,`prenom`=?,`email`=?,`telephone`=?,`rue`=?,`code_postal`=?,`ville`=? WHERE no_utilisateur=?";
 	String updateUtilisateurmdp = "UPDATE `UTILISATEURS` SET `mot_de_passe`=? WHERE no_utilisateur=?";
-
+	String UPDATE_CREDIT = "UPDATE `UTILISATEURS` SET `credit`=? WHERE no_utilisateur=?;";
 	@Override
 	public Utilisateur insert(Utilisateur utilisateurCourant) throws DALException {
 		int rowsInserted = -1;
@@ -88,7 +88,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 				String rue = rs.getString("rue");
 				String codePostal = rs.getString("code_Postal");
 				String ville = rs.getString("ville");
-				String motDePasse = rs.getString("motDePasse");
+				String motDePasse = rs.getString("mot_De_Passe");
 				String credit = rs.getString("credit");
 				Boolean administrateur = rs.getBoolean("administrateur");
 
@@ -426,4 +426,36 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void insertIntoList(Enchere newEnchere) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Utilisateur nouveauSolde(Utilisateur utilisateur, int montant) throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+	
+			
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_CREDIT);
+			pstmt.setInt(1, montant);			
+			pstmt.setInt(2, utilisateur.getNoUtilisateur());
+					
+			int rowsAffected = pstmt.executeUpdate();
+			System.out.println(rowsAffected + " utilisateur modifié");
+			pstmt.close();
+			
+	} catch (Exception e) {
+		e.printStackTrace();
+		
+	}
+		
+		
+		
+		
+		return selectByIdFull(utilisateur.getNoUtilisateur());
+	}
+
+	
 }

@@ -105,9 +105,9 @@ public class ServletNouvelleVente extends HttpServlet {
 				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 				System.out.println("soucis sur la dal");
 			    String message = "Une erreur est survenue sur la dal";
-						response.setCharacterEncoding("UTF-8" );				
-							response.addCookie(CookieUtils.SetCookie("message", message, 10));				
-							response.sendRedirect(request.getContextPath());	
+				response.setCharacterEncoding("UTF-8" );				
+				response.addCookie(CookieUtils.SetCookie("message", message, 10));				
+				response.sendRedirect(request.getContextPath());	
 				e.printStackTrace();
 				
 			} catch (BusinessException e1) {
