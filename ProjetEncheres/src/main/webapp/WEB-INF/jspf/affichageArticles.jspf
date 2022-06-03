@@ -45,6 +45,7 @@
                     <p class="prix">prix : <span> <%= article.getEnchere().getMontant() %>  pts</span></p>
                     
                     
+
                   	   <% LocalDateTime dateToday = LocalDateTime.now();
                     	if(dateToday.compareTo(article.getDateDebutEnchere())>0){    %>
 
@@ -56,6 +57,7 @@
                     	<% } %>
                     
                     
+
                     <span>fin le <span><%= article.getSTRDateFinEnchere() %></span> </span>
                 </div>
             
