@@ -59,7 +59,7 @@ public class ServletProfilUtilisateur extends HttpServlet {
 		Utilisateur userConnected=  (Utilisateur) request.getSession(false).getAttribute("connectedUser"); 
 		
 		int noUtilisateur = userConnected.getNoUtilisateur(); 
-		System.out.println(noUtilisateur);
+	
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -96,10 +96,10 @@ public class ServletProfilUtilisateur extends HttpServlet {
 				Utilisateur userUpdated = null;	
 				
 				if(motDePasse!="") {
-					System.out.println("modification mdp");
+					//on met à jour l'utilisateur et on recupère ses données
 					 userUpdated = userManager.UdpateUtilisateurMdp(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 				}else {
-					System.out.println("mot de passe null");
+					//on met à jour l'utilisateur et on recupère ses données
 					 userUpdated = userManager.UdpateUtilisateurComplet(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
 				}
 				

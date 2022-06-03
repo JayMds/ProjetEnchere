@@ -12,6 +12,7 @@ import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
+import fr.eni.encheres.servlet.BusinessException;
 
 /**
  * Application Lifecycle Listener implementation class ListenerFinEnchere
@@ -41,7 +42,16 @@ public class ListenerFinEnchere implements ServletRequestListener {
     	
     	
         ArticleManager artManager = new ArticleManager(); 
-        List<Article> listeArticle = artManager.selectUnsellArticle();	
+        List<Article> listeArticle = null;
+		try {
+			listeArticle = artManager.selectUnsellArticle();
+		} catch (BusinessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (DALException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
         
         for(Article article : listeArticle) {
 			try {
