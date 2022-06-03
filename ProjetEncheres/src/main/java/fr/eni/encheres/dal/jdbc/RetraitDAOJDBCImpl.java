@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
@@ -15,6 +14,7 @@ import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
+import fr.eni.encheres.servlet.BusinessException;
 
 public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	private final String insertRetrait= "INSERT INTO `RETRAITS` (`no_article`, `rue`, `code_postal`, `ville`) VALUES(?, ?, ?, ?);";

@@ -1,4 +1,4 @@
-package fr.eni.encheres;
+package fr.eni.encheres.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,51 +14,41 @@ import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 
+
 /**
- * Servlet implementation class ServletProfilUtilisateur
+ * Servlet implementation class ServletInscription
  */
 
-public class ServletProfilUtilisateur extends HttpServlet {
+public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-
+ 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		UtilisateurManager userManager = new UtilisateurManager(); 
-	
-		int id = Integer.parseInt(request.getParameter("id") ); 
-		try {
-			Utilisateur user = userManager.selectionnerInformationDiscret(id);
-			request.setAttribute("userProfil", user);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/profil.jsp");
-		rd.forward(request, response);
-		
+		String pseudo = "";
+		String nom = "";
+		String prenom = "";
+		String email = "";
+		String motDePasse = "";
+		String confirmation = "";
+		String telephone = "";;
+		String rue = "";
+		String codePostal = "";
+		String ville = "";
+		Utilisateur newUser = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, ville, false);
+		System.out.println(newUser.toString());
+		setUtilisateurAndForward(request, response, newUser);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		Utilisateur userConnected=  (Utilisateur) request.getSession(false).getAttribute("connectedUser"); 
-		
-		int noUtilisateur = userConnected.getNoUtilisateur(); 
-		System.out.println(noUtilisateur);
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -72,7 +61,7 @@ public class ServletProfilUtilisateur extends HttpServlet {
 		String ville = request.getParameter("ville");
 		
 	
-		
+		Utilisateur newUser = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, ville, false); 
 		UtilisateurManager userManager = new UtilisateurManager(); 
 		List<Integer> listeCodesErreur=new ArrayList<>();
 		
@@ -88,51 +77,40 @@ public class ServletProfilUtilisateur extends HttpServlet {
 		//traitement
 		if(listeCodesErreur.size()>0) {
 			request.setAttribute("listeCodesErreur",listeCodesErreur);
-			setAttributeAndRedirect(request, response, userConnected);	
+			setUtilisateurAndForward(request, response, newUser);		
 		}else {
 			
 			try {
 				
-				Utilisateur userUpdated = null;	
-				
-				if(motDePasse!="") {
-					System.out.println("modification mdp");
-					 userUpdated = userManager.UdpateUtilisateurMdp(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-				}else {
-					System.out.println("mot de passe null");
-					 userUpdated = userManager.UdpateUtilisateurComplet(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville);
-				}
-				
-				request.getSession().setAttribute("connectedUser", userUpdated);
-				
-				
-				String message = "Votre profil a été modifié";
+				userManager.ajouterutilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+				//création du cookie pour l'affichage du message
+				//TODO création methode et fichier proprietes 
+				String message = "Votre inscription est réussie, bienvenue parmis nous.";
 				response.setCharacterEncoding("UTF-8" );				
 				response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
-				
-				setAttributeAndRedirect(request, response, userUpdated);
-				
-				
+				response.sendRedirect(request.getContextPath());
 				
 				
 			} catch (BusinessException e) {
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-				setAttributeAndRedirect(request, response, userConnected);
+				setUtilisateurAndForward(request, response, newUser);	
 				e.printStackTrace();
 				
 			} catch (DALException e) {
-				setAttributeAndRedirect(request, response, userConnected);
+				setUtilisateurAndForward(request, response, newUser);	
 				e.printStackTrace();
 			} 
 		}
 		
 		
-	}
+		
+}
 
-	private void setAttributeAndRedirect(HttpServletRequest request, HttpServletResponse response,
-			Utilisateur userUpdated) throws IOException {
-			request.setAttribute("userProfil", userUpdated);
-			response.sendRedirect(request.getContextPath()+"/utilisateur?id="+userUpdated.getNoUtilisateur());
+	private void setUtilisateurAndForward(HttpServletRequest request, HttpServletResponse response, Utilisateur newUser)
+			throws ServletException, IOException {
+		request.setAttribute("NewUser", newUser); 
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+		rd.forward(request, response);
 	}
-
+	
 }

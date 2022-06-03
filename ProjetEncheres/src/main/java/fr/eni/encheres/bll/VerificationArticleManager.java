@@ -2,7 +2,7 @@ package fr.eni.encheres.bll;
 
 import java.time.LocalDateTime;
 
-import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.servlet.BusinessException;
 
 public class VerificationArticleManager {
 	

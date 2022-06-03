@@ -3,12 +3,12 @@ package fr.eni.encheres.bll;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
+import fr.eni.encheres.servlet.BusinessException;
 
 //todo manage du DELETE
 

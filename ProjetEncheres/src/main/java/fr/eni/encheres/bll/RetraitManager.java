@@ -3,11 +3,11 @@ package fr.eni.encheres.bll;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
+import fr.eni.encheres.servlet.BusinessException;
 
 public class RetraitManager {
 	

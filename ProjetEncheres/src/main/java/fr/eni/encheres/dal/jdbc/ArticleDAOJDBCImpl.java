@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 import fr.eni.encheres.dal.SelectByDateInterface;
+import fr.eni.encheres.servlet.BusinessException;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 

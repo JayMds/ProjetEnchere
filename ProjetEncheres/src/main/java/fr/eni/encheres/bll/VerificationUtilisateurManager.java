@@ -3,9 +3,9 @@ package fr.eni.encheres.bll;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
+import fr.eni.encheres.servlet.BusinessException;
 
 public class VerificationUtilisateurManager  {
 

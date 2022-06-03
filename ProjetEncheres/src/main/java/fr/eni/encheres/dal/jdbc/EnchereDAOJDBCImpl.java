@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
-
 import fr.eni.encheres.bll.CodesResultatBLL;
 import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.VerificationEnchereManager;
@@ -20,6 +18,7 @@ import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
+import fr.eni.encheres.servlet.BusinessException;
 
 public class EnchereDAOJDBCImpl implements ObjetsEnchereDAO<Enchere> {
 	private final String insertEnchere = "INSERT INTO `ENCHERES`(`no_article`, `montant_enchere`) VALUES (?, ?);";
