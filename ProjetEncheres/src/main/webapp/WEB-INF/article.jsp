@@ -28,14 +28,16 @@
 	
 	    <% if(article.getNoAcheteur() == user.getNoUtilisateur()){%>
 	    
-	    <h3>Vous avez remportez l'enchère</h3>   
+	    	<h3>Vous avez remportez l'enchère</h3>   
 	    
 	    <%}else{%>
 	    
 	      <% if(article.getNoAcheteur() != 0){%>
 	      <h3> <a href="<%= request.getContextPath() %>/utilisateur?id=<%= article.getEnchere().getEncherisseur().getNoUtilisateur()%>"> <%=article.getEnchere().getEncherisseur().getPseudo() %> </a>à remporté l'enchère</h3>
 	    
-	    <%}} %>
+	    <%}
+	      
+	    } %>
 	    
 	    
 	
@@ -118,9 +120,9 @@
 				
 				<%}else{ %>
 
-			<p>Connectez vous pouvoir enchérir</p>
+					<p>Connectez vous pouvoir enchérir</p>
 
-		<%} %>
+				<%} %>
 		
 		<div class="divider"></div>
 		<!-- AFFICHAGE BOUTON DE MODIFICIATION D'ARTICLE -->

@@ -100,7 +100,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 			throw new DALException(e);
 
 		}
-
+		UtilisateurCourant.setNoUtilisateur(no_utilisateur);
 		return UtilisateurCourant;
 
 	}
@@ -452,7 +452,7 @@ public class UtilisateurDAOImpl implements ObjetsEnchereDAO<Utilisateur> {
 		
 		
 		
-		
+	
 		return selectByIdFull(utilisateur.getNoUtilisateur());
 	}
 

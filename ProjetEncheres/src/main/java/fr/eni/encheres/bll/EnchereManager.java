@@ -83,7 +83,7 @@ public class EnchereManager extends VerificationEnchereManager {
 		
 		
 		Article article = artManager.selectArticle(idArticle); 
-		//System.out.println("no encherisseur:"+encherisseur.getNoUtilisateur());
+		System.out.println(article.getNoAcheteur());
 		String creditVerifierBDD = userManager.VerifCreditUtilisateur(encherisseur.getNoUtilisateur()); //recupération des crédit utlisateur
 		int creditUtilisateur = Integer.parseInt(creditVerifierBDD);
 		

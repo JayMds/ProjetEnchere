@@ -118,6 +118,8 @@ public class ServletArticle extends HttpServlet {
 		try {
 			
 			 Utilisateur userUpdated = encheresManager.validationOperationEncherir(idArticle, 	user , offre);
+			 System.out.println(user.getNoUtilisateur());
+			 System.out.println(userUpdated.getNoUtilisateur());
 			 
 			 //mise a jour de la session utilisateur
 			 request.getSession().setAttribute("connectedUser", userUpdated);
