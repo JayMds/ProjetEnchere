@@ -1,4 +1,4 @@
-package fr.eni.encheres;
+package fr.eni.encheres.servlet;
 
 public abstract class CodeResultatServlet {
 	/**

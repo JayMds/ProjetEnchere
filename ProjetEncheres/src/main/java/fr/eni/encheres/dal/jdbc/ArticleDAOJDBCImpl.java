@@ -9,10 +9,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
 import fr.eni.encheres.dal.SelectByDateInterface;
+import fr.eni.encheres.servlet.BusinessException;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 
@@ -25,8 +27,8 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 	private final String selectByIdArticles = "SELECT `no_article`, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` WHERE `no_article` = ?; ";
 	private final String insertArticle = "INSERT INTO `ARTICLES`(`nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`) VALUES(?, ?, ?, ?, ?, ?, ?,?);";
 	private final String deleteArticle = "DELETE FROM `ARTICLES` WHERE `no_article` = ?;";
-	private final String selectUnsellByUser = "SELECT ARTICLES.no_article, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` LEFT JOIN `LISTENCHERES` ON ARTICLES.no_article = LISTENCHERES.no_article WHERE LISTENCHERES.no_utilisateur = ? AND no_acheteur is NULL;" ;
-	private final String selectSellByUser = "SELECT ARTICLES.no_article, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` LEFT JOIN `LISTENCHERES` ON ARTICLES.no_article = LISTENCHERES.no_article WHERE LISTENCHERES.no_utilisateur = ? AND no_acheteur is  NOT NULL;" ;
+	private final String selectUnsellByUser = "SELECT DISTINCT ARTICLES.no_article, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` LEFT JOIN `LISTENCHERES` ON ARTICLES.no_article = LISTENCHERES.no_article WHERE LISTENCHERES.no_utilisateur = ? AND no_acheteur is NULL;" ;
+	private final String selectSellByUser = "SELECT DISTINCT ARTICLES.no_article, `nom_article`, `description`, `date_debut_encheres`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_vendeur`, `no_categorie`, `no_acheteur` FROM `ARTICLES` LEFT JOIN `LISTENCHERES` ON ARTICLES.no_article = LISTENCHERES.no_article WHERE LISTENCHERES.no_utilisateur = ? AND no_acheteur is  NOT NULL;" ;
 	
 	private final String selectVenteUtilisateurEncour = "SELECT * FROM `ARTICLES` WHERE  no_vendeur = ? AND no_acheteur is NULL;";
 	private final String selectVenteUtilisateurNondebute = "SELECT * FROM `ARTICLES` WHERE no_vendeur = ? AND date_debut_encheres > ? ;";
@@ -410,6 +412,20 @@ public class ArticleDAOJDBCImpl implements ObjetsEnchereDAO<Article>, SelectByDa
 
 	@Override
 	public Article verificationPseudo(String login) throws BusinessException, DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void insertIntoList(Enchere newEnchere) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Utilisateur nouveauSolde(Utilisateur encherisseur, int montant) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

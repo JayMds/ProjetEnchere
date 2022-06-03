@@ -64,4 +64,12 @@ public class Enchere {
 	public void setEncherisseur(Utilisateur encherisseur) {
 		this.encherisseur = encherisseur;
 	}
+
+	@Override
+	public String toString() {
+		return "Enchere [noUtilisateur=" + noUtilisateur + ", noArticle=" + noArticle + ", dateEnchere=" + dateEnchere
+				+ ", montant=" + montant + ", encherisseur=" + encherisseur + ", FORMAT=" + FORMAT + "]";
+	}
+	
+	
 }

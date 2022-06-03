@@ -7,12 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ConnectionProvider;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
+import fr.eni.encheres.servlet.BusinessException;
 
 public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 	private final String insertRetrait= "INSERT INTO `RETRAITS` (`no_article`, `rue`, `code_postal`, `ville`) VALUES(?, ?, ?, ?);";
@@ -217,6 +219,18 @@ public class RetraitDAOJDBCImpl implements ObjetsEnchereDAO<Retrait> {
 
 	@Override
 	public List<Article> selectAllRechercheUser(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertIntoList(Enchere newEnchere) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Utilisateur nouveauSolde(Utilisateur encherisseur, int montant) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

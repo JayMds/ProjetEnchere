@@ -1,4 +1,4 @@
-package fr.eni.encheres;
+package fr.eni.encheres.servlet;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package fr.eni.encheres;
+package fr.eni.encheres.servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,49 +42,42 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		CategorieManager catManager = new CategorieManager(); 
-		List<Categorie> listeCategories;
+		
 		try {
-			listeCategories = catManager.selectAllCategrorie();
-			request.setAttribute("Categories", listeCategories); 
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
-			rd.forward(request, response);
+			ServletUtils.selectAndSetAttributeCategorie(request);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 			
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//Récuperation User Courant
+		//Création des Managers
+		ArticleManager artManager = new ArticleManager(); 
+		RetraitManager retraitManager = new RetraitManager();
+		EnchereManager enchereManager = new EnchereManager();		
+		
+		
+		//Récuperation User Courant
 		Utilisateur vendeur = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
-	//Conversion request ---> Multipart TODO RESTE A REGLER LIMTE TAILLE FICHIER ET FORMAT OU CONVERSION EN JPG (PAS TROP COMPLIQUé) reorga exception
+		
+		//Conversion request ---> Multipart TODO RESTE A REGLER LIMTE TAILLE FICHIER ET FORMAT OU CONVERSION EN JPG (PAS TROP COMPLIQUé) reorga exception
 		FileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("UTF-8");
 		List<FileItem> multiparts = upload.parseRequest(new ServletRequestContext(request));
-	//Création des Managers
-		ArticleManager artManager = new ArticleManager(); 
-		RetraitManager retraitManager = new RetraitManager();
-		EnchereManager enchereManager = new EnchereManager();		
-		CategorieManager catManager = new CategorieManager();
 		
-		List<Categorie> listeCategories = null;
-		try {
-			listeCategories = catManager.selectAllCategrorie();
-		} catch (DALException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		request.setAttribute("Categories", listeCategories);
 		
 		//Inits Outils et variables
 		FichiersUtils lecteur = new FichiersUtils();
-	//lecture du formulaire, et valeurs stcockés par FichierUtils ---> récupération via getters	
+		
+	    //lecture du formulaire, et valeurs stcockés par FichierUtils ---> récupération via getters	
 		lecteur.lecteurFormulaire(multiparts);
+		
 		//création + insert d'un nouvel article
 			try {
 				Article a = artManager.addArticle(lecteur.getNomArticle(), lecteur.getDescription(), lecteur.dateDebutEncheres, lecteur.dateFinEncheres, lecteur.getPrixInit() , vendeur.getNoUtilisateur(), lecteur.getCategorie());
@@ -96,23 +89,32 @@ public class ServletNouvelleVente extends HttpServlet {
 				a.setRetrait(r);
 				
 				lecteur.createurImgArticle(a);
+				
+				try {
+					ServletUtils.selectAndSetAttributeCategorie(request);
+				} catch (DALException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
 	            String message = "Votre article est maintenant en vente";
 				response.setCharacterEncoding("UTF-8" );				
-				response.addCookie(CookieUtils.SetCookie("message", message, 10));				
+				response.addCookie(CookieUtils.SetCookie("message", message, 10));
+
+				
 				response.sendRedirect(request.getContextPath()+"/article?idArticle="+a.getNoArticle());
 				
 			} catch (DALException e) {
 				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
-				System.out.println("soucis sur la dal");
-			    String message = "Une erreur est survenue sur la dal";
-						response.setCharacterEncoding("UTF-8" );				
-							response.addCookie(CookieUtils.SetCookie("message", message, 10));				
-							response.sendRedirect(request.getContextPath());	
+				
+			    
+					
+				response.sendRedirect(request.getContextPath());	
 				e.printStackTrace();
 				
 			} catch (BusinessException e1) {
 				request.setAttribute("listeCodesErreur", e1.getListeCodesErreur());
-				System.out.println("soucis sur la bll");
+				
 				 String message = "Une erreur est survenue sur la bll";
 					response.setCharacterEncoding("UTF-8" );				
 						response.addCookie(CookieUtils.SetCookie("message", message, 10));				

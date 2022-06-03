@@ -1,4 +1,4 @@
-package fr.eni.encheres;
+package fr.eni.encheres.servlet;
 
 import java.io.IOException;
 
@@ -38,7 +38,7 @@ public class ServletArticle extends HttpServlet {
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("connectedUser");
 		
 		if(user==null) {
-			String message = "Vous devez être connectépour accéder à cette page ";
+			String message = "Vous devez être connecté pour accéder à cette page ";
 			response.setCharacterEncoding("UTF-8" );				
 			response.addCookie( CookieUtils.SetCookie("message", message, 10)  );				
 			response.sendRedirect(request.getContextPath()+"/connexion");			
@@ -105,26 +105,24 @@ public class ServletArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		UtilisateurManager userManager = new UtilisateurManager();
+		
 		EnchereManager encheresManager = new EnchereManager();
 		Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("connectedUser");
 		//BusinessException be = new BusinessException();
-		int test2 = Integer.parseInt(request.getParameter("offre"));
+		int offre = Integer.parseInt(request.getParameter("offre"));
 		int idArticle = Integer.parseInt(request.getParameter("idarticle"));
 	
 
 		// TODO GESTION EXCEPTION
 
 		try {
-			String creditVerifierBDD = userManager.VerifCreditUtilisateur(user.getNoUtilisateur());
-			System.out.println(idArticle);
-			System.out.println(creditVerifierBDD);
-			int montantDeniereEnchere = encheresManager.VerifMontantDerniereEncheres(idArticle);
-			System.out.println(montantDeniereEnchere);
-			int creditVerifierBDDint = Integer.parseInt(creditVerifierBDD);
-			encheresManager.VerifCreditSuperieurEncheres(montantDeniereEnchere,creditVerifierBDDint);
-			encheresManager.VerifMontantMini(test2,montantDeniereEnchere);
 			
+			 Utilisateur userUpdated = encheresManager.validationOperationEncherir(idArticle, 	user , offre);
+			 System.out.println(user.getNoUtilisateur());
+			 System.out.println(userUpdated.getNoUtilisateur());
+			 
+			 //mise a jour de la session utilisateur
+			 request.getSession().setAttribute("connectedUser", userUpdated);
 			
 			String message = "Votre enchere est sauvegardé";
 			response.setCharacterEncoding("UTF-8" );				

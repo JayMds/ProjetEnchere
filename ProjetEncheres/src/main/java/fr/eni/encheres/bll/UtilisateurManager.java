@@ -2,11 +2,11 @@ package fr.eni.encheres.bll;
 
 import java.util.List;
 
-import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.ObjetsEnchereDAO;
+import fr.eni.encheres.servlet.BusinessException;
 
 public class UtilisateurManager extends VerificationUtilisateurManager {
 
@@ -173,6 +173,17 @@ public class UtilisateurManager extends VerificationUtilisateurManager {
 	public void deleteUser(int no_utilisateur) throws DALException {
 		this.utilisateurDAO.delete(no_utilisateur);
 	}
+
+	public Utilisateur debiter(Utilisateur encherisseur, int montant) throws DALException {
+		int soldeFinal =Integer.parseInt(encherisseur.getCredit()) - montant ; 
+		return this.utilisateurDAO.nouveauSolde(encherisseur, soldeFinal );
+	}
+
+	public void crediter(Utilisateur utilisateur, int montant) throws DALException {
+		int soldeFinal =Integer.parseInt(utilisateur.getCredit()) + montant ; 
+		this.utilisateurDAO.nouveauSolde(utilisateur, soldeFinal );
+	}
+	
 	
 	
 	

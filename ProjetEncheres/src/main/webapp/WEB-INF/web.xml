@@ -7,7 +7,7 @@
  	  <welcome-file>PageAccueil</welcome-file>  
   </welcome-file-list>
    <listener>
-        <listener-class>fr.eni.encheres.ListenerFinEnchere</listener-class>
+        <listener-class>fr.eni.encheres.servlet.ListenerFinEnchere</listener-class>
     </listener>
   
  
@@ -15,7 +15,7 @@
 
 <servlet>
 	<servlet-name>PageAccueil</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletPageAccueil</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletPageAccueil</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>PageAccueil</servlet-name>
@@ -25,7 +25,7 @@
   
 <servlet>
 	<servlet-name>Inscription</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletInscription</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletInscription</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>Inscription</servlet-name>
@@ -34,7 +34,7 @@
  
 <servlet>
 	<servlet-name>Connexion</servlet-name>
-	<servlet-class>fr.eni.encheres.Login</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.Login</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>Connexion</servlet-name>
@@ -44,7 +44,7 @@
 
 <servlet>
 	<servlet-name>Utilisateur</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletProfilUtilisateur</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletProfilUtilisateur</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>Utilisateur</servlet-name>
@@ -54,7 +54,7 @@
 
 <servlet>
 	<servlet-name>Article</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletArticle</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletArticle</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>Article</servlet-name>
@@ -65,7 +65,7 @@
 
 <servlet>
 	<servlet-name>Logout</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletLogout</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletLogout</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>Logout</servlet-name>
@@ -77,7 +77,7 @@
 
 <servlet>
 	<servlet-name>NouvelleVente</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletNouvelleVente</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletNouvelleVente</servlet-class>
 	<multipart-config>
             <location>"/Users/jean-/tmp"</location> <!-- A adapter chez vous -->
             <max-file-size>10485760</max-file-size> <!-- 10 Mo -->
@@ -92,7 +92,7 @@
 
 <servlet>
 	<servlet-name>Encherir</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletEncherir</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletEncherir</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>Encherir</servlet-name>
@@ -102,7 +102,7 @@
 
 <servlet>
 	<servlet-name>Encheres</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletPageEncheres</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletPageEncheres</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>Encheres</servlet-name>
@@ -112,7 +112,7 @@
 
 <servlet>
 	<servlet-name>ForgotPassword</servlet-name>
-	<servlet-class>fr.eni.encheres.ForgotPassword</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ForgotPassword</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>ForgotPassword</servlet-name>
@@ -121,7 +121,7 @@
 
 <servlet>
 	<servlet-name>ModificationEnchere</servlet-name>
-	<servlet-class>fr.eni.encheres.ServletModificationEnchere</servlet-class>
+	<servlet-class>fr.eni.encheres.servlet.ServletModificationEnchere</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>ModificationEnchere</servlet-name>

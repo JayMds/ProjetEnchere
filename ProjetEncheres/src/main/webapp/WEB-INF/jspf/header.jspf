@@ -1,5 +1,5 @@
 <%@page import="fr.eni.encheres.bo.Utilisateur"%>
-<%@page import="fr.eni.encheres.CookieUtils"%>
+<%@page import="fr.eni.encheres.servlet.CookieUtils"%>
 <%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

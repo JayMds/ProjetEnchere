@@ -16,8 +16,8 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.encheres.CookieUtils;
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.servlet.CookieUtils;
 
 /**
  * Servlet Filter implementation class filtreSessionUtilisateur

@@ -1,4 +1,4 @@
-package fr.eni.encheres;
+package fr.eni.encheres.servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,12 +19,13 @@ import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.dal.DALException;
 
 /**
  * Servlet implementation class ServletPageAccueil
  */
 
-public class ServletPageAccueil extends HttpServlet {
+public class ServletPageAccueil extends HttpServlet  {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -39,27 +40,11 @@ public class ServletPageAccueil extends HttpServlet {
 		
 		try {
 			//Récupération des articles en cour de vente et des informations du vendeur
-			ArticleManager artManager = new ArticleManager();
-			UtilisateurManager userManager = new UtilisateurManager(); 
-			EnchereManager enchereManager = new EnchereManager(); 
+			ServletUtils.selectAndSetAttributeUnsellArticle(request);
 			
+			//récupération de l'ensemble des catégorie sur la bdd			
 			
-			List<Article> listeArticle = artManager.selectUnsellArticle();	
-					
-			for(Article article : listeArticle) {
-				Utilisateur user = userManager.selectionnerInformationDiscret(article.getNoVendeur()); 
-				Enchere enchere = enchereManager.selectEnchere(article.getNoArticle()); 
-				//System.out.println(user.getPseudo());
-				article.setNomVendeur(user.getPseudo()); 
-				article.setEnchere(enchere); 
-			}
-			request.setAttribute("listeArticle", listeArticle);
-			//récupération de l'ensemble des catégorie sur la bdd
-			
-			CategorieManager catManager = new CategorieManager(); 
-			List<Categorie> listeCategories = catManager.selectAllCategrorie(); 			
-			request.setAttribute("Categories", listeCategories); 
-			
+			ServletUtils.selectAndSetAttributeCategorie(request);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 			rd.forward(request, response);
 			
@@ -67,26 +52,24 @@ public class ServletPageAccueil extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
 	}
 
+
+	
+
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArticleManager artManager = new ArticleManager();
-		UtilisateurManager userManager = new UtilisateurManager(); 
-		EnchereManager enchereManager = new EnchereManager(); 
+				
 		String recherche = request.getParameter("recherche");
 		int choixCategorie = Integer.valueOf("choixCategorie");
-		System.out.println(choixCategorie);
-		List<Article> listeArticle = artManager.selectRechercheUser(recherche, choixCategorie);	
-		request.setAttribute("listeArticle", listeArticle); 
 		
+		List<Article> listeArticle = artManager.selectRechercheUser(recherche, choixCategorie);	
+		
+		request.setAttribute("listeArticle", listeArticle); 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 		rd.forward(request, response);
 		
